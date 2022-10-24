@@ -1,0 +1,8 @@
+.content {
+    grid-area: c;
+    background-color: #47ecec;
+}
+
+.post {
+    color: greenyellow;
+}

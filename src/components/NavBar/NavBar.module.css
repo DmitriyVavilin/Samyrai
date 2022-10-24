@@ -1,0 +1,12 @@
+.nav {
+    grid-area: n;
+    background-color: #47ecec;
+}
+
+.nav ul {
+    list-style: none;
+}
+
+.item {
+    color: #ffffff;
+}
