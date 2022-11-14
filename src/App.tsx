@@ -8,18 +8,56 @@ import {BrowserRouter, Route} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
+import {DialogItemsPropsType} from "./components/Dialogs/DialogItems/DialogItems";
 
 
+export type PostType ={
+    id: number
+    messages: string
+    likesCount: number
+}
+
+export type DialogsType = {
+    id: number
+    name: string
+}
+
+export type MessageType = {
+    id: number
+    message: string
+}
 
 function App() {
+
+     let dialogs: DialogsType[] = [
+        {id: 1, name: 'Dimych'},
+        {id: 2, name: 'Andrey'},
+        {id: 3, name: 'Sveta'},
+        {id: 4, name: 'Sasha'},
+        {id: 5, name: 'Tatyana'}
+    ]
+
+     let messages: MessageType[] = [
+        {id: 1, message: 'Hello!!!'},
+        {id: 2, message: 'How are you?'},
+        {id: 3, message: 'What do you do?'},
+        {id: 4, message: 'I have a two dogs'},
+        {id: 5, message: 'I`m want you)'}
+    ]
+
+    let myPostData: PostType[] = [
+        {id: 1, messages: 'Hi, how are you?', likesCount: 100},
+        {id: 2, messages: 'It`s my first post', likesCount: 150},
+    ]
+
     return (
         <BrowserRouter>
             <div className={'app-wrapper'}>
                 <Header/>
                 <NavBar/>
                 <div className={'app-wrapper-content'}>
-                    <Route path={'/dialogs'} component={Dialogs}/>
-                    <Route path={'/profile'} component={Profile}/>
+                    <Route path={'/dialogs'} render={()=> <Dialogs dialogs={dialogs} messages={messages}/>}/>
+                    <Route path={'/profile'} render={()=> <Profile myPostData={myPostData} />}/>
                     <Route path={'/news'} component={News}/>
                     <Route path={'/news'} component={News}/>
                     <Route path={'/music'} component={Music}/>
