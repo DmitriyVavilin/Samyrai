@@ -8,7 +8,7 @@ export const ProfileInfo = () => {
                 <img
                     src={'https://www.planetware.com/wpimages/2020/02/france-in-pictures-beautiful-places-to-photograph-eiffel-tower.jpg'}/>
             </div>
-            <div>
+            <div className={s.descriptionBlock}>
                 avatar + description
             </div>
         </div>
