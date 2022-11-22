@@ -8,7 +8,7 @@ import {BrowserRouter, Route} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
-import {DialogItemsPropsType} from "./components/Dialogs/DialogItems/DialogItems";
+import {StatePropsType} from "./components/redux/state";
 
 
 export type PostType ={
@@ -27,7 +27,7 @@ export type MessageType = {
     message: string
 }
 
-function App() {
+function App(props:StatePropsType) {
 
      let dialogs: DialogsType[] = [
         {id: 1, name: 'Dimych'},
@@ -56,7 +56,7 @@ function App() {
                 <Header/>
                 <NavBar/>
                 <div className={'app-wrapper-content'}>
-                    <Route path={'/dialogs'} render={()=> <Dialogs dialogs={dialogs} messages={messages}/>}/>
+                    <Route path={'/dialogs'} render={()=> <Dialogs  dialogs={props.dialogs} messages={props.messages}/>}/>
                     <Route path={'/profile'} render={()=> <Profile myPostData={myPostData} />}/>
                     <Route path={'/news'} component={News}/>
                     <Route path={'/news'} component={News}/>
