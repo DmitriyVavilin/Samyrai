@@ -10,7 +10,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <App dialogs={state.dialogs} messages={state.messages}/>
+    <App profileDialogs={state.profileDialogs} profilePost={state.profilePost}/>
   </React.StrictMode>
 );
 

@@ -29,26 +29,26 @@ export type MessageType = {
 
 function App(props:StatePropsType) {
 
-     let dialogs: DialogsType[] = [
-        {id: 1, name: 'Dimych'},
-        {id: 2, name: 'Andrey'},
-        {id: 3, name: 'Sveta'},
-        {id: 4, name: 'Sasha'},
-        {id: 5, name: 'Tatyana'}
-    ]
-
-     let messages: MessageType[] = [
-        {id: 1, message: 'Hello!!!'},
-        {id: 2, message: 'How are you?'},
-        {id: 3, message: 'What do you do?'},
-        {id: 4, message: 'I have a two dogs'},
-        {id: 5, message: 'I`m want you)'}
-    ]
-
-    let myPostData: PostType[] = [
-        {id: 1, messages: 'Hi, how are you?', likesCount: 100},
-        {id: 2, messages: 'It`s my first post', likesCount: 150},
-    ]
+    //  let dialogs: DialogsType[] = [
+    //     {id: 1, name: 'Dimych'},
+    //     {id: 2, name: 'Andrey'},
+    //     {id: 3, name: 'Sveta'},
+    //     {id: 4, name: 'Sasha'},
+    //     {id: 5, name: 'Tatyana'}
+    // ]
+    //
+    //  let messages: MessageType[] = [
+    //     {id: 1, message: 'Hello!!!'},
+    //     {id: 2, message: 'How are you?'},
+    //     {id: 3, message: 'What do you do?'},
+    //     {id: 4, message: 'I have a two dogs'},
+    //     {id: 5, message: 'I`m want you)'}
+    // ]
+    //
+    // let myPostData: PostType[] = [
+    //     {id: 1, messages: 'Hi, how are you?', likesCount: 100},
+    //     {id: 2, messages: 'It`s my first post', likesCount: 150},
+    // ]
 
     return (
         <BrowserRouter>
@@ -56,8 +56,8 @@ function App(props:StatePropsType) {
                 <Header/>
                 <NavBar/>
                 <div className={'app-wrapper-content'}>
-                    <Route path={'/dialogs'} render={()=> <Dialogs  dialogs={props.dialogs} messages={props.messages}/>}/>
-                    <Route path={'/profile'} render={()=> <Profile myPostData={myPostData} />}/>
+                    <Route path={'/dialogs'} render={()=> <Dialogs dialogs={props.profileDialogs.dialogs} messages={props.profileDialogs.messages}/>}/>
+                    <Route path={'/profile'} render={()=> <Profile myPostData={props.profilePost.myPostData}/>}/>
                     <Route path={'/news'} component={News}/>
                     <Route path={'/news'} component={News}/>
                     <Route path={'/music'} component={Music}/>
