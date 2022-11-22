@@ -4,7 +4,7 @@ import App from './App';
 import {state} from "./components/redux/state";
 
 test('renders learn react link', () => {
-  render(<App profileDialogs={state.profileDialogs} profilePost={state.profilePost}/>);
+  render(<App dialogsPage={state.dialogsPage} profilePage={state.profilePage}/>);
   const linkElement = screen.getByText(/learn react/i);
   expect(linkElement).toBeInTheDocument();
 });

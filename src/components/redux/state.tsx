@@ -26,12 +26,12 @@ export type ObjectPost = {
 }
 
 export type StatePropsType = {
-    profilePost: ObjectPost
-    profileDialogs: ObjectDialogs
+    profilePage: ObjectPost
+    dialogsPage: ObjectDialogs
 }
 
 export let state: StatePropsType = {
-    profileDialogs: {
+    dialogsPage: {
         dialogs: [
             {id: 1, name: 'Dimych'},
             {id: 2, name: 'Andrey'},
@@ -47,7 +47,7 @@ export let state: StatePropsType = {
             {id: 5, message: 'I`m want you)'}
         ]
     },
-    profilePost: {
+    profilePage: {
         myPostData: [
             {id: 1, messages: 'Hi, how are you?', likesCount: 100},
             {id: 2, messages: 'It`s my first post', likesCount: 150},

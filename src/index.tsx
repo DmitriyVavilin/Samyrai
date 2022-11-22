@@ -4,13 +4,16 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {state} from "./components/redux/state";
+import {BrowserRouter} from "react-router-dom";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <App profileDialogs={state.profileDialogs} profilePost={state.profilePost}/>
+      <BrowserRouter>
+          <App dialogsPage={state.dialogsPage} profilePage={state.profilePage}/>
+      </BrowserRouter>
   </React.StrictMode>
 );
 
