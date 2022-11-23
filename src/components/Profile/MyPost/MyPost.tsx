@@ -1,12 +1,14 @@
 import React from "react";
 import s from "../MyPost/MyPost.module.css";
 import {Post} from "./Post/Post";
-import {PostType} from "../../redux/state";
+import {PostType, state} from "../../redux/state";
+import {renderEnterTree} from "../../../render";
 
 
 
 type MyPostPropsType = {
     myPostData: PostType[]
+    addPost:(postMessage: string)=>void
 }
 
 export const MyPost = (props: MyPostPropsType) => {
@@ -16,9 +18,9 @@ export const MyPost = (props: MyPostPropsType) => {
     const newPostElement = React.createRef<HTMLTextAreaElement>()
 
     const onclickButtonHandler = () => {
-        debugger
-        const text = newPostElement.current?.value
-        alert('ffff')
+        let textPost = newPostElement.current?.value
+        props.addPost(textPost ? textPost : "")
+        renderEnterTree()
     }
 
     return (
