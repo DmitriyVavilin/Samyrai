@@ -4,28 +4,13 @@ import {Header} from "./components/Header/Header";
 import {NavBar} from "./components/NavBar/NavBar";
 import {Profile} from "./components/Profile/Profile";
 import {Dialogs} from "./components/Dialogs/Dialogs";
-import {BrowserRouter, Route} from "react-router-dom";
+import {Route} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
 import {StatePropsType} from "./components/redux/state";
 
 
-export type PostType ={
-    id: number
-    messages: string
-    likesCount: number
-}
-
-export type DialogsType = {
-    id: number
-    name: string
-}
-
-export type MessageType = {
-    id: number
-    message: string
-}
 
 function App(props:StatePropsType) {
     return (

@@ -28,6 +28,7 @@ export type ObjectPost = {
 export type StatePropsType = {
     profilePage: ObjectPost
     dialogsPage: ObjectDialogs
+    addPost?: (postMessage: string)=>void
 }
 
 export let state: StatePropsType = {
@@ -54,4 +55,9 @@ export let state: StatePropsType = {
         ]
     }
 
+}
+
+export let addPost = (postMessage: string) => {
+    let newPost = {id: 3, messages: postMessage, likesCount: 200}
+    state.profilePage.myPostData.push(newPost)
 }

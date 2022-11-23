@@ -1,8 +1,8 @@
 import React from "react";
 import s from "./Dialogs.module.css"
-import {DialogItems, DialogItemsPropsType} from "./DialogItems/DialogItems";
+import {DialogItems} from "./DialogItems/DialogItems";
 import {MessagesItem} from "./MessageItem/MessageItem";
-import {DialogsType} from "../../App";
+import {DialogsType} from "../redux/state";
 
 
 type MessageType = {
@@ -21,6 +21,13 @@ export const Dialogs = (props: DialogsPropsType) => {
 
     const messagesElements = props.messages.map((m) => <MessagesItem message={m.message}/>)
 
+    const newPostArea = React.createRef<HTMLTextAreaElement>()
+
+    const onclicHandler = () => {
+        const newText = newPostArea.current?.value
+        alert(newText)
+    }
+
     return(
         <div className={s.dialogs}>
             <div className={s.dialogs_item}>
@@ -28,6 +35,10 @@ export const Dialogs = (props: DialogsPropsType) => {
             </div>
             <div className={s.messages}>
                 {messagesElements}
+                <textarea ref={newPostArea}></textarea>
+                <div>
+                    <button onClick={onclicHandler}>Add</button>
+                </div>
             </div>
         </div>
     )
