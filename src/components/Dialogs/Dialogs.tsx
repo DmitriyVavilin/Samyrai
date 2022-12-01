@@ -18,9 +18,9 @@ type DialogsPropsType = {
 
 export const Dialogs = (props: DialogsPropsType) => {
 
-    const dialogsElements = props.dialogs.map((d) => <DialogItems name={d.name} id={d.id}/>)
+    const dialogsElements = props.dialogs.map((d,index) => <DialogItems key={index} name={d.name} id={d.id}/>)
 
-    const messagesElements = props.messages.map((m) => <MessagesItem message={m.message}/>)
+    const messagesElements = props.messages.map((m,index) => <MessagesItem key={index} message={m.message}/>)
 
     const newPostArea = React.createRef<HTMLTextAreaElement>()
 

@@ -2,7 +2,6 @@ import React from "react";
 import s from "../MyPost/MyPost.module.css";
 import {Post} from "./Post/Post";
 import {PostType} from "../../redux/state";
-import {renderEnterTree} from "../../../render";
 
 
 type MyPostPropsType = {
@@ -28,7 +27,6 @@ export const MyPost = (props: MyPostPropsType) => {
         let textPost = newPostElement.current?.value
         props.updatePostText(textPost ? textPost: '')
     }
-    console.log('render')
     return (
         <div className={s.postBlock}>
             <h3>My post</h3>
