@@ -16,18 +16,20 @@ export type DialogsType = {
     name: string
 }
 
-export type ObjectDialogs = {
+export type StateDialogsType = {
     dialogs: DialogsType[]
     messages: MessageType[]
 }
 
-export type ObjectPost = {
-    myPostData: PostType[]
+export type StatePostType = {
+    myPost: PostType[]
+    newPostText: string
+
 }
 
 export type StatePropsType = {
-    profilePage: ObjectPost
-    dialogsPage: ObjectDialogs
+    profilePage: StatePostType
+    dialogsPage: StateDialogsType
     addPost?: (postMessage: string)=>void
 }
 
@@ -49,15 +51,20 @@ export let state: StatePropsType = {
         ]
     },
     profilePage: {
-        myPostData: [
+        myPost: [
             {id: 1, messages: 'Hi, how are you?', likesCount: 100},
             {id: 2, messages: 'It`s my first post', likesCount: 150},
-        ]
-    }
+        ],
+        newPostText: 'it-kamasutra'
+    },
 
 }
 
 export let addPost = (postMessage: string) => {
     let newPost = {id: 3, messages: postMessage, likesCount: 200}
-    state.profilePage.myPostData.push(newPost)
+    state.profilePage.myPost.push(newPost)
+}
+
+export let updatePostText = (newText: string) => {
+    state.profilePage.newPostText = newText
 }

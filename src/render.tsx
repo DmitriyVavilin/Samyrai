@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import {addPost, state, StatePropsType} from "./components/redux/state";
+import {addPost, state, updatePostText} from "./components/redux/state";
 import {BrowserRouter} from "react-router-dom";
 
 const root = ReactDOM.createRoot(
@@ -20,6 +20,7 @@ export const renderEnterTree = () => {
                     dialogsPage={state.dialogsPage}
                     profilePage={state.profilePage}
                     addPost={addPost}
+                    updatePostText={updatePostText}
                 />
             </BrowserRouter>
         </React.StrictMode>
