@@ -13,6 +13,7 @@ type MessageType = {
 type DialogsPropsType = {
     dialogs: DialogsType[]
     messages: MessageType[]
+    addDialog:()=>void
 }
 
 export const Dialogs = (props: DialogsPropsType) => {
@@ -23,9 +24,9 @@ export const Dialogs = (props: DialogsPropsType) => {
 
     const newPostArea = React.createRef<HTMLTextAreaElement>()
 
-    const onclicHandler = () => {
+    const onclickHandler = () => {
         const newText = newPostArea.current?.value
-        alert(newText)
+        props.addDialog()
     }
 
     return(
@@ -37,7 +38,7 @@ export const Dialogs = (props: DialogsPropsType) => {
                 {messagesElements}
                 <textarea ref={newPostArea}></textarea>
                 <div>
-                    <button onClick={onclicHandler}>Add</button>
+                    <button onClick={onclickHandler}>Add</button>
                 </div>
             </div>
         </div>
