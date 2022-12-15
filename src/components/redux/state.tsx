@@ -102,8 +102,8 @@ export let store: StoreType = {
         this.onChange()
     },
     addPost(){
-        let newPost = {id: 3, messages: state.profilePage.newPostText, likesCount: 200}
-        state.profilePage.myPost.push(newPost)
+        let newPost = {id: 3, messages: this._state.profilePage.newPostText, likesCount: 200}
+        this._state.profilePage.myPost.push(newPost)
         this.onChange()
     },
     subscribe(callBack){
