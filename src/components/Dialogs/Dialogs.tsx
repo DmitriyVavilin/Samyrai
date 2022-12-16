@@ -2,7 +2,7 @@ import React from "react";
 import s from "./Dialogs.module.css"
 import {DialogItems} from "./DialogItems/DialogItems";
 import {MessagesItem} from "./MessageItem/MessageItem";
-import {DialogsType} from "../redux/state";
+import {ActionsTypes, DialogsType} from "../redux/state";
 
 
 type MessageType = {
@@ -14,6 +14,7 @@ type DialogsPropsType = {
     dialogs: DialogsType[]
     messages: MessageType[]
     addDialog:()=>void
+    dispatch:(action: ActionsTypes)=>void
 }
 
 export const Dialogs = (props: DialogsPropsType) => {

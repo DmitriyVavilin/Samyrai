@@ -14,6 +14,7 @@ export const renderEnterTree = () => {
         <BrowserRouter>
             <App
                 store={store}
+                dispatch={store.dispatch.bind(store)}
             />
         </BrowserRouter>
     );

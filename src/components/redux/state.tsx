@@ -28,32 +28,44 @@ export type StatePropsType = {
     sidebar: SidebarType
 }
 
-export let state: StatePropsType = {
-    dialogsPage: {
-        dialogs: [
-            {id: 1, name: 'Dimych'},
-            {id: 2, name: 'Andrey'},
-            {id: 3, name: 'Sveta'},
-            {id: 4, name: 'Sasha'},
-            {id: 5, name: 'Tatyana'}
-        ],
-        messages: [
-            {id: 1, message: 'Hello!!!'},
-            {id: 2, message: 'How are you?'},
-            {id: 3, message: 'What do you do?'},
-            {id: 4, message: 'I have a two dogs'},
-            {id: 5, message: 'I`m want you)'}
-        ]
-    },
-    profilePage: {
-        myPost: [
-            {id: 1, messages: 'Hi, how are you?', likesCount: 100},
-            {id: 2, messages: 'It`s my first post', likesCount: 150},
-        ],
-        newPostText: 'it-kamasutra'
-    },
-    sidebar: {}
+type AddActionAddPostType = {
+    type: 'ADD-POST'
+    newPostText: string
 }
+
+type UpdateActionPostTextType ={
+    type:'UPDATE-POST-TEXT'
+    newText: string
+}
+
+export type ActionsTypes = UpdateActionPostTextType | AddActionAddPostType
+
+// export let state: StatePropsType = {
+//     dialogsPage: {
+//         dialogs: [
+//             {id: 1, name: 'Dimych'},
+//             {id: 2, name: 'Andrey'},
+//             {id: 3, name: 'Sveta'},
+//             {id: 4, name: 'Sasha'},
+//             {id: 5, name: 'Tatyana'}
+//         ],
+//         messages: [
+//             {id: 1, message: 'Hello!!!'},
+//             {id: 2, message: 'How are you?'},
+//             {id: 3, message: 'What do you do?'},
+//             {id: 4, message: 'I have a two dogs'},
+//             {id: 5, message: 'I`m want you)'}
+//         ]
+//     },
+//     profilePage: {
+//         myPost: [
+//             {id: 1, messages: 'Hi, how are you?', likesCount: 100},
+//             {id: 2, messages: 'It`s my first post', likesCount: 150},
+//         ],
+//         newPostText: 'it-kamasutra'
+//     },
+//     sidebar: {}
+// }
 
 export type StoreType = {
     _state: StatePropsType
@@ -63,6 +75,7 @@ export type StoreType = {
     subscribe:(callBack: ()=>void)=>void
     onChange:()=>void
     getState:()=>StatePropsType
+    dispatch:(action: ActionsTypes)=>void
 }
 
 export let store: StoreType = {
@@ -92,6 +105,21 @@ export let store: StoreType = {
         },
         sidebar: {}
     },
+    dispatch (action) {
+        console.log('this._state ' ,this)
+        if(action.type === 'ADD-POST') {
+            let newPost = {id: 3, messages: action.newPostText, likesCount: 200}
+            this._state.profilePage.myPost.push(newPost)
+            this.onChange()
+        }else if(action.type === 'UPDATE-POST-TEXT') {
+
+            this._state.profilePage.newPostText = action.newText
+            this.onChange()
+        }
+    },
+    subscribe(callBack){
+        this.onChange = callBack
+    },
     updatePostText(newText: string) {
         this._state.profilePage.newPostText = newText
         this.onChange()
@@ -106,13 +134,11 @@ export let store: StoreType = {
         this._state.profilePage.myPost.push(newPost)
         this.onChange()
     },
-    subscribe(callBack){
-        this.onChange = callBack
-    },
     onChange(){},
     getState(){
         return this._state
-    }
+    },
+
 
 }
 
