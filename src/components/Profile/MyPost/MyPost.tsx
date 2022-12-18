@@ -1,16 +1,15 @@
 import React from "react";
 import s from "../MyPost/MyPost.module.css";
 import {Post} from "./Post/Post";
-import {ActionsTypes, PostType} from "../../redux/state";
-import {log} from "util";
+import {ActionsTypes, addPostAC, onChangePostAC, PostType} from "../../redux/state";
 
 
 type MyPostPropsType = {
     posts: PostType[]
-    addPost: () => void
     newPostText: string
-    dispatch: (action: ActionsTypes) => void
+    dispatch: (action: ActionsTypes, ) => void
 }
+
 
 export const MyPost = (props: MyPostPropsType) => {
 
@@ -20,14 +19,14 @@ export const MyPost = (props: MyPostPropsType) => {
     const newPostElement = React.createRef<HTMLTextAreaElement>()
 
     const addPostHandler = () => {
-        props.dispatch({type: 'ADD-POST', newPostText: newPostElement.current?.value!})
+        // props.dispatch({type: 'ADD-POST', newPostText: newPostElement.current?.value!})
+        props.dispatch(addPostAC(props.newPostText))
     }
 
     const onChangePost = () => {
-        debugger
         let textPost = newPostElement.current?.value
-        props.dispatch({type: 'UPDATE-POST-TEXT', newText: textPost ? textPost : ''})
-        console.log(textPost)
+        // props.dispatch({type: 'UPDATE-POST-TEXT', newText: textPost ? textPost : ''})
+        props.dispatch(onChangePostAC(textPost!))
     }
     return (
         <div className={s.postBlock}>
