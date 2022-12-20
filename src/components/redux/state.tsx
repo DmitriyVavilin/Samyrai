@@ -1,5 +1,5 @@
 import React from "react";
-import {renderEnterTree} from "../../render";
+import {renderEnterTree} from "../../index";
 
 export type PostType ={
     id: number
@@ -63,10 +63,12 @@ export let state: StatePropsType = {
 export let addPost = () => {
     let newPost = {id: 3, messages: state.profilePage.newPostText, likesCount: 200}
     state.profilePage.posts.push(newPost)
+    state.profilePage.newPostText = ''
     renderEnterTree(state)
 }
 
 export let updatePostText = (newText: string) => {
     state.profilePage.newPostText = newText
+    renderEnterTree(state)
 }
 

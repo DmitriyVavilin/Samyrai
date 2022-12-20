@@ -17,13 +17,13 @@ type DialogsPropsType = {
 
 export const Dialogs = (props: DialogsPropsType) => {
 
-    const dialogsElements = props.dialogs.map((d) => <DialogItems name={d.name} id={d.id}/>)
+    const dialogsElements = props.dialogs.map((d) => <DialogItems  name={d.name} id={d.id}/>)
 
     const messagesElements = props.messages.map((m) => <MessagesItem message={m.message}/>)
 
     const newPostArea = React.createRef<HTMLTextAreaElement>()
 
-    const onclicHandler = () => {
+    const onclickHandler = () => {
         const newText = newPostArea.current?.value
         alert(newText)
     }
@@ -35,9 +35,9 @@ export const Dialogs = (props: DialogsPropsType) => {
             </div>
             <div className={s.messages}>
                 {messagesElements}
-                <textarea ref={newPostArea}></textarea>
+                <textarea onChange={()=>{}} ref={newPostArea}/>
                 <div>
-                    <button onClick={onclicHandler}>Add</button>
+                    <button onClick={onclickHandler}>Add</button>
                 </div>
             </div>
         </div>

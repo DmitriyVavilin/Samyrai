@@ -32,7 +32,7 @@ export const MyPost = (props: MyPostPropsType) => {
             <h3>My post</h3>
             <div className={s.addPost}>
                 <div>
-                    <textarea onChange={onChangePost} ref={newPostElement} value={props.newPostText} />
+                    <textarea onChange={onChangePost} ref={newPostElement} value={props.newPostText}  />
                 </div>
                 <div>
                     <button onClick={addPost}>add post</button>
