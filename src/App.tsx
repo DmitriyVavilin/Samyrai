@@ -13,7 +13,7 @@ import {StateDialogsType, StatePostType} from "./components/redux/state";
 type AppPropsType = {
     dialogsPage: StateDialogsType
     profilePage:  StatePostType
-    addPost: (postMessage: string) => void
+    addPost: () => void
     updatePostText:(newText: string)=>void
 }
 
@@ -24,7 +24,9 @@ function App(props: AppPropsType) {
                 <NavBar dialogs={props.dialogsPage.dialogs}/>
                 <div className={'app-wrapper-content'}>
                     <Route path={'/dialogs'} render={()=> <Dialogs dialogs={props.dialogsPage.dialogs} messages={props.dialogsPage.messages}/>}/>
-                    <Route path={'/profile'} render={()=> <Profile profilePage={props.profilePage.myPost} updatePostText={props.updatePostText} newPostText={props.profilePage.newPostText} addPost={props.addPost} />}/>
+                    <Route path={'/profile'} render={()=> <Profile profilePage={props.profilePage.posts}
+                                                                   updatePostText={props.updatePostText}
+                                                                   newPostText={props.profilePage.newPostText} addPost={props.addPost} />}/>
                     <Route path={'/news'} component={News}/>
                     <Route path={'/news'} component={News}/>
                     <Route path={'/music'} component={Music}/>
@@ -33,6 +35,4 @@ function App(props: AppPropsType) {
             </div>
     );
 }
-
-
 export default App;

@@ -1,4 +1,5 @@
 import React from "react";
+import {renderEnterTree} from "../../render";
 
 export type PostType ={
     id: number
@@ -22,7 +23,7 @@ export type StateDialogsType = {
 }
 
 export type StatePostType = {
-    myPost: PostType[]
+    posts: PostType[]
     newPostText: string
 
 }
@@ -30,7 +31,6 @@ export type StatePostType = {
 export type StatePropsType = {
     profilePage: StatePostType
     dialogsPage: StateDialogsType
-    addPost?: (postMessage: string)=>void
 }
 
 export let state: StatePropsType = {
@@ -51,7 +51,7 @@ export let state: StatePropsType = {
         ]
     },
     profilePage: {
-        myPost: [
+        posts: [
             {id: 1, messages: 'Hi, how are you?', likesCount: 100},
             {id: 2, messages: 'It`s my first post', likesCount: 150},
         ],
@@ -60,11 +60,13 @@ export let state: StatePropsType = {
 
 }
 
-export let addPost = (postMessage: string) => {
-    let newPost = {id: 3, messages: postMessage, likesCount: 200}
-    state.profilePage.myPost.push(newPost)
+export let addPost = () => {
+    let newPost = {id: 3, messages: state.profilePage.newPostText, likesCount: 200}
+    state.profilePage.posts.push(newPost)
+    renderEnterTree(state)
 }
 
 export let updatePostText = (newText: string) => {
     state.profilePage.newPostText = newText
 }
+
