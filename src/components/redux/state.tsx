@@ -1,5 +1,11 @@
 import React from "react";
-import {renderEnterTree} from "../../index";
+
+let onChange = () => {
+    console.log('state is changed')
+}
+export const subscriber = (callBack:()=>void) => {
+    onChange = callBack
+}
 
 export type PostType ={
     id: number
@@ -60,15 +66,15 @@ export let state: StatePropsType = {
 
 }
 
-export let addPost = () => {
+export const addPost = (newPostText:string) => {
     let newPost = {id: 3, messages: state.profilePage.newPostText, likesCount: 200}
     state.profilePage.posts.push(newPost)
     state.profilePage.newPostText = ''
-    renderEnterTree(state)
+    onChange()
 }
 
-export let updatePostText = (newText: string) => {
+export const updatePostText = (newText: string) => {
     state.profilePage.newPostText = newText
-    renderEnterTree(state)
+    onChange()
 }
 

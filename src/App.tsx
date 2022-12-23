@@ -13,7 +13,7 @@ import {StateDialogsType, StatePostType} from "./components/redux/state";
 type AppPropsType = {
     dialogsPage: StateDialogsType
     profilePage:  StatePostType
-    addPost: () => void
+    addPost: (newPostText:string) => void
     updatePostText:(newText: string)=>void
 }
 
