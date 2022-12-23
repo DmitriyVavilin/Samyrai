@@ -4,10 +4,11 @@ import {BrowserRouter} from "react-router-dom";
 import App from "./App";
 import {store} from "./components/redux/state";
 
-export const renderEnterTree = () => {
     const root = ReactDOM.createRoot(
         document.getElementById('root') as HTMLElement
     );
+
+    export const renderEnterTree = () => {
     root.render(
         <BrowserRouter>
             <App
