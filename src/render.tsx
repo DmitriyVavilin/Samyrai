@@ -2,9 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import {BrowserRouter} from "react-router-dom";
 import App from "./App";
-import {StoreType} from "./components/redux/state";
+import {store} from "./components/redux/state";
 
-export const renderEnterTree = (store:StoreType) => {
+export const renderEnterTree = () => {
     const root = ReactDOM.createRoot(
         document.getElementById('root') as HTMLElement
     );
