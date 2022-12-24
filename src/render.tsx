@@ -14,11 +14,13 @@ import {store} from "./components/redux/state";
             <App
                 dialogsPage={store._state.dialogsPage}
                 profilePage={store._state.profilePage}
-                addPost={store.addPost}
-                updatePostText={store.updatePostText}
-
+                addPost={store.addPost.bind(store)}
+                updatePostText={store.updatePostText.bind(store)}
             />
         </BrowserRouter>
     );
 }
+
+renderEnterTree()
+store.subscriber(renderEnterTree)
 

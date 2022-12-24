@@ -3,8 +3,10 @@ import './index.css';
 import {renderEnterTree} from "./render";
 import {store} from "./components/redux/state";
 
-store.subscriber(renderEnterTree)
+
 renderEnterTree()
+store.subscriber(renderEnterTree)
+
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

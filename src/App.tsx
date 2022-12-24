@@ -9,11 +9,12 @@ import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
 import {StateDialogsType, StatePostType} from "./components/redux/state";
+import {store} from "./components/redux/state";
 
 type AppPropsType = {
     dialogsPage: StateDialogsType
     profilePage:  StatePostType
-    addPost: (newPostText:string) => void
+    addPost: () => void
     updatePostText:(newText: string)=>void
 }
 
@@ -23,10 +24,10 @@ function App(props: AppPropsType) {
                 <Header/>
                 <NavBar dialogs={props.dialogsPage.dialogs}/>
                 <div className={'app-wrapper-content'}>
-                    <Route path={'/dialogs'} render={()=> <Dialogs dialogs={props.dialogsPage.dialogs} messages={props.dialogsPage.messages}/>}/>
-                    <Route path={'/profile'} render={()=> <Profile profilePage={props.profilePage.posts}
-                                                                   updatePostText={props.updatePostText}
-                                                                   newPostText={props.profilePage.newPostText} addPost={props.addPost} />}/>
+                    <Route path={'/dialogs'} render={()=> <Dialogs dialogs={store._state.dialogsPage.dialogs} messages={store._state.dialogsPage.messages}/>}/>
+                    <Route path={'/profile'} render={()=> <Profile profilePage={store._state.profilePage.posts}
+                                                                   updatePostText={store.updatePostText}
+                                                                   newPostText={store._state.profilePage.newPostText} addPost={store.addPost} />}/>
                     <Route path={'/news'} component={News}/>
                     <Route path={'/news'} component={News}/>
                     <Route path={'/music'} component={Music}/>
