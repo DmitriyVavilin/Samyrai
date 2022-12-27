@@ -70,8 +70,7 @@ export let store: StoreType = {
         this._callSubscriber = callBack
     },
     addPost() {
-        debugger
-        let newPost = {id: 3, messages: this._state.profilePage.newPostText, likesCount: 200}
+        const newPost = {id: 3, messages: this._state.profilePage.newPostText, likesCount: 200}
         this._state.profilePage.posts.push(newPost)
         this._state.profilePage.newPostText = ''
         this._callSubscriber()

@@ -18,7 +18,6 @@ export const MyPost = (props: MyPostPropsType) => {
     const newPostElement = React.createRef<HTMLTextAreaElement>()
 
     const addPost = () => {
-        debugger
         props.addPost()
         props.updatePostText('')
     }
