@@ -31,8 +31,9 @@ export type StoreType = {
     _state: StatePropsType
     addPost: () => void
     updatePostText: (newText: string) => void
-    _callSubcriber: () => void
+    _callSubscriber: () => void
     subscriber: (callBack: () => void) => void
+    getState: ()=> StatePropsType
 }
 
 
@@ -62,21 +63,24 @@ export let store: StoreType = {
             newPostText: 'it-kamasutra'
         }
     },
-    _callSubcriber() {
+    _callSubscriber() {
         console.log('state is changed')
     },
-    subscriber(callBack: () => void) {
-        this._callSubcriber = callBack
+    subscriber(callBack) {
+        this._callSubscriber = callBack
     },
     addPost() {
         debugger
         let newPost = {id: 3, messages: this._state.profilePage.newPostText, likesCount: 200}
         this._state.profilePage.posts.push(newPost)
         this._state.profilePage.newPostText = ''
-        this._callSubcriber()
+        this._callSubscriber()
     },
     updatePostText(newText: string) {
         this._state.profilePage.newPostText = newText
-        this._callSubcriber()
+        this._callSubscriber()
+    },
+    getState() {
+        return this._state
     }
 }

@@ -12,6 +12,8 @@ import {store} from "./components/redux/state";
     root.render(
         <BrowserRouter>
             <App
+                store={store}
+                state={store.getState()}
                 dialogsPage={store._state.dialogsPage}
                 profilePage={store._state.profilePage}
                 addPost={store.addPost.bind(store)}
