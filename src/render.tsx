@@ -12,7 +12,7 @@ import {store} from "./components/redux/state";
     root.render(
         <BrowserRouter>
             <App
-               store={store}
+               store={store} dispatch={store.dispatch.bind(store)}
             />
         </BrowserRouter>
     );
