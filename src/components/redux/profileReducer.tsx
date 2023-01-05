@@ -1,5 +1,5 @@
 import React from "react";
-import {ActionTypeDispatch, StatePostType, StatePropsType} from "./state";
+import {ActionTypeDispatch, StatePostType} from "./state";
 
 
 export const profileReducer = (state: StatePostType, action: ActionTypeDispatch): StatePostType => {

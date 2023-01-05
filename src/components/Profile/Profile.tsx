@@ -12,6 +12,7 @@ type ProfilePropsType = {
 }
 
 export const Profile = (props: ProfilePropsType) => {
+    console.log(props.newPostText)
     return (
         <div className={s.content}>
             <ProfileInfo/>

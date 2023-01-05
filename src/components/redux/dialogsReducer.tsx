@@ -1,5 +1,5 @@
 import React from "react";
-import {ActionTypeDispatch, StateDialogsType, StatePropsType} from "./state";
+import {ActionTypeDispatch, StateDialogsType} from "./state";
 
 
 export const dialogsReducer = (state: StateDialogsType, action: ActionTypeDispatch): StateDialogsType => {
