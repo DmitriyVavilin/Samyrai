@@ -8,31 +8,31 @@ import {Route} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
-import {ActionTypeDispatch, StoreType} from "./components/redux/store";
+import {ActionTypeDispatch} from "./components/redux/store";
+import {RootStateType} from "./components/redux/redux-store";
 
 type AppPropsType = {
-    store: StoreType
+    store: RootStateType
     dispatch: (action: ActionTypeDispatch)=>void
 }
 
 const App: React.FC<AppPropsType>  =  (props) => {
-    const state = props.store.getState()
+    const state = props.store
 
     return (
             <div className={'app-wrapper'}>
                 <Header/>
-                <NavBar dialogs={props.store._state.dialogsPage.dialogs}/>
+                <NavBar dialogs={state.dialogsPage.dialogs}/>
                 <div className={'app-wrapper-content'}>
                     <Route path={'/dialogs'} render={()=> <Dialogs
-                        store={props.store}
-                        dialogs={props.store._state.dialogsPage.dialogs}
-                        messages={props.store._state.dialogsPage.messages}
-                        newMessageBody={props.store._state.dialogsPage.newMessageBody}
+                        dialogs={state.dialogsPage.dialogs}
+                        messages={state.dialogsPage.messages}
+                        newMessageBody={state.dialogsPage.newMessageBody}
+                        dispatch={props.dispatch}
 
                     />}
                     />
                     <Route path={'/profile'} render={()=> <Profile profilePage={state.profilePage.posts}
-                                                                   store={props.store}
                                                                    newPostText={state.profilePage.newPostText}
                                                                    dispatch={props.dispatch}/>}/>
                     <Route path={'/news'} component={News}/>
