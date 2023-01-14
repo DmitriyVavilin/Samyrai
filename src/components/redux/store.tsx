@@ -1,7 +1,7 @@
 import React from "react";
-import {addPostCreator, profileReducer, updateNewPostTextCreator} from "./profileReducer";
-import {dialogsReducer, sendMessageCreator, updateNewMessageBodyCreator} from "./dialogsReducer";
-import {sideBarReducer} from "./sideBarReducer";
+import {addPostCreator, profileReducer, updateNewPostTextCreator} from "./reducer/profileReducer";
+import {dialogsReducer, sendMessageCreator, updateNewMessageBodyCreator} from "./reducer/dialogsReducer";
+import {sideBarReducer} from "./reducer/sideBarReducer";
 
 export type PostType = {
     id: number
@@ -36,7 +36,7 @@ export type StatePropsType = {
 export type StoreType = {
     _state: StatePropsType
     _callSubscriber: () => void
-    subscriber: (callBack: () => void) => void
+    subscribe: (callBack: () => void) => void
     getState: () => StatePropsType
     dispatch: (action: ActionTypeDispatch) => void
 
@@ -79,7 +79,7 @@ export let store: StoreType = {
     _callSubscriber() {
         console.log('state is changed')
     },
-    subscriber(callBack) {
+    subscribe(callBack) {
         this._callSubscriber = callBack
     },
     getState() {

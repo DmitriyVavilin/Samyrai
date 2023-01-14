@@ -1,9 +1,15 @@
 import React from "react";
-import {ActionTypeDispatch, StatePostType} from "./state";
+import {ActionTypeDispatch, StatePostType} from "../store";
 
+let initialState = {
+    posts: [
+        {id: 1, messages: 'Hi, how are you?', likesCount: 100},
+        {id: 2, messages: 'It`s my first post', likesCount: 150},
+    ],
+    newPostText: 'it-kamasutra'
+}
 
-export const profileReducer = (state: StatePostType, action: ActionTypeDispatch): StatePostType => {
-
+export const profileReducer = (state: StatePostType = initialState, action: ActionTypeDispatch): StatePostType => {
     switch (action.type) {
         case 'ADD-POST': {
             const newPost = {id: 3, messages: state.newPostText, likesCount: 200}
