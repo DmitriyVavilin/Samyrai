@@ -13,4 +13,7 @@ let reducers = combineReducers({
 
 
 export let store = createStore(reducers)
+
 export type RootStateType = ReturnType<typeof reducers>
+/*export type AppDispatch = typeof store.dispatch*/
+export type RootStoreType = typeof store

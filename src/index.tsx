@@ -12,7 +12,7 @@ export const renderEnterTree = () => {
     root.render(
         <BrowserRouter>
             <App
-                store={store.getState()} dispatch={store.dispatch.bind(store)}
+                store={store}
             />
         </BrowserRouter>
     );
