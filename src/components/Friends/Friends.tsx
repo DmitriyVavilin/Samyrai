@@ -6,7 +6,7 @@ import {DialogsType} from "../redux/store";
 
 type FriendsTypeProps = {
     title: string
-    dialogs: DialogsType[]
+    dialogs:DialogsType[]
 }
 
 export const Friends = (props: FriendsTypeProps) => {

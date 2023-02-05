@@ -1,7 +1,6 @@
 import React from "react";
-import {addPostCreator, profileReducer, updateNewPostTextCreator} from "./reducer/profileReducer";
-import {dialogsReducer, sendMessageCreator, updateNewMessageBodyCreator} from "./reducer/dialogsReducer";
-import {sideBarReducer} from "./reducer/sideBarReducer";
+import {addPostCreator, updateNewPostTextCreator} from "./reducer/profileReducer";
+import {sendMessageCreator, updateNewMessageBodyCreator} from "./reducer/dialogsReducer";
 
 export type PostType = {
     id: number

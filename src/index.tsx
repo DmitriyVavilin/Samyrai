@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import {BrowserRouter} from "react-router-dom";
 import App from "./App";
 import {store} from './components/redux/redux-store'
-import StoreContext from "./StoreContext";
+import {Provider} from "./Provider";
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
@@ -12,9 +12,9 @@ const root = ReactDOM.createRoot(
 export const renderEnterTree = () => {
     root.render(
         <BrowserRouter>
-            <StoreContext.Provider value={store}>
-            <App store={store}/>
-            </StoreContext.Provider>
+            <Provider store={store}>
+            <App/>
+            </Provider>
         </BrowserRouter>
     );
 }
