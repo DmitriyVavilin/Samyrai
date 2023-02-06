@@ -5,14 +5,13 @@ import {DialogsType} from "../redux/store";
 
 
 type FriendsTypeProps = {
-    title: string
     dialogs:DialogsType[]
 }
 
 export const Friends = (props: FriendsTypeProps) => {
     return (
         <div className={s.friendsTop}>
-            <NavLink className={s.title} to={'/dialogs'}>{props.title}</NavLink>
+            <NavLink className={s.title} to={'/dialogs'}>{'Friends'}</NavLink>
             <div>
                 <div className={s.friends}>
                     {props.dialogs.slice(0,3).map((el, index) => <div key={index} className={s.friendsItem}>

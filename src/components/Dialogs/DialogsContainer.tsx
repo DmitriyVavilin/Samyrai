@@ -45,7 +45,6 @@ type mapStateToProps = {
 type mapDispatchPropsType ={
     updateNewMessageBodyCreator:(body: string)=>void
     sendMessageCreator:()=>void
-    dispatch:(store: RootStoreType)=>void
 }
 let mapStateToProps = (state:RootStateType):mapStateToProps => {
     return {
@@ -62,9 +61,7 @@ let mapDispatchToProps = (dispatch: Dispatch):mapDispatchPropsType => {
         sendMessageCreator: ()=>{
             dispatch(sendMessageCreator())
         },
-        dispatch:() => {
-            dispatch(store.dispatch())
-        }
+
     }
 }
 

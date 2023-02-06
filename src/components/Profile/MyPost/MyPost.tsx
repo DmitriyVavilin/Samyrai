@@ -1,16 +1,16 @@
 import React from "react";
 import s from "../MyPost/MyPost.module.css";
 import {Post} from "./Post/Post";
-import {ActionTypeDispatch, PostType,} from "../../redux/store";
+import {MyPostPropsType} from "./MyPostContainer";
 
 
-type MyPostPropsType = {
-    posts: PostType[]
-    newPostText: string
-    dispatch: (action: ActionTypeDispatch)=>void
-    updateNewPostTextCreator:(text:string)=>void
-    addPost:(newPostText: string)=>void
-}
+// type MyPostPropsType = {
+//     posts: PostType[]
+//     newPostText: string
+//     dispatch: (action: ActionTypeDispatch)=>void
+//     updateNewPostTextCreator:(text:string)=>void
+//     addPost:(newPostText: string)=>void
+// }
 
 export const MyPost = (props: MyPostPropsType) => {
 

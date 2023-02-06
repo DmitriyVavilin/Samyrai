@@ -8,8 +8,6 @@ import {Provider} from "react-redux";
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );
-
-export const renderEnterTree = () => {
     root.render(
         <BrowserRouter>
             <Provider store={store}>
@@ -17,8 +15,5 @@ export const renderEnterTree = () => {
             </Provider>
         </BrowserRouter>
     );
-}
 
-renderEnterTree()
-store.subscribe(renderEnterTree)
 
