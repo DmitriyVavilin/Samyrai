@@ -12,7 +12,6 @@ export type UserType = {
     status: string
     location: LocationType
 }
-
 export type UserStateType = {
     users: Array<UserType>
 }
@@ -53,10 +52,32 @@ let initialState = {
 export const usersReducer = (state: UserStateType = initialState, action: ActionType): UserStateType => {
     switch (action.type) {
         case 'FOLLOW': {
-            return state
+            return {
+                ...state,
+                users: state.users.map(el => {
+                    if (el.id === action.payload.userId) {
+                        return {...el, followed: true}
+                    }
+                    return el
+                })
+            }
         }
         case 'UNFOLLOW': {
-            return state
+            return {
+                ...state,
+                users: state.users.map(el => {
+                    if (el.id === action.payload.userId) {
+                        return {...el, followed: false}
+                    }
+                    return el
+                })
+            }
+        }
+        case 'SET-USERS': {
+            return {
+                ...state,
+                users: [...state.users, ...action.payload.users]
+            }
         }
         default:
             return state
@@ -64,18 +85,32 @@ export const usersReducer = (state: UserStateType = initialState, action: Action
 }
 
 
-type ActionType = FollowActionCreator | UnFollowActionCreator
+type ActionType = FollowActionCreator | UnFollowActionCreator | setUsersActionCreator
 type FollowActionCreator = ReturnType<typeof followActionCreator>
 type UnFollowActionCreator = ReturnType<typeof unFollowActionCreator>
+type setUsersActionCreator = ReturnType<typeof setUsersActionCreator>
 
-export const followActionCreator = () => {
+export const followActionCreator = (userId: number) => {
     return {
-        type: 'FOLLOW'
-    }as const
+        type: 'FOLLOW',
+        payload: {
+            userId: userId
+        }
+    } as const
 }
-
-export const unFollowActionCreator = () => {
+export const unFollowActionCreator = (userId: number) => {
     return {
-        type: 'UNFOLLOW'
-    }as const
+        type: 'UNFOLLOW',
+        payload: {
+            userId: userId
+        }
+    } as const
+}
+export const setUsersActionCreator = (users: []) => {
+    return {
+        type: 'SET-USERS',
+        payload: {
+            users: users
+        }
+    } as const
 }
