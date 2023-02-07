@@ -1,6 +1,18 @@
 import React from "react";
-import {ActionTypeDispatch, StateDialogsType} from "../store";
 
+export type MessageType = {
+    id: number
+    message: string
+}
+export type DialogsType = {
+    id: number
+    name: string
+}
+export type StateDialogsType = {
+    dialogs: DialogsType[]
+    messages: MessageType[]
+    newMessageBody: string
+}
 
 let initialState = {
     dialogs: [
@@ -20,17 +32,17 @@ let initialState = {
     newMessageBody: '',
 }
 
-export const dialogsReducer = (state: StateDialogsType = initialState, action: ActionTypeDispatch): StateDialogsType => {
+export const dialogsReducer = (state: StateDialogsType = initialState, action: ActionType): StateDialogsType => {
     switch (action.type) {
         case 'UPDATE-NEW-MESSAGE-BODY': {
-            return  {
+            return {
                 ...state,
-                newMessageBody:  action.body
+                newMessageBody: action.body
             }
         }
         case 'SEND-MESSAGE': {
             let body = state.newMessageBody
-            return  {
+            return {
                 ...state,
                 newMessageBody: '',
                 messages: [...state.messages, {id: 6, message: body}]
@@ -40,6 +52,10 @@ export const dialogsReducer = (state: StateDialogsType = initialState, action: A
             return state
     }
 }
+
+type ActionType = UpdateNewMessageBodyCreator | SendMessageCreator
+type UpdateNewMessageBodyCreator = ReturnType<typeof updateNewMessageBodyCreator>
+type SendMessageCreator = ReturnType<typeof sendMessageCreator>
 
 export const updateNewMessageBodyCreator = (body: string) => {
     return (

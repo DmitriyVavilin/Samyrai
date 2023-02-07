@@ -1,51 +1,45 @@
 import React from "react";
-import {addPostCreator, updateNewPostTextCreator} from "./reducer/profileReducer";
-import {sendMessageCreator, updateNewMessageBodyCreator} from "./reducer/dialogsReducer";
 
-export type PostType = {
-    id: number
-    messages: string
-    likesCount: number
-}
-export type MessageType = {
-    id: number
-    message: string
-}
-export type DialogsType = {
-    id: number
-    name: string
-}
-export type StateDialogsType = {
-    dialogs: DialogsType[]
-    messages: MessageType[]
-    newMessageBody: string
-}
-export type StatePostType = {
-    posts: PostType[]
-    newPostText: string
-
-}
-
-export type StateSideBarType = {}
-export type StatePropsType = {
-    profilePage: StatePostType
-    dialogsPage: StateDialogsType
-    sideBar: StateSideBarType
-}
-export type StoreType = {
-    _state: StatePropsType
-    _callSubscriber: () => void
-    subscribe: (callBack: () => void) => void
-    getState: () => StatePropsType
-    dispatch: (action: ActionTypeDispatch) => void
-
-}
-
-export type ActionTypeDispatch =
-    ReturnType<typeof addPostCreator> |
-    ReturnType<typeof updateNewPostTextCreator> |
-    ReturnType<typeof updateNewMessageBodyCreator> |
-    ReturnType<typeof sendMessageCreator>
+// export type PostType = {
+//     id: number
+//     messages: string
+//     likesCount: number
+// }
+// export type MessageType = {
+//     id: number
+//     message: string
+// }
+// export type DialogsType = {
+//     id: number
+//     name: string
+// }
+//
+// export type StatePostType = {
+//     posts: PostType[]
+//     newPostText: string
+//
+// }
+//
+// export type StateSideBarType = {}
+// export type StatePropsType = {
+//     profilePage: StatePostType
+//     dialogsPage: StateDialogsType
+//     sideBar: StateSideBarType
+// }
+// export type StoreType = {
+//     _state: StatePropsType
+//     _callSubscriber: () => void
+//     subscribe: (callBack: () => void) => void
+//     getState: () => StatePropsType
+//     dispatch: (action: ActionTypeDispatch) => void
+//
+// }
+//
+// export type ActionTypeDispatch =
+//     ReturnType<typeof addPostCreator> |
+//     ReturnType<typeof updateNewPostTextCreator> |
+//     ReturnType<typeof updateNewMessageBodyCreator> |
+//     ReturnType<typeof sendMessageCreator>
 
 // export let store: StoreType = {
 //     _state: {

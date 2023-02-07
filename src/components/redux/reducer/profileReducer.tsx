@@ -1,5 +1,15 @@
 import React from "react";
-import {ActionTypeDispatch, StatePostType} from "../store";
+
+export type PostType = {
+    id: number
+    messages: string
+    likesCount: number
+}
+
+export type StatePostType = {
+    posts: PostType[]
+    newPostText: string
+}
 
 let initialState = {
     posts: [
@@ -9,7 +19,7 @@ let initialState = {
     newPostText: 'it-kamasutra'
 }
 
-export const profileReducer = (state: StatePostType = initialState, action: ActionTypeDispatch): StatePostType => {
+export const profileReducer = (state: StatePostType = initialState, action: ActionType): StatePostType => {
     switch (action.type) {
         case 'ADD-POST': {
             const newPost = {id: 3, messages: state.newPostText, likesCount: 200}
@@ -29,6 +39,10 @@ export const profileReducer = (state: StatePostType = initialState, action: Acti
             return state
     }
 }
+
+type ActionType = AddPostCreator | UpdateNewPostTextCreator
+type AddPostCreator = ReturnType<typeof addPostCreator>
+type UpdateNewPostTextCreator = ReturnType<typeof updateNewPostTextCreator>
 
 export const addPostCreator = (newPostText: string) => {
     return (

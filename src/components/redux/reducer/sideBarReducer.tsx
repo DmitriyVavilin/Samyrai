@@ -1,9 +1,14 @@
 import React from "react";
-import {ActionTypeDispatch, StateSideBarType} from "../store";
 
+
+export type StateSideBarType = {}
 
 let initialState = {}
 
-export const sideBarReducer = (state:StateSideBarType = initialState,action: ActionTypeDispatch):StateSideBarType => {
+export const sideBarReducer = (state:StateSideBarType = initialState,action: ActionType):StateSideBarType => {
     return state
+}
+
+type ActionType = {
+
 }

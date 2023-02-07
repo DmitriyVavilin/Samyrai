@@ -1,10 +1,9 @@
 import React from "react";
-import {addPostCreator, updateNewPostTextCreator} from "../../redux/reducer/profileReducer";
+import {addPostCreator, StatePostType, updateNewPostTextCreator} from "../../redux/reducer/profileReducer";
 import {MyPost} from "./MyPost";
 import {connect} from "react-redux";
 import {RootStateType} from "../../redux/redux-store";
 import {Dispatch} from "redux";
-import {StatePostType} from "../../redux/store";
 
 
 // export const MyPostContainer = () => {
