@@ -5,9 +5,14 @@ import s from './Users.module.css'
 
 export const Users = (props: UsersContainerType) => {
 
-    const UnFollowHandler =  () => {
 
+    const UnFollowHandler = (id: number) => {
+        props.unFollow(id)
     }
+    const FollowHandler = (id: number) => {
+        props.follow(id)
+    }
+
 
     return (
         <div>
@@ -21,9 +26,10 @@ export const Users = (props: UsersContainerType) => {
                                 </div>
                                 <div>
                                     {
-                                        el.followed ? <button onClick={UnFollowHandler}>UnFollow</button> : <button>Follow</button>
+                                        el.followed
+                                            ? <button onClick={()=>UnFollowHandler(el.id)}>UnFollow</button>
+                                            : <button onClick={()=>FollowHandler(el.id)}>Follow</button>
                                     }
-
                                 </div>
                              </span>
                             <span>
