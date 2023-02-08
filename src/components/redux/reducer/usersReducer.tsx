@@ -7,6 +7,7 @@ export type LocationType = {
 }
 export type UserType = {
     id: number
+    photoUrl: string
     followed: boolean
     fullName: string
     status: string
@@ -20,6 +21,7 @@ let initialState = {
     users: [
         {
             id: 1,
+            photoUrl: 'https://i.pinimg.com/originals/1f/42/cf/1f42cffe6f2092e9b067227b126c1978.jpg',
             followed: false,
             fullName: 'Slava',
             status: 'I`m a boss',
@@ -27,6 +29,7 @@ let initialState = {
         },
         {
             id: 2,
+            photoUrl: 'https://i.pinimg.com/originals/1f/42/cf/1f42cffe6f2092e9b067227b126c1978.jpg',
             followed: true,
             fullName: 'Dayna',
             status: 'I`m a boss too ',
@@ -34,6 +37,7 @@ let initialState = {
         },
         {
             id: 3,
+            photoUrl: 'https://i.pinimg.com/originals/1f/42/cf/1f42cffe6f2092e9b067227b126c1978.jpg',
             followed: false,
             fullName: 'Viktoria',
             status: 'I`m a boss too',
@@ -41,6 +45,7 @@ let initialState = {
         },
         {
             id: 4,
+            photoUrl: 'https://i.pinimg.com/originals/1f/42/cf/1f42cffe6f2092e9b067227b126c1978.jpg',
             followed: true,
             fullName: 'Dmitriy',
             status: 'I`m a boss too',

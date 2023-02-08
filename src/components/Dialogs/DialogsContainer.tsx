@@ -44,13 +44,13 @@ type mapDispatchPropsType = {
     updateNewMessageBodyCreator: (body: string) => void
     sendMessageCreator: () => void
 }
-let mapStateToProps = (state: RootStateType): mapStateToProps => {
+const mapStateToProps = (state: RootStateType): mapStateToProps => {
     return {
         dialogsPage: state.dialogsPage
     }
 }
 
-let mapDispatchToProps = (dispatch: Dispatch): mapDispatchPropsType => {
+const mapDispatchToProps = (dispatch: Dispatch): mapDispatchPropsType => {
     return {
         updateNewMessageBodyCreator: (body) => {
             dispatch(updateNewMessageBodyCreator(body))
