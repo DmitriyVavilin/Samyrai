@@ -4,9 +4,9 @@ import s from './ProfileInfo.module.css'
 export const ProfileInfo = () => {
     return (
         <div>
-            <div>
+            <div className={s.img}>
                 <img
-                    src={'https://www.planetware.com/wpimages/2020/02/france-in-pictures-beautiful-places-to-photograph-eiffel-tower.jpg'}/>
+                    src={'https://p4.wallpaperbetter.com/wallpaper/797/280/934/anime-attack-on-titan-attack-on-titan-colossal-titan-wallpaper-preview.jpg'}/>
             </div>
             <div className={s.descriptionBlock}>
                 avatar + description
