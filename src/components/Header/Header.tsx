@@ -4,7 +4,7 @@ import s from './Heade.module.css'
 export const Header = () => {
     return(
         <header className={s.header}>
-            <img src={'https://p4.wallpaperbetter.com/wallpaper/397/928/918/anime-shingeki-no-kyojin-scout-regiment-wallpaper-preview.jpg'}/>
+            <img src={'https://www.mirf.ru/wp-content/uploads/2021/04/Ataka-titanov-Eren_titan.jpg'}/>
         </header>
     )
 }

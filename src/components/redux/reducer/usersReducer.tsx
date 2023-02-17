@@ -18,40 +18,7 @@ export type UserStateType = {
 }
 
 let initialState = {
-    users: [
-        {
-            id: 1,
-            photoUrl: 'https://i.pinimg.com/originals/1f/42/cf/1f42cffe6f2092e9b067227b126c1978.jpg',
-            followed: false,
-            fullName: 'Slava',
-            status: 'I`m a boss',
-            location: {city: 'Aksai', counter: 'Kazakhstan'}
-        },
-        {
-            id: 2,
-            photoUrl: 'https://i.pinimg.com/originals/1f/42/cf/1f42cffe6f2092e9b067227b126c1978.jpg',
-            followed: true,
-            fullName: 'Dayna',
-            status: 'I`m a boss too ',
-            location: {city: 'Oral', counter: 'Kazakhstan'}
-        },
-        {
-            id: 3,
-            photoUrl: 'https://i.pinimg.com/originals/1f/42/cf/1f42cffe6f2092e9b067227b126c1978.jpg',
-            followed: false,
-            fullName: 'Viktoria',
-            status: 'I`m a boss too',
-            location: {city: 'Moscow', counter: 'Russia'}
-        },
-        {
-            id: 4,
-            photoUrl: 'https://i.pinimg.com/originals/1f/42/cf/1f42cffe6f2092e9b067227b126c1978.jpg',
-            followed: true,
-            fullName: 'Dmitriy',
-            status: 'I`m a boss too',
-            location: {city: 'New York', counter: 'United States'}
-        },
-    ],
+    users: []
 }
 
 export const usersReducer = (state: UserStateType = initialState, action: ActionType): UserStateType => {
@@ -111,7 +78,7 @@ export const unFollowActionCreator = (userId: number) => {
         }
     } as const
 }
-export const setUsersActionCreator = (users: []) => {
+export const setUsersActionCreator = (users:Array<UserType>) => {
     return {
         type: 'SET-USERS',
         payload: {

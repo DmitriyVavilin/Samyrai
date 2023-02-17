@@ -7,7 +7,7 @@ import {
     followActionCreator,
     setUsersActionCreator,
     unFollowActionCreator,
-    UserStateType
+    UserStateType, UserType
 } from "../redux/reducer/usersReducer";
 
 export type UsersContainerType = mapStateToProps & mapDispatchToProps
@@ -19,7 +19,7 @@ type mapStateToProps = {
 type mapDispatchToProps = {
     follow: (userID: number) => void
     unFollow: (userID: number) => void
-    setUsers: (users: []) => void
+    setUsers: (users: Array<UserType>) => void
 }
 
 const mapStateToProps = (state: RootStateType): mapStateToProps => {
@@ -37,7 +37,7 @@ const mapDispatchToProps = (dispatch: Dispatch):mapDispatchToProps => {
         unFollow: (userID: number) => {
             dispatch(unFollowActionCreator(userID))
         },
-        setUsers: (users: []) => {
+        setUsers: (users: Array<UserType>) => {
             dispatch(setUsersActionCreator(users))
         },
     }
