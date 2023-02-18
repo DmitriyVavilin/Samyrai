@@ -6,7 +6,7 @@ import userPhoto from '../../assets/images/user.jpg'
 
 
 export const Users = (props: UsersContainerType) => {
-    let getUsersHandler = () => {
+     let getUsersHandler = () => {
         if (props.usersPage.users.length === 0) {
             axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
                 props.setUsers(response.data.items)
