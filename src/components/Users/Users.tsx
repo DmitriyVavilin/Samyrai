@@ -2,47 +2,16 @@ import React from 'react';
 import {UsersContainerType} from "./UsersContainer";
 import s from './Users.module.css'
 import axios from "axios";
+import userPhoto from '../../assets/images/user.jpg'
 
 
 export const Users = (props: UsersContainerType) => {
-
-    if (props.usersPage.users.length === 0) {
-        axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
-            props.setUsers([
-                {
-                    id: 1,
-                    photoUrl: 'https://i.pinimg.com/originals/1f/42/cf/1f42cffe6f2092e9b067227b126c1978.jpg',
-                    followed: false,
-                    fullName: 'Slava',
-                    status: 'I`m a boss',
-                    location: {city: 'Aksai', counter: 'Kazakhstan'}
-                },
-                {
-                    id: 2,
-                    photoUrl: 'https://i.pinimg.com/originals/1f/42/cf/1f42cffe6f2092e9b067227b126c1978.jpg',
-                    followed: true,
-                    fullName: 'Dayna',
-                    status: 'I`m a boss too ',
-                    location: {city: 'Oral', counter: 'Kazakhstan'}
-                },
-                {
-                    id: 3,
-                    photoUrl: 'https://i.pinimg.com/originals/1f/42/cf/1f42cffe6f2092e9b067227b126c1978.jpg',
-                    followed: false,
-                    fullName: 'Viktoria',
-                    status: 'I`m a boss too',
-                    location: {city: 'Moscow', counter: 'Russia'}
-                },
-                {
-                    id: 4,
-                    photoUrl: 'https://i.pinimg.com/originals/1f/42/cf/1f42cffe6f2092e9b067227b126c1978.jpg',
-                    followed: true,
-                    fullName: 'Dmitriy',
-                    status: 'I`m a boss too',
-                    location: {city: 'New York', counter: 'United States'}
-                },
-            ])
-        })
+    let getUsersHandler = () => {
+        if (props.usersPage.users.length === 0) {
+            axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
+                props.setUsers(response.data.items)
+            })
+        }
     }
 
     const UnFollowHandler = (id: number) => {
@@ -55,13 +24,14 @@ export const Users = (props: UsersContainerType) => {
 
     return (
         <div>
+            <button onClick={getUsersHandler}>Get Users</button>
             {
                 props.usersPage.users.length && props.usersPage.users.map(el => {
                     return (
                         <div key={el.id}>
                             <span>
                                  <div>
-                                    <img className={s.userPhoto} src={el.photoUrl}/>
+                                    <img className={s.userPhoto} src={el.photos.small != null ? el.photos.small : userPhoto}/>
                                 </div>
                                 <div>
                                     {
@@ -73,15 +43,15 @@ export const Users = (props: UsersContainerType) => {
                              </span>
                             <span>
                                 <span>
-                                    <div>{el.fullName}</div>
+                                    <div>{el.name}</div>
                                     <div>{el.status}</div>
                                 </span>
                                 <span>
                                     <div>
-                                        {el.location.city}
+                                        {'el.location.city'}
                                     </div>
                                     <div>
-                                        {el.location.counter}
+                                        {'el.location.counter'}
                                     </div>
                                 </span>
                             </span>

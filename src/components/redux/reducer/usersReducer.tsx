@@ -5,11 +5,15 @@ export type LocationType = {
     city: string
     counter: string
 }
+export type PhotosType = {
+    small: string
+    large: string
+}
 export type UserType = {
     id: number
-    photoUrl: string
+    photos: PhotosType
     followed: boolean
-    fullName: string
+    name: string
     status: string
     location: LocationType
 }
@@ -78,7 +82,7 @@ export const unFollowActionCreator = (userId: number) => {
         }
     } as const
 }
-export const setUsersActionCreator = (users:Array<UserType>) => {
+export const setUsersActionCreator = (users: Array<UserType>) => {
     return {
         type: 'SET-USERS',
         payload: {
