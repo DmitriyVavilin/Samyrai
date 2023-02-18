@@ -3,15 +3,6 @@ import s from "../MyPost/MyPost.module.css";
 import {Post} from "./Post/Post";
 import {MyPostPropsType} from "./MyPostContainer";
 
-
-// type MyPostPropsType = {
-//     posts: PostType[]
-//     newPostText: string
-//     dispatch: (action: ActionTypeDispatch)=>void
-//     updateNewPostTextCreator:(text:string)=>void
-//     addPost:(newPostText: string)=>void
-// }
-
 export const MyPost = (props: MyPostPropsType) => {
 
     const postElements = props.posts.map((el,index) => <Post key={index} messages={el.messages} likesCount={el.likesCount}/>)
@@ -26,9 +17,6 @@ export const MyPost = (props: MyPostPropsType) => {
 
         let textPost = newPostElement.current?.value
         props.updateNewPostTextCreator(textPost ? textPost: '')
-        // props.dispatch({type: 'UPDATE-NEW-POST-TEXT', newText: textPost ? textPost : ''})
-        // props.dispatch(updateNewPostTextCreator(textPost? textPost : ''))
-
     }
 
     return (
