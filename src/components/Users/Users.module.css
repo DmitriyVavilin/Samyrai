@@ -2,3 +2,14 @@
     width: 100px;
     height: 100px;
 }
+
+.selected {
+    font-weight: bold;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.cursor {
+    cursor: pointer;
+    margin-right: 10px;
+}

@@ -11,17 +11,16 @@ import {
     UserStateType,
     UserType
 } from "../redux/reducer/usersReducer";
-import {UsersAPIComponent} from "./UsersAPIComponent";
+import {Users} from "./Users";
+import axios from "axios";
 
 export type UsersContainerType = mapStateToProps & mapDispatchToProps
-
 export type mapStateToProps = {
     usersPage: UserStateType
     pageSize: number
     totalCount: number
     currentPage: number
 }
-
 type mapDispatchToProps = {
     follow: (userID: number) => void
     unFollow: (userID: number) => void
@@ -31,6 +30,33 @@ type mapDispatchToProps = {
 
 }
 
+ class UsersAPIComponent extends React.Component<UsersContainerType> {
+
+    componentDidMount() {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
+            this.props.setUsers(response.data.items)
+        })
+    }
+
+    onPageChanged = (pageNumber: number) => {
+        this.props.setCurrentPage(pageNumber)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`).then(response => {
+            this.props.setUsers(response.data.items)
+            // this.props.setTotalCount(response.data.totalCount)  ****** отрисует странички всех users  *******
+        })
+
+    }
+
+    render() {
+        return <Users totalCount={this.props.totalCount} pageSize={this.props.pageSize}
+                      currentPage={this.props.currentPage} usersPage={this.props.usersPage}
+                      unFollow={this.props.unFollow} follow={this.props.follow}
+                      onPageChanged={this.onPageChanged}
+        />
+    }
+}
+
+
 const mapStateToProps = (state: RootStateType): mapStateToProps => {
     return {
         usersPage: state.usersPage,
@@ -39,8 +65,6 @@ const mapStateToProps = (state: RootStateType): mapStateToProps => {
         currentPage: state.usersPage.currentPage
     }
 }
-
-
 const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToProps => {
     return {
         follow: (userID: number) => {
