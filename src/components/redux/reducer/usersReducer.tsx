@@ -22,13 +22,15 @@ export type UserStateType = {
     pageSize: number
     totalCount: number
     currentPage: number
+    isFetching: boolean
 }
 
 let initialState: UserStateType = {
     users: [],
     pageSize: 10,
     totalCount: 50,
-    currentPage: 1
+    currentPage: 1,
+    isFetching: false
 }
 
 export const usersReducer = (state: UserStateType = initialState, action: ActionType): UserStateType => {
@@ -73,6 +75,12 @@ export const usersReducer = (state: UserStateType = initialState, action: Action
                 totalCount: action.payload.totalCount
             }
         }
+        case 'FETCHING': {
+            return {
+                ...state,
+                isFetching: action.payload.isFetching
+            }
+        }
 
         default:
             return state
@@ -80,12 +88,18 @@ export const usersReducer = (state: UserStateType = initialState, action: Action
 }
 
 
-type ActionType = FollowActionCreator | UnFollowActionCreator | setUsersActionCreator | SetCurrentPageAC | SetTotalCount
+type ActionType = FollowActionCreator | UnFollowActionCreator
+    | setUsersActionCreator | SetCurrentPageAC
+    | SetTotalCount | Fetching
+
+
 type FollowActionCreator = ReturnType<typeof followActionCreator>
 type UnFollowActionCreator = ReturnType<typeof unFollowActionCreator>
 type setUsersActionCreator = ReturnType<typeof setUsersActionCreator>
 type SetCurrentPageAC = ReturnType<typeof setCurrentPageAC>
 type SetTotalCount = ReturnType<typeof setTotalCountAC>
+type Fetching = ReturnType<typeof fetchingAC>
+
 
 export const followActionCreator = (userId: number) => {
     return {
@@ -111,7 +125,6 @@ export const setUsersActionCreator = (users: Array<UserType>) => {
         }
     } as const
 }
-
 export const setCurrentPageAC = (currentPage: number) => {
     return {
         type: 'SET-CURRENT-PAGE',
@@ -120,7 +133,6 @@ export const setCurrentPageAC = (currentPage: number) => {
         }
     } as const
 }
-
 export const setTotalCountAC = (totalCount: number) => {
     return {
         type: 'SET-TOTAL-COUNT',
@@ -128,4 +140,12 @@ export const setTotalCountAC = (totalCount: number) => {
             totalCount
         }
     } as const
+}
+export const fetchingAC = (isFetching: boolean) => {
+    return {
+        type: 'FETCHING',
+        payload: {
+            isFetching
+        }
+    }as const
 }

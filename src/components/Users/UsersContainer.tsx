@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import {RootStateType} from "../redux/redux-store";
 import {Dispatch} from "redux";
 import {
+    fetchingAC,
     followActionCreator,
     setCurrentPageAC,
     setTotalCountAC,
@@ -20,17 +21,19 @@ export type mapStateToProps = {
     pageSize: number
     totalCount: number
     currentPage: number
+    isFetching: boolean
 }
 type mapDispatchToProps = {
     follow: (userID: number) => void
     unFollow: (userID: number) => void
     setUsers: (users: Array<UserType>) => void
     setCurrentPage: (currentPage: number) => void
-    setTotalCount: (totalCount: number)=>void
+    setTotalCount: (totalCount: number) => void
+    setFetching: (isFetching: boolean) => void
 
 }
 
- class UsersAPIComponent extends React.Component<UsersContainerType> {
+class UsersAPIComponent extends React.Component<UsersContainerType> {
 
     componentDidMount() {
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
@@ -48,11 +51,14 @@ type mapDispatchToProps = {
     }
 
     render() {
-        return <Users totalCount={this.props.totalCount} pageSize={this.props.pageSize}
-                      currentPage={this.props.currentPage} usersPage={this.props.usersPage}
-                      unFollow={this.props.unFollow} follow={this.props.follow}
-                      onPageChanged={this.onPageChanged}
-        />
+        return<>
+            {this.props.isFetching ? <img/> : null }
+            <Users totalCount={this.props.totalCount} pageSize={this.props.pageSize}
+                   currentPage={this.props.currentPage} usersPage={this.props.usersPage}
+                   unFollow={this.props.unFollow} follow={this.props.follow}
+                   onPageChanged={this.onPageChanged}
+            />
+        </>
     }
 }
 
@@ -62,7 +68,8 @@ const mapStateToProps = (state: RootStateType): mapStateToProps => {
         usersPage: state.usersPage,
         pageSize: state.usersPage.pageSize,
         totalCount: state.usersPage.totalCount,
-        currentPage: state.usersPage.currentPage
+        currentPage: state.usersPage.currentPage,
+        isFetching: state.usersPage.isFetching
     }
 }
 const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToProps => {
@@ -81,6 +88,9 @@ const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToProps => {
         },
         setTotalCount: (totalCount: number) => {
             dispatch(setTotalCountAC(totalCount))
+        },
+        setFetching: (isFetching: boolean) => {
+            dispatch(fetchingAC(isFetching))
         }
     }
 }
