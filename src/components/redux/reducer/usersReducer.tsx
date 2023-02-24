@@ -75,7 +75,7 @@ export const usersReducer = (state: UserStateType = initialState, action: Action
                 totalCount: action.payload.totalCount
             }
         }
-        case 'FETCHING': {
+        case 'TOGGLE-IS-FETCHING': {
             return {
                 ...state,
                 isFetching: action.payload.isFetching
@@ -98,7 +98,7 @@ type UnFollowActionCreator = ReturnType<typeof unFollowActionCreator>
 type setUsersActionCreator = ReturnType<typeof setUsersActionCreator>
 type SetCurrentPageAC = ReturnType<typeof setCurrentPageAC>
 type SetTotalCount = ReturnType<typeof setTotalCountAC>
-type Fetching = ReturnType<typeof fetchingAC>
+type Fetching = ReturnType<typeof toggleIsFetchingAC>
 
 
 export const followActionCreator = (userId: number) => {
@@ -141,9 +141,9 @@ export const setTotalCountAC = (totalCount: number) => {
         }
     } as const
 }
-export const fetchingAC = (isFetching: boolean) => {
+export const toggleIsFetchingAC = (isFetching: boolean) => {
     return {
-        type: 'FETCHING',
+        type: 'TOGGLE-IS-FETCHING',
         payload: {
             isFetching
         }
