@@ -19,10 +19,16 @@ export type UserType = {
 }
 export type UserStateType = {
     users: Array<UserType>
+    pageSize: number
+    totalCount: number
+    currentPage: number
 }
 
-let initialState = {
-    users: []
+let initialState: UserStateType = {
+    users: [],
+    pageSize: 10,
+    totalCount: 50,
+    currentPage: 1
 }
 
 export const usersReducer = (state: UserStateType = initialState, action: ActionType): UserStateType => {
@@ -52,19 +58,34 @@ export const usersReducer = (state: UserStateType = initialState, action: Action
         case 'SET-USERS': {
             return {
                 ...state,
-                users: [...state.users, ...action.payload.users]
+                users: action.payload.users
             }
         }
+        case 'SET-CURRENT-PAGE': {
+            return {
+                ...state,
+                currentPage: action.payload.currentPage
+            }
+        }
+        case 'SET-TOTAL-COUNT': {
+            return {
+                ...state,
+                totalCount: action.payload.totalCount
+            }
+        }
+
         default:
             return state
     }
 }
 
 
-type ActionType = FollowActionCreator | UnFollowActionCreator | setUsersActionCreator
+type ActionType = FollowActionCreator | UnFollowActionCreator | setUsersActionCreator | SetCurrentPageAC | SetTotalCount
 type FollowActionCreator = ReturnType<typeof followActionCreator>
 type UnFollowActionCreator = ReturnType<typeof unFollowActionCreator>
 type setUsersActionCreator = ReturnType<typeof setUsersActionCreator>
+type SetCurrentPageAC = ReturnType<typeof setCurrentPageAC>
+type SetTotalCount = ReturnType<typeof setTotalCountAC>
 
 export const followActionCreator = (userId: number) => {
     return {
@@ -87,6 +108,24 @@ export const setUsersActionCreator = (users: Array<UserType>) => {
         type: 'SET-USERS',
         payload: {
             users: users
+        }
+    } as const
+}
+
+export const setCurrentPageAC = (currentPage: number) => {
+    return {
+        type: 'SET-CURRENT-PAGE',
+        payload: {
+            currentPage
+        }
+    } as const
+}
+
+export const setTotalCountAC = (totalCount: number) => {
+    return {
+        type: 'SET-TOTAL-COUNT',
+        payload: {
+            totalCount
         }
     } as const
 }

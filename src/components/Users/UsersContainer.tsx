@@ -4,34 +4,44 @@ import {RootStateType} from "../redux/redux-store";
 import {Dispatch} from "redux";
 import {
     followActionCreator,
+    setCurrentPageAC,
+    setTotalCountAC,
     setUsersActionCreator,
     unFollowActionCreator,
     UserStateType,
     UserType
 } from "../redux/reducer/usersReducer";
-import UsersClass from "./UsersClass";
-import {Users} from "./Users";
+import {UsersAPIComponent} from "./UsersAPIComponent";
 
 export type UsersContainerType = mapStateToProps & mapDispatchToProps
 
 export type mapStateToProps = {
     usersPage: UserStateType
+    pageSize: number
+    totalCount: number
+    currentPage: number
 }
 
 type mapDispatchToProps = {
     follow: (userID: number) => void
     unFollow: (userID: number) => void
     setUsers: (users: Array<UserType>) => void
+    setCurrentPage: (currentPage: number) => void
+    setTotalCount: (totalCount: number)=>void
+
 }
 
 const mapStateToProps = (state: RootStateType): mapStateToProps => {
     return {
-        usersPage: state.usersPage
+        usersPage: state.usersPage,
+        pageSize: state.usersPage.pageSize,
+        totalCount: state.usersPage.totalCount,
+        currentPage: state.usersPage.currentPage
     }
 }
 
 
-const mapDispatchToProps = (dispatch: Dispatch):mapDispatchToProps => {
+const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToProps => {
     return {
         follow: (userID: number) => {
             dispatch(followActionCreator(userID))
@@ -42,7 +52,13 @@ const mapDispatchToProps = (dispatch: Dispatch):mapDispatchToProps => {
         setUsers: (users: Array<UserType>) => {
             dispatch(setUsersActionCreator(users))
         },
+        setCurrentPage: (currentPage: number) => {
+            dispatch(setCurrentPageAC(currentPage))
+        },
+        setTotalCount: (totalCount: number) => {
+            dispatch(setTotalCountAC(totalCount))
+        }
     }
 }
 
-export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersClass)
+export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPIComponent)
