@@ -3,6 +3,7 @@ import style from "./Users.module.css";
 import s from "./Users.module.css";
 import userPhoto from "../../assets/images/user.jpg";
 import {UserStateType} from "../redux/reducer/usersReducer";
+import {NavLink} from "react-router-dom";
 
 type UserPresentationType = {
     totalCount: number
@@ -37,8 +38,11 @@ export const Users = (props: UserPresentationType) => {
                         <div key={el.id}>
                         <span>
                         <div>
-                        <img className={s.userPhoto}
-                             src={el.photos.small != null ? el.photos.small : userPhoto}/>
+                            <NavLink to={'/profile'}>
+                                <img className={s.userPhoto}
+                                     src={el.photos.small != null ? el.photos.small : userPhoto}/>
+                            </NavLink>
+
                         </div>
                         <div>
                     {
