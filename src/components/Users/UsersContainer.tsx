@@ -1,7 +1,6 @@
 import React from 'react';
 import {connect} from "react-redux";
 import {RootStateType} from "../redux/redux-store";
-import {Dispatch} from "redux";
 import {
     follow,
     setCurrentPage,
