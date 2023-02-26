@@ -1,5 +1,4 @@
 import React from "react";
-import any = jasmine.any;
 
 export type PostType = {
     id: number
@@ -24,8 +23,19 @@ type ProfileContactsType = {
     "mainLink": null
 }
 
+export type ProfilePhotosType = {
+    "small": "https://social-network.samuraijs.com/activecontent/images/users/2/user-small.jpg?v=0",
+    "large": "https://social-network.samuraijs.com/activecontent/images/users/2/user.jpg?v=0"
+}
+
 export type ProfileType = {
+    "aboutMe": string
     contacts: ProfileContactsType
+    "lookingForAJob": true,
+    "lookingForAJobDescription": string
+    "fullName": string
+    "userId": number
+    "photos": ProfilePhotosType
 }
 
 let initialState: StatePostType = {
@@ -34,7 +44,27 @@ let initialState: StatePostType = {
         {id: 2, messages: 'It`s my first post', likesCount: 150},
     ],
     newPostText: 'it-kamasutra',
-    profile: ProfileType
+    profile: {
+        "aboutMe": "я круто чувак 1001%",
+        "contacts": {
+            "facebook": "facebook.com",
+            "website": null,
+            "vk": "vk.com/dimych",
+            "twitter": "https://twitter.com/@sdf",
+            "instagram": "instagra.com/sds",
+            "youtube": null,
+            "github": "github.com",
+            "mainLink": null
+        },
+        "lookingForAJob": true,
+        "lookingForAJobDescription": "не ищу, а дурачусь",
+        "fullName": "samurai dimych",
+        "userId": 2,
+        "photos": {
+            "small": "https://social-network.samuraijs.com/activecontent/images/users/2/user-small.jpg?v=0",
+            "large": "https://social-network.samuraijs.com/activecontent/images/users/2/user.jpg?v=0"
+        }
+    }
 }
 
 export const profileReducer = (state: StatePostType = initialState, action: ActionType): StatePostType => {
@@ -83,7 +113,7 @@ export const updateNewPostTextCreator = (newText: string) => {
     )
 }
 
-export const setUsersProfile = (profile: any) => {
+export const setUsersProfile = (profile: ProfileType) => {
     return (
         {
             type: 'SET-USERS-PROFILE',

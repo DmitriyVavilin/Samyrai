@@ -1,16 +1,16 @@
 import React from "react";
-import axios from "axios/index";
+import axios from "axios";
 import {connect} from "react-redux";
-import {setUsersProfile} from "../redux/reducer/profileReducer";
+import {ProfileType, setUsersProfile} from "../redux/reducer/profileReducer";
 import {RootStateType} from "../redux/redux-store";
 import {Profile} from "./Profile";
 
 
 type mapStateToProps = {
-    profile: any
+    profile: ProfileType
 }
 type mapDispatchToProps = {
-    setUsersProfile: (profile: any) => void
+    setUsersProfile: (profile: ProfileType) => void
 }
 export type ProfileContainerPropsType = mapStateToProps & mapDispatchToProps
 
