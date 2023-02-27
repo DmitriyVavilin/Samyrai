@@ -19,7 +19,9 @@ export const ProfileInfo = (props:ProfileInfo) => {
             </div>
             <div className={s.descriptionBlock}>
                 <img src={props.profile.photos.large}/>
-                <span>{props.profile.fullName}</span>
+                <div>
+                    <span>{props.profile.fullName}</span>
+                </div>
                 <ul>
                     <li>
                         {props.profile.contacts.facebook}
