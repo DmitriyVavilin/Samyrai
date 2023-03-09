@@ -49,15 +49,31 @@ export const Users = (props: UserPresentationType) => {
                     {
                         el.followed
                             ? <button onClick={() => {
-                                axios.post('https://social-network.samuraijs.com/api/1.0/follow' + el.id,{},{
-                                    withCredentials: true
+                                axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`, {}, {
+                                    withCredentials: true,
+                                    headers: {
+                                        'API-KEY' : '14389096-3138-44a4-a13b-8e136108be86'
+                                    }
                                 }).then(response => {
-
+                                    if (response.data.resultCode == 0) {
+                                        props.unFollow(el.id)
+                                    }
                                 })
-                                props.unFollow(el.id)
                             }
                             }>UnFollow</button>
-                            : <button onClick={() => props.follow(el.id)}>Follow</button>
+                            : <button onClick={() => {
+                                axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`, {
+                                    withCredentials: true,
+                                    headers: {
+                                        'API-KEY' : '14389096-3138-44a4-a13b-8e136108be86'
+                                    }
+                                }).then(response => {
+                                    if (response.data.resultCode == 0) {
+                                        props.follow(el.id)
+                                    }
+                                })
+
+                            }}>Follow</button>
                     }
                         </div>
                         </span>

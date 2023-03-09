@@ -37,7 +37,9 @@ export class UsersAPIComponent extends React.Component<UsersContainerType> {
 
     componentDidMount() {
         this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {
+            withCredentials: true
+        }).then(response => {
             this.props.toggleIsFetching(false)
             this.props.setUsers(response.data.items)
             // this.props.setTotalCount(response.data.totalCount)  ****** отрисует странички всех users  *******
@@ -47,7 +49,9 @@ export class UsersAPIComponent extends React.Component<UsersContainerType> {
     onPageChanged = (pageNumber: number) => {
         this.props.toggleIsFetching(true)
         this.props.setCurrentPage(pageNumber)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`).then(response => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, {
+            withCredentials: true
+        }).then(response => {
             this.props.toggleIsFetching(false)
             this.props.setUsers(response.data.items)
         })
@@ -55,8 +59,8 @@ export class UsersAPIComponent extends React.Component<UsersContainerType> {
     }
 
     render() {
-        return<>
-            {this.props.isFetching ? <Preloader/> : null }
+        return <>
+            {this.props.isFetching ? <Preloader/> : null}
             <Users totalCount={this.props.totalCount} pageSize={this.props.pageSize}
                    currentPage={this.props.currentPage} usersPage={this.props.usersPage}
                    unFollow={this.props.unFollow} follow={this.props.follow}
@@ -78,5 +82,5 @@ const mapStateToProps = (state: RootStateType): mapStateToProps => {
 }
 
 export const UsersContainer = connect(mapStateToProps, {
-    follow,unFollow,setUsers,setCurrentPage,setTotalCount,toggleIsFetching
+    follow, unFollow, setUsers, setCurrentPage, setTotalCount, toggleIsFetching
 })(UsersAPIComponent)
