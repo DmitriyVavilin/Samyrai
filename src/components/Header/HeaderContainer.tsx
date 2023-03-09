@@ -1,29 +1,29 @@
 import React from "react";
-import {authUsersType, DataAuthType} from "../redux/reducer/authReducer";
+import {DataAuthType, setUserData} from "../redux/reducer/authReducer";
 import {Header} from "./Header";
 import {connect} from "react-redux";
 import {RootStateType} from "../redux/redux-store";
 
-type HeaderContainerType = MapStateToProps & MapDispatchToProps
+export type HeaderContainerType = MapStateToProps & MapDispatchToProps
+type MapStateToProps = {
+    data: DataAuthType
+}
+type MapDispatchToProps = {
+    setUserData: (data: DataAuthType) => void
+}
+
 
 class HeaderContainer extends React.Component<HeaderContainerType> {
     render() {
         return (
             <>
-                <Header/>
+                <Header {...this.props}/>
             </>)
     }
 }
 
-type MapStateToProps = {
-    data: DataAuthType
-}
 
-type MapDispatchToProps = {
-    setUserData: (data: DataAuthType) => void
-}
-
-const mapStateToProps = (state: RootStateType): DataAuthType => {
+const mapStateToProps = (state: RootStateType): MapStateToProps => {
     return {
         data: state.authUsers.data
     }
