@@ -4,6 +4,7 @@ import s from "./Users.module.css";
 import userPhoto from "../../assets/images/user.jpg";
 import {UserStateType} from "../redux/reducer/usersReducer";
 import {NavLink} from "react-router-dom";
+import axios from "axios";
 
 type UserPresentationType = {
     totalCount: number
@@ -47,7 +48,15 @@ export const Users = (props: UserPresentationType) => {
                         <div>
                     {
                         el.followed
-                            ? <button onClick={() => props.unFollow(el.id)}>UnFollow</button>
+                            ? <button onClick={() => {
+                                axios.post('https://social-network.samuraijs.com/api/1.0/follow' + el.id,{},{
+                                    withCredentials: true
+                                }).then(response => {
+
+                                })
+                                props.unFollow(el.id)
+                            }
+                            }>UnFollow</button>
                             : <button onClick={() => props.follow(el.id)}>Follow</button>
                     }
                         </div>
