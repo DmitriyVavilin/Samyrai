@@ -3,9 +3,9 @@ import React from "react";
 
 type MessageAuthType = []
 export type DataAuthType = {
-    id: null
-    email: null
-    login: null
+    id: null | number
+    email: null |string
+    login: null | string
 }
 export type authUsersType = {
     resultCode: number
@@ -40,9 +40,9 @@ export const authReducer = (state: authUsersType = initialState, action: ActionT
 type ActionType = SetUserData
 
 
-type SetUserData = ReturnType<typeof setUserData>
+type SetUserData = ReturnType<typeof setAuthUserData>
 
-export const setUserData = (data: DataAuthType) => {
+export const setAuthUserData = (data: DataAuthType) => {
     return {
         type: 'SET-USER-DATA',
         data: data
