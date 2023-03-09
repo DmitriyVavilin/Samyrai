@@ -8,6 +8,8 @@ import axios from "axios";
 export type HeaderContainerType = MapStateToProps & MapDispatchToProps
 type MapStateToProps = {
     data: DataAuthType
+    isAuth: boolean
+    login: null | string
 }
 type MapDispatchToProps = {
     setAuthUserData: (data: DataAuthType) => void
@@ -16,11 +18,13 @@ type MapDispatchToProps = {
 
 class HeaderContainer extends React.Component<HeaderContainerType> {
     componentDidMount() {
-        axios.get('https://social-network.samuraijs.com/api/1.0/auth/me').then(response => {
+        axios.get('https://social-network.samuraijs.com/api/1.0/auth/me',{
+            withCredentials: true
+        }).then(response => {
             debugger
-            // if (response.data.resultCode === 0) {
-            //     this.props.setAuthUserData(response.data.data.login)
-            // }
+            if (response.data.resultCode === 0) {
+                this.props.setAuthUserData(response.data.data.login)
+            }
         })
     }
 
@@ -35,7 +39,9 @@ class HeaderContainer extends React.Component<HeaderContainerType> {
 
 const mapStateToProps = (state: RootStateType): MapStateToProps => {
     return {
-        data: state.authUsers.data
+        data: state.authUsers.data,
+        isAuth: state.authUsers.isAuth,
+        login: state.authUsers.data.login
     }
 }
 
