@@ -9,7 +9,7 @@ export const Header = (props: HeaderContainerType) => {
         <header className={s.header}>
             <img src={'https://www.mirf.ru/wp-content/uploads/2021/04/Ataka-titanov-Eren_titan.jpg'}/>
             <div className={s.loginBlock}>
-                {props.isAuth ? props.login :
+                {props.isAuth ? props.login:
                     <NavLink to={'/login'}>Login</NavLink>}
             </div>
         </header>
