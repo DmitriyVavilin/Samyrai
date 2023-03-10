@@ -1,8 +1,26 @@
-import React from "react";
-import axios from "axios/index";
+import axios from "axios";
 
-export const getUsers = () => {
-    return axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {
-        withCredentials: true
-    })
+
+const instance = axios.create({
+    baseURL: 'https://social-network.samuraijs.com/api/1.0/',
+    withCredentials: true,
+    headers: {
+        'API-KEY': '14389096-3138-44a4-a13b-8e136108be86'
+    }
+})
+
+
+export const userApi = {
+    getUsers(currentPage = 1, pageSize = 10) {
+        return instance.get(`users?page=${currentPage}&count=${pageSize}`, {
+            withCredentials: true
+        }).then(response => response.data)
+    },
+    follow(userId: number) {
+        return instance.get(``, {
+            withCredentials: true
+        }).then(response => response.data)
+    }
 }
+
+
