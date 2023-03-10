@@ -6,6 +6,7 @@ import {
     setCurrentPage,
     setTotalCount,
     setUsers,
+    toggleFollowingInProgress,
     toggleIsFetching,
     unFollow,
     UserStateType,
@@ -22,6 +23,7 @@ export type mapStateToProps = {
     totalCount: number
     currentPage: number
     isFetching: boolean
+    followingInProgress:number []
 }
 type mapDispatchToProps = {
     follow: (userID: number) => void
@@ -30,6 +32,7 @@ type mapDispatchToProps = {
     setCurrentPage: (currentPage: number) => void
     setTotalCount: (totalCount: number) => void
     toggleIsFetching: (isFetching: boolean) => void
+    toggleFollowingInProgress: (isFetching: boolean, userId: number) => void
 
 }
 
@@ -47,7 +50,7 @@ export class UsersAPIComponent extends React.Component<UsersContainerType> {
     onPageChanged = (pageNumber: number) => {
         this.props.toggleIsFetching(true)
         this.props.setCurrentPage(pageNumber)
-            userApi.getUsers(pageNumber,this.props.pageSize).then(data => {
+        userApi.getUsers(pageNumber, this.props.pageSize).then(data => {
             this.props.toggleIsFetching(false)
             this.props.setUsers(data.items)
         })
@@ -61,6 +64,8 @@ export class UsersAPIComponent extends React.Component<UsersContainerType> {
                    currentPage={this.props.currentPage} usersPage={this.props.usersPage}
                    unFollow={this.props.unFollow} follow={this.props.follow}
                    onPageChanged={this.onPageChanged}
+                   followingInProgress={this.props.followingInProgress}
+                   toggleFollowingInProgress={this.props.toggleFollowingInProgress}
             />
         </>
     }
@@ -73,10 +78,11 @@ const mapStateToProps = (state: RootStateType): mapStateToProps => {
         pageSize: state.usersPage.pageSize,
         totalCount: state.usersPage.totalCount,
         currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching
+        isFetching: state.usersPage.isFetching,
+        followingInProgress: state.usersPage.followingInProgress
     }
 }
 
 export const UsersContainer = connect(mapStateToProps, {
-    follow, unFollow, setUsers, setCurrentPage, setTotalCount, toggleIsFetching
+    follow, unFollow, setUsers, setCurrentPage, setTotalCount, toggleIsFetching, toggleFollowingInProgress
 })(UsersAPIComponent)
