@@ -5,6 +5,7 @@ import userPhoto from "../../assets/images/user.jpg";
 import {UserStateType} from "../redux/reducer/usersReducer";
 import {NavLink} from "react-router-dom";
 import axios from "axios";
+import {userApi} from "../../api/api";
 
 type UserPresentationType = {
     totalCount: number
@@ -49,26 +50,16 @@ export const Users = (props: UserPresentationType) => {
                     {
                         el.followed
                             ? <button onClick={() => {
-                                axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`,  {
-                                    withCredentials: true,
-                                    headers: {
-                                        'API-KEY' : '14389096-3138-44a4-a13b-8e136108be86'
-                                    }
-                                }).then(response => {
-                                    if (response.data.resultCode == 0) {
+                                userApi.unfollow(el.id).then(data => {
+                                    if (data.resultCode == 0) {
                                         props.unFollow(el.id)
                                     }
                                 })
                             }
                             }>UnFollow</button>
                             : <button onClick={() => {
-                                axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`, {},{
-                                    withCredentials: true,
-                                    headers: {
-                                        'API-KEY' : '14389096-3138-44a4-a13b-8e136108be86'
-                                    }
-                                }).then(response => {
-                                    if (response.data.resultCode == 0) {
+                                userApi.follow(el.id).then(data => {
+                                    if (data.resultCode == 0) {
                                         props.follow(el.id)
                                     }
                                 })
