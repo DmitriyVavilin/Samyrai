@@ -4,7 +4,6 @@ import s from "./Users.module.css";
 import userPhoto from "../../assets/images/user.jpg";
 import {UserStateType} from "../redux/reducer/usersReducer";
 import {NavLink} from "react-router-dom";
-import axios from "axios";
 import {userApi} from "../../api/api";
 
 type UserPresentationType = {
