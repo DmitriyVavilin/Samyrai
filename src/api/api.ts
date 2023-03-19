@@ -25,4 +25,4 @@ export const userApi = {
     }
 }
 
-
+// метод some
