@@ -1,4 +1,6 @@
 import React from "react";
+import {userApi} from "../../../api/api";
+import {AppDispatchType} from "../redux-store";
 
 
 export type LocationType = {
@@ -34,6 +36,7 @@ let initialState: UserStateType = {
     isFetching: false,
     followingInProgress: [2, 3]
 }
+
 
 export const usersReducer = (state: UserStateType = initialState, action: ActionType): UserStateType => {
     switch (action.type) {
@@ -111,6 +114,17 @@ type SetTotalCount = ReturnType<typeof setTotalCount>
 type Fetching = ReturnType<typeof toggleIsFetching>
 type Following = ReturnType<typeof toggleFollowingInProgress>
 
+
+export const getUserThunkCreator = (currentPage: number, pageSize: number) => {
+    return (dispatch: AppDispatchType) => {
+        dispatch(toggleIsFetching(true))
+
+        userApi.getUsers(currentPage, pageSize).then(data => {
+            dispatch(toggleIsFetching(false))
+            dispatch(setUsers(data.items))
+        })
+    }
+}
 export const follow = (userId: number) => {
     return {
         type: 'FOLLOW',
@@ -159,7 +173,6 @@ export const toggleIsFetching = (isFetching: boolean) => {
         }
     } as const
 }
-
 export const toggleFollowingInProgress = (isFetching: boolean, userId: number) => {
     return {
         type: 'TOGGLE-IS-FOLLOWING',
