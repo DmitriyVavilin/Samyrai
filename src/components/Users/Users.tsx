@@ -12,7 +12,6 @@ type UserPresentationType = {
     followingInProgress: number []
     usersPage: UserStateType
     onPageChanged: (pageNumber: number) => void
-    toggleFollowingInProgress: (isFetching: boolean, userId: number) => void
     follow: (id: number) => void
     unfollow: (id: number) => void
 }

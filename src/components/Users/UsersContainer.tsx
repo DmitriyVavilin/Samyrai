@@ -54,7 +54,6 @@ export class UsersAPIComponent extends React.Component<UsersContainerType> {
                    currentPage={this.props.currentPage} usersPage={this.props.usersPage}
                    onPageChanged={this.onPageChanged}
                    followingInProgress={this.props.followingInProgress}
-                   toggleFollowingInProgress={this.props.toggleFollowingInProgress}
                    follow={this.props.follow}
                    unfollow={this.props.unfollow}
             />
