@@ -4,7 +4,6 @@ import s from "./Users.module.css";
 import userPhoto from "../../assets/images/user.jpg";
 import {UserStateType} from "../redux/reducer/usersReducer";
 import {NavLink} from "react-router-dom";
-import {userApi} from "../../api/api";
 
 type UserPresentationType = {
     totalCount: number
@@ -12,12 +11,10 @@ type UserPresentationType = {
     currentPage: number
     followingInProgress: number []
     usersPage: UserStateType
-    unFollow: (userID: number) => void
-    follow: (userID: number) => void
     onPageChanged: (pageNumber: number) => void
     toggleFollowingInProgress: (isFetching: boolean, userId: number) => void
-    followThunk: (id: number) => void
-    unfollowThunk: (id: number) => void
+    follow: (id: number) => void
+    unfollow: (id: number) => void
 }
 
 export const Users = (props: UserPresentationType) => {
@@ -54,13 +51,13 @@ export const Users = (props: UserPresentationType) => {
                         el.followed
                             ? <button disabled={props.followingInProgress.some(id => id === el.id)}
                                       onClick={() => {
-                                          props.unfollowThunk(el.id)
+                                          props.unfollow(el.id)
                                       }
 
                                       }>UnFollow</button>
                             : <button disabled={props.followingInProgress.some(id => id === el.id)}
                                       onClick={() => {
-                                          props.followThunk(el.id)
+                                          props.follow(el.id)
                                       }
                                       }>Follow</button>
                     }

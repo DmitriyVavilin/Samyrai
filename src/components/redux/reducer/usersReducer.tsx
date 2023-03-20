@@ -115,8 +115,7 @@ type Fetching = ReturnType<typeof toggleIsFetching>
 type Following = ReturnType<typeof toggleFollowingInProgress>
 
 
-export const follow = (userId: number) => {
-    return (dispatch: AppDispatchType) => {
+export const follow = (userId: number) => (dispatch: AppDispatchType) => {
         dispatch(toggleFollowingInProgress(true, userId))
         userApi.follow(userId).then(data => {
             if (data.resultCode === 0) {
@@ -125,7 +124,6 @@ export const follow = (userId: number) => {
             dispatch(toggleFollowingInProgress(false, userId))
         })
     }
-}
 
 export const unfollow = (userId: number) => (dispatch: AppDispatchType) => {
         dispatch(toggleFollowingInProgress(true, userId))
@@ -136,7 +134,6 @@ export const unfollow = (userId: number) => (dispatch: AppDispatchType) => {
             dispatch(toggleFollowingInProgress(false, userId))
         })
     }
-
 
 export const getUser = (currentPage: number, pageSize: number) => {
     return (dispatch: AppDispatchType) => {
