@@ -1,5 +1,5 @@
 import React from "react";
-import {userApi} from "../../../api/api";
+import {userAPI} from "../../../api/api";
 import {AppDispatchType} from "../redux-store";
 
 
@@ -117,7 +117,7 @@ type Following = ReturnType<typeof toggleFollowingInProgress>
 
 export const follow = (userId: number) => (dispatch: AppDispatchType) => {
         dispatch(toggleFollowingInProgress(true, userId))
-        userApi.follow(userId).then(data => {
+        userAPI.follow(userId).then(data => {
             if (data.resultCode === 0) {
                 dispatch(followSuccess(userId))
             }
@@ -127,7 +127,7 @@ export const follow = (userId: number) => (dispatch: AppDispatchType) => {
 
 export const unfollow = (userId: number) => (dispatch: AppDispatchType) => {
         dispatch(toggleFollowingInProgress(true, userId))
-        userApi.unFollow(userId).then(data => {
+        userAPI.unFollow(userId).then(data => {
             if (data.resultCode === 0) {
                 dispatch(unFollowSuccess(userId))
             }
@@ -139,7 +139,7 @@ export const getUser = (currentPage: number, pageSize: number) => {
     return (dispatch: AppDispatchType) => {
         dispatch(toggleIsFetching(true))
         dispatch(setCurrentPage(currentPage))
-        userApi.getUsers(currentPage, pageSize).then(data => {
+        userAPI.getUsers(currentPage, pageSize).then(data => {
             dispatch(toggleIsFetching(false))
             dispatch(setUsers(data.items))
         })

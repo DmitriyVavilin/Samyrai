@@ -1,4 +1,6 @@
 import React from "react";
+import {AppDispatchType} from "../redux-store";
+import {profileApi} from "../../../api/api";
 
 export type PostType = {
     id: number
@@ -96,6 +98,8 @@ type AddPostCreator = ReturnType<typeof addPostCreator>
 type UpdateNewPostTextCreator = ReturnType<typeof updateNewPostTextCreator>
 type SetUsersProfile = ReturnType<typeof setUsersProfile>
 
+
+
 export const addPostCreator = (newPostText: string) => {
     return (
         {
@@ -112,7 +116,6 @@ export const updateNewPostTextCreator = (newText: string) => {
         } as const
     )
 }
-
 export const setUsersProfile = (profile: ProfileType) => {
     return (
         {
@@ -121,3 +124,4 @@ export const setUsersProfile = (profile: ProfileType) => {
         } as const
     )
 }
+
