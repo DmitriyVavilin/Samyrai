@@ -1,6 +1,6 @@
 import React from "react";
 import {AppDispatchType} from "../redux-store";
-import {profileApi} from "../../../api/api";
+import {userAPI} from "../../../api/api";
 
 export type PostType = {
     id: number
@@ -123,5 +123,10 @@ export const setUsersProfile = (profile: ProfileType) => {
             payload: profile
         } as const
     )
+}
+export const getUserProfile = (userId: string) => (dispatch: AppDispatchType) => {
+    userAPI.getProfile(userId).then(response => {
+        dispatch(setUsersProfile(response.data.profile))
+    })
 }
 

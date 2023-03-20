@@ -20,6 +20,9 @@ export const userAPI = {
     unFollow(userId: number) {
         return instance.delete(`follow/${userId}`, {}).then(response => response.data)
     },
+    getProfile(userId: string) {
+        return instance.get(`profile/${userId}`, {})
+    }
 }
 
 
@@ -29,10 +32,6 @@ export const authAPI = {
     }
 }
 
-export const profileApi = {
-    getProfile(userId: number) {
-        return instance.get(`profile/${userId}`, {})
-    }
-}
+
 
 // метод some

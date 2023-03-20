@@ -46,11 +46,11 @@ export const setAuthUserData = (userId: number, email: string, login: string) =>
 }
 
 
-// export const getAuthUser = (userId: number) => (dispatch: AppDispatchType) => {
-//     authApi.get(userId).then(response => {
-//         if (response.data.resultCode == 0) {
-//             let {id, login, email} = response.data.data
-//             dispatch(setAuthUserData(id, login, email))
-//         }
-//     })
-// }
+export const getAuthUserData = () => (dispatch: AppDispatchType) => {
+    authAPI.me().then(response => {
+        if (response.data.resultCode === 0) {
+            let {id, login, email} = response.data.data
+            dispatch(setAuthUserData(id, login, email))
+        }
+    })
+}

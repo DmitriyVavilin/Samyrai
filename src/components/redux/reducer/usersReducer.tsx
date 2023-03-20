@@ -31,7 +31,7 @@ export type UserStateType = {
 let initialState: UserStateType = {
     users: [],
     pageSize: 10,
-    totalCount: 50,
+    totalCount: 500,
     currentPage: 1,
     isFetching: false,
     followingInProgress: [2, 3]
