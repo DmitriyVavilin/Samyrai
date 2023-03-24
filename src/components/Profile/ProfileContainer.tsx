@@ -9,6 +9,7 @@ import {userAPI} from "../../api/api";
 
 type mapStateToProps = {
     profile: ProfileType
+    isAuth: boolean
 }
 type mapDispatchToProps = {
     setUsersProfile: (profile: ProfileType) => void
@@ -30,10 +31,11 @@ class ProfileContainer extends React.Component<OwnType> {
         if (!userId) {
             userId = '2'
         }
-        // this.props.getUserProfile(userId)
-        userAPI.getProfile(userId).then(response => {
-            setUsersProfile(response.data.profile)
-        })
+        this.props.getUserProfile(userId)
+        // userAPI.getProfile(userId).then(response => {
+        //     debugger
+        //     setUsersProfile(response.data.profile)
+        // })
     }
 
     render() {
@@ -47,7 +49,8 @@ class ProfileContainer extends React.Component<OwnType> {
 
 
 const mapStateToProps = (state: RootStateType): mapStateToProps => ({
-    profile: state.profilePage.profile
+    profile: state.profilePage.profile,
+    isAuth: state.authUsers.isAuth
 })
 let WithUrlDataContainerComponent = withRouter(ProfileContainer)
 

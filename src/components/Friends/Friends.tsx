@@ -1,11 +1,12 @@
 import React from "react";
 import s from './Friends.module.css'
-import {NavLink} from "react-router-dom";
+import {NavLink, Redirect} from "react-router-dom";
 import {DialogsType} from "../redux/reducer/dialogsReducer";
 
 
 type FriendsTypeProps = {
     dialogs:DialogsType[]
+
 }
 
 export const Friends = (props: FriendsTypeProps) => {

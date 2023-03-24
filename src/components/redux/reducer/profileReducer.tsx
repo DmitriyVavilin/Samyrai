@@ -126,7 +126,7 @@ export const setUsersProfile = (profile: ProfileType) => {
 }
 export const getUserProfile = (userId: string) => (dispatch: AppDispatchType) => {
     userAPI.getProfile(userId).then(response => {
-        dispatch(setUsersProfile(response.data.profile))
+        dispatch(setUsersProfile(response.data))
     })
 }
 

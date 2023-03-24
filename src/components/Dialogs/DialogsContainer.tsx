@@ -38,6 +38,8 @@ export type DialogsPropsType = mapStateToProps & mapDispatchPropsType
 
 type mapStateToProps = {
     dialogsPage: StateDialogsType
+    isAuth: boolean
+
 }
 
 type mapDispatchPropsType = {
@@ -46,7 +48,8 @@ type mapDispatchPropsType = {
 }
 const mapStateToProps = (state: RootStateType): mapStateToProps => {
     return {
-        dialogsPage: state.dialogsPage
+        dialogsPage: state.dialogsPage,
+        isAuth: state.authUsers.isAuth
     }
 }
 
