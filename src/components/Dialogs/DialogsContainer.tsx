@@ -4,6 +4,7 @@ import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
 import {RootStateType} from "../redux/redux-store";
 import {Dispatch} from "redux";
+import {Redirect} from "react-router-dom";
 
 
 // компонента больше не нужна!!! export const DialogsContainer = () => {
@@ -46,6 +47,13 @@ type mapDispatchPropsType = {
     updateNewMessageBodyCreator: (body: string) => void
     sendMessageCreator: () => void
 }
+
+
+let AuthRedirectComponent = (props:DialogsPropsType) => {
+    if(props.isAuth === false) return <Redirect to={'/login'}/>
+    return <Dialogs isAuth={props.isAuth} dialogsPage={props.dialogsPage} sendMessageCreator={props.sendMessageCreator} updateNewMessageBodyCreator={props.updateNewMessageBodyCreator}/>
+}
+
 const mapStateToProps = (state: RootStateType): mapStateToProps => {
     return {
         dialogsPage: state.dialogsPage,
@@ -66,4 +74,4 @@ const mapDispatchToProps = (dispatch: Dispatch): mapDispatchPropsType => {
     }
 }
 
-export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
+export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent)
