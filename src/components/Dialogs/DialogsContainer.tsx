@@ -1,39 +1,32 @@
 import React from "react";
 import {sendMessageCreator, StateDialogsType, updateNewMessageBodyCreator} from "../redux/reducer/dialogsReducer";
-import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
 import {RootStateType} from "../redux/redux-store";
-import {Dispatch} from "redux";
-import {Redirect} from "react-router-dom";
+import {compose, Dispatch} from "redux";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {Dialogs} from "./Dialogs";
+import {withRouter} from "react-router-dom";
 
 
-export type DialogsPropsType = mapStateToProps & mapDispatchPropsType
+export type DialogsPropsType = MapStateToPropsType & MapDispatchPropsType
 
-type mapStateToProps = {
+type MapStateToPropsType = {
     dialogsPage: StateDialogsType
-    isAuth: boolean
 
 }
 
-type mapDispatchPropsType = {
+type MapDispatchPropsType = {
     updateNewMessageBodyCreator: (body: string) => void
     sendMessageCreator: () => void
 }
 
-
-let AuthRedirectComponent = (props:DialogsPropsType) => {
-    if(props.isAuth === false) return <Redirect to={'/login'}/>
-    return <Dialogs isAuth={props.isAuth} dialogsPage={props.dialogsPage} sendMessageCreator={props.sendMessageCreator} updateNewMessageBodyCreator={props.updateNewMessageBodyCreator}/>
-}
-
-const mapStateToProps = (state: RootStateType): mapStateToProps => {
+const mapStateToProps = (state: RootStateType): MapStateToPropsType => {
     return {
         dialogsPage: state.dialogsPage,
-        isAuth: state.authUsers.isAuth
     }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch): mapDispatchPropsType => {
+const mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
     return {
         updateNewMessageBodyCreator: (body) => {
             dispatch(updateNewMessageBodyCreator(body))
@@ -46,4 +39,5 @@ const mapDispatchToProps = (dispatch: Dispatch): mapDispatchPropsType => {
     }
 }
 
-export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent)
+export const DialogsContainer =  compose<React.ComponentType>(connect(mapStateToProps, mapDispatchToProps),withRouter,withAuthRedirect)(Dialogs)
+
