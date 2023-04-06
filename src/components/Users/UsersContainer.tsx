@@ -15,6 +15,9 @@ import {
 } from "../redux/reducer/usersReducer";
 import {Users} from "./Users";
 import {Preloader} from "../../Preloader/Preloader";
+import {compose} from "redux";
+import {withRouter} from "react-router-dom";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 export type UsersContainerType = mapStateToProps & mapDispatchToProps
 export type mapStateToProps = {
@@ -76,13 +79,11 @@ const mapStateToProps = (state: RootStateType): mapStateToProps => {
     }
 }
 
-export const UsersContainer = connect(mapStateToProps, {
-    setUsers,
+export const UsersContainer =  compose<React.ComponentType>(connect(mapStateToProps, { setUsers,
     setCurrentPage,
     setTotalCount,
     toggleIsFetching,
     toggleFollowingInProgress,
     getUser,
     follow,
-    unfollow
-})(UsersAPIComponent)
+    unfollow}),withRouter,withAuthRedirect)(UsersAPIComponent)
