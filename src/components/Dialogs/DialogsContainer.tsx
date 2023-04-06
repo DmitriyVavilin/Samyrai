@@ -7,34 +7,6 @@ import {Dispatch} from "redux";
 import {Redirect} from "react-router-dom";
 
 
-// компонента больше не нужна!!! export const DialogsContainer = () => {
-//     return (
-//         <StoreContext.Consumer>
-//             {
-//                 (store)=>{
-//                     let state = store.getState()
-//                     const onSendMessageClick = () => {
-//                         store.dispatch(sendMessageCreator())
-//                     }
-//
-//                     const onNewMessageChange = (body:string) => {
-//                         store.dispatch(updateNewMessageBodyCreator(body))
-//                     }
-//
-//                     return(
-//                         <Dialogs
-//                             dialogsPage={state.dialogsPage}
-//                             dispatch={store.dispatch}
-//                             updateNewMessageBodyCreator={onNewMessageChange}
-//                             sendMessageCreator={onSendMessageClick} />
-//                     )
-//                 }
-//             }
-//         </StoreContext.Consumer>
-//     )
-//
-// }   ''//
-
 export type DialogsPropsType = mapStateToProps & mapDispatchPropsType
 
 type mapStateToProps = {
