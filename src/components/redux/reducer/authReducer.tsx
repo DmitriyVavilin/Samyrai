@@ -1,6 +1,6 @@
 import React from "react";
 import {AppDispatchType} from "../redux-store";
-import {authAPI, userAPI} from "../../../api/api";
+import {authAPI, profileAPI} from "../../../api/api";
 
 
 export type authUsersType = {
