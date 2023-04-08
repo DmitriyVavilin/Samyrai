@@ -1,5 +1,4 @@
 import React, {ChangeEvent} from 'react';
-import {setStatus} from "../../../redux/reducer/profileReducer";
 
 type ProfileStatusType = {
     status: string
@@ -11,12 +10,6 @@ class ProfileStatus extends React.Component<ProfileStatusType> {
     state = {
         editMode: false,
         status: this.props.status
-    }
-
-    onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
-        this.setState({
-            status: e.currentTarget.value
-        })
     }
 
     activateEditMode = () => {
@@ -32,15 +25,31 @@ class ProfileStatus extends React.Component<ProfileStatusType> {
         this.props.updateStatus(this.state.status)
     }
 
+    onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
+        this.setState({
+            status: e.currentTarget.value
+        })
+    }
+
+    componentDidUpdate(prevProps: Readonly<ProfileStatusType>, prevState: Readonly<{}>, snapshot?: any):void {
+
+        if(prevProps.status !== this.props.status) {
+            this.setState({
+                status: this.props.status
+            })
+        }
+    }
+
 
     render() {
+        console.log('render')
         return <div>
             {!this.state.editMode ?
                 <div>
-                    <span onDoubleClick={this.activateEditMode}>{this.props.status}</span>
+                    <span onDoubleClick={this.activateEditMode}>{this.props.status || 'No status'}</span>
                 </div> :
                 <div>
-                    <input onChange={this.onStatusChange} autoFocus={true} value={this.state.status} onBlur={this.deActivateEditMode}/>
+                    <input onChange={this.onStatusChange} autoFocus value={this.state.status} onBlur={this.deActivateEditMode}/>
                 </div>
             }
         </div>
