@@ -10,7 +10,6 @@ export type PostType = {
 
 export type StatePostType = {
     posts: PostType[]
-    newPostText: string
     profile: ProfileType
     status: string
 }
@@ -46,7 +45,6 @@ let initialState: StatePostType = {
         {id: 1, messages: 'Hi, how are you?', likesCount: 100},
         {id: 2, messages: 'It`s my first post', likesCount: 150},
     ],
-    newPostText: 'it-kamasutra',
     profile: {
         "aboutMe": "я круто чувак 1001%",
         "contacts": {
@@ -78,13 +76,6 @@ export const profileReducer = (state: StatePostType = initialState, action: Acti
             return {
                 ...state,
                 posts: [...state.posts, newPost],
-                newPostText: ''
-            }
-        }
-        case 'UPDATE-NEW-POST-TEXT': {
-            return {
-                ...state,
-                newPostText: action.newText
             }
         }
         case 'SET-USERS-PROFILE': {
@@ -101,9 +92,8 @@ export const profileReducer = (state: StatePostType = initialState, action: Acti
     }
 }
 
-type ActionType = AddPostCreator | UpdateNewPostTextCreator | SetUsersProfile | SetUserStatus
+type ActionType = AddPostCreator | SetUsersProfile | SetUserStatus
 type AddPostCreator = ReturnType<typeof addPostCreator>
-type UpdateNewPostTextCreator = ReturnType<typeof updateNewPostTextCreator>
 type SetUsersProfile = ReturnType<typeof setUsersProfile>
 type SetUserStatus = ReturnType<typeof setStatus>
 
@@ -113,14 +103,6 @@ export const addPostCreator = (newPostText: string) => {
         {
             type: 'ADD-POST',
             newPostText: newPostText
-        } as const
-    )
-}
-export const updateNewPostTextCreator = (newText: string) => {
-    return (
-        {
-            type: 'UPDATE-NEW-POST-TEXT',
-            newText: newText
         } as const
     )
 }
@@ -154,6 +136,6 @@ export const getStatus = (userId: string) => (dispatch: AppDispatchType) => {
 export const updateStatus = (status: string) => (dispatch: AppDispatchType) => {
     profileAPI.updateStatus(status).then(response => {
         if (response.data.resultCode === 0)
-        dispatch(setStatus(status))
+            dispatch(setStatus(status))
     })
 }
