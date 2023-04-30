@@ -19,9 +19,9 @@ export const AddNewPostForm: React.FC<InjectedFormProps<AddNewPostFormType>> = (
     );
 };
 
-export const MyPostFormRedux = reduxForm<AddNewPostFormType>({form: 'MyPostForm'})(AddNewPostForm)
+export const AddNewPostFormRedux = reduxForm<AddNewPostFormType>({form: 'AddNewPostForm'})(AddNewPostForm)
 
-// export const MyPostForm = () => {
+// export const AddNewPostForm = () => {
 //     return (
 //         <div>
 //             <Formik

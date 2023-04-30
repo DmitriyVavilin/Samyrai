@@ -2,22 +2,13 @@ import React from "react";
 import s from "../MyPost/MyPost.module.css";
 import {Post} from "./Post/Post";
 import {MyPostPropsType} from "./MyPostContainer";
-import {MyPostFormRedux, AddNewPostFormType} from "./MyPostForm/AddNewPostForm";
+import {AddNewPostFormRedux, AddNewPostFormType} from "./AddNewPostForm/AddNewPostForm";
 
 export const MyPost = (props: MyPostPropsType) => {
 
     const postElements = props.posts.map((el, index) => <Post key={index} messages={el.messages}
                                                               likesCount={el.likesCount}/>)
-    const newPostElement = React.createRef<HTMLTextAreaElement>()
 
-    const onAddPost = () => {
-        props.addPost(props.newPostText)
-    }
-
-    const onPostChange = () => {
-        let textPost = newPostElement.current?.value
-        props.updateNewPostTextCreator(textPost ? textPost : '')
-    }
 
     const addNewProfile = (values: AddNewPostFormType) => {
         props.addPost(values.newPost)
@@ -28,12 +19,7 @@ export const MyPost = (props: MyPostPropsType) => {
             <h3 className={s.h3}>My post</h3>
             <div className={s.addPost}>
                 <div>
-                    {/*<textarea onChange={onPostChange} ref={newPostElement} value={props.newPostText}/>*/}
-                    <MyPostFormRedux onSubmit={addNewProfile}/>
-                </div>
-
-                <div>
-                    {/*<button onClick={onAddPost}>add post</button>*/}
+                    <AddNewPostFormRedux onSubmit={addNewProfile}/>
                 </div>
             </div>
             <div className={s.posts}>
