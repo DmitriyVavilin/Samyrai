@@ -9,12 +9,6 @@ export const Dialogs = (props: DialogsPropsType) => {
     const dialogsElements = props.dialogsPage.dialogs.map((d) => <DialogItems key={d.id} name={d.name} id={d.id}/>)
     const messagesElements = props.dialogsPage.messages.map((m) => <MessagesItem key={m.id} message={m.message}/>)
 
-
-    const onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        let body = e.currentTarget.value
-        props.updateNewMessageBodyCreator(body)
-    }
-
     const addNewMessage = (values: AddMessageFormType) => {
         props.sendMessageCreator(values.newMessageBody)
     }
