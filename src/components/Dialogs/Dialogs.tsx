@@ -3,13 +3,14 @@ import s from "./Dialogs.module.css"
 import {DialogItems} from "./DialogItems/DialogItems";
 import {MessagesItem} from "./MessageItem/MessageItem";
 import {DialogsPropsType} from "./DialogsContainer";
+import {AddMessageFormRedux} from "./DialogsForm/AddMessageForm";
 
 export const Dialogs = (props: DialogsPropsType) => {
     const dialogsElements = props.dialogsPage.dialogs.map((d) => <DialogItems key={d.id} name={d.name} id={d.id}/>)
     const messagesElements = props.dialogsPage.messages.map((m) => <MessagesItem key={m.id} message={m.message}/>)
     const newMessageBody = props.dialogsPage.newMessageBody
 
-    const onSendMessageClick = () => {
+    const onSendMessageClick = (values: string) => {
         props.sendMessageCreator()
     }
 
@@ -18,7 +19,9 @@ export const Dialogs = (props: DialogsPropsType) => {
         props.updateNewMessageBodyCreator(body)
     }
 
-
+    const addNewMessage = (values: {}) => {
+        alert(values)
+    }
 
     return (
         <div className={s.dialogs}>
@@ -27,13 +30,7 @@ export const Dialogs = (props: DialogsPropsType) => {
             </div>
             <div className={s.messages}>
                 <div>{messagesElements}</div>
-                <div>
-                    <textarea placeholder={'Enter your message'} onChange={onNewMessageChange}
-                              value={newMessageBody}/>
-                </div>
-                <div>
-                    <button onClick={onSendMessageClick}>Send</button>
-                </div>
+              <AddMessageFormRedux onSubmit={addNewMessage}/>
             </div>
         </div>
     )

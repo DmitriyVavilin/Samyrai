@@ -2,10 +2,12 @@ import React from "react";
 import s from "../MyPost/MyPost.module.css";
 import {Post} from "./Post/Post";
 import {MyPostPropsType} from "./MyPostContainer";
+import MyPostForm from "./MyPostForm/MyPostForm";
 
 export const MyPost = (props: MyPostPropsType) => {
 
-    const postElements = props.posts.map((el,index) => <Post key={index} messages={el.messages} likesCount={el.likesCount}/>)
+    const postElements = props.posts.map((el, index) => <Post key={index} messages={el.messages}
+                                                              likesCount={el.likesCount}/>)
 
     const newPostElement = React.createRef<HTMLTextAreaElement>()
 
@@ -16,7 +18,7 @@ export const MyPost = (props: MyPostPropsType) => {
     const onPostChange = () => {
 
         let textPost = newPostElement.current?.value
-        props.updateNewPostTextCreator(textPost ? textPost: '')
+        props.updateNewPostTextCreator(textPost ? textPost : '')
     }
 
     return (
