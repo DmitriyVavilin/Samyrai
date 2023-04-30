@@ -11,7 +11,6 @@ export type DialogsType = {
 export type StateDialogsType = {
     dialogs: DialogsType[]
     messages: MessageType[]
-    newMessageBody: string
 }
 
 let initialState = {
@@ -28,8 +27,7 @@ let initialState = {
         {id: 3, message: 'What do you do?'},
         {id: 4, message: 'I have a two dogs'},
         {id: 5, message: 'I`m want you)'}
-    ],
-    newMessageBody: '',
+    ]
 }
 
 export const dialogsReducer = (state: StateDialogsType = initialState, action: ActionType): StateDialogsType => {
@@ -37,14 +35,13 @@ export const dialogsReducer = (state: StateDialogsType = initialState, action: A
         case 'UPDATE-NEW-MESSAGE-BODY': {
             return {
                 ...state,
-                newMessageBody: action.body
+
             }
         }
         case 'SEND-MESSAGE': {
-            let body = state.newMessageBody
+            let body = action.newMessageBody
             return {
                 ...state,
-                newMessageBody: '',
                 messages: [...state.messages, {id: 6, message: body}]
             }
         }
@@ -65,8 +62,8 @@ export const updateNewMessageBodyCreator = (body: string) => {
         } as const
     )
 }
-export const sendMessageCreator = () => {
+export const sendMessageCreator = (newMessageBody:string) => {
     return (
-        {type: 'SEND-MESSAGE'} as const
+        {type: 'SEND-MESSAGE',newMessageBody} as const
     )
 }

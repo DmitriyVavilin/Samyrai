@@ -1,8 +1,8 @@
 import React from 'react';
 import {Field, InjectedFormProps, reduxForm} from 'redux-form';
 
-type AddMessageFormType = {
-    addNewMessage:(values: any) => void
+export type AddMessageFormType = {
+    newMessageBody:string
 }
 
 const AddMessageForm: React.FC<InjectedFormProps<AddMessageFormType>> = (props) => {

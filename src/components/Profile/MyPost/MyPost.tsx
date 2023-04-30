@@ -2,7 +2,6 @@ import React from "react";
 import s from "../MyPost/MyPost.module.css";
 import {Post} from "./Post/Post";
 import {MyPostPropsType} from "./MyPostContainer";
-import MyPostForm from "./MyPostForm/MyPostForm";
 
 export const MyPost = (props: MyPostPropsType) => {
 
