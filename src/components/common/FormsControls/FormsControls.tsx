@@ -4,18 +4,36 @@ import s from './FormsControls.module.css'
 type TextAreaType = {
     input: {}
     meta: { error: string, touched: true }
+    children?: React.ReactNode
 }
 
-export const TextArea: React.FC<TextAreaType> = ({input, meta, ...props}) => {
+
+export const FormControl:React.FC<TextAreaType> = ({input, meta,children, ...props}) => {
     const hasError = meta.touched && meta.error
-    return (
-        <div className={s.formControl + ' ' + (hasError ? s.error : '')}>
+    return(
+        <div className={s.formControl + ' ' + (hasError ? s.error: '')}>
             <div>
-                <textarea {...input} {...props}/>
+                {children}
             </div>
-            <div>
-                {hasError && <span>'some error'</span>}
-            </div>
+            {hasError && <span>{meta.error}</span>}
         </div>
+    )
+}
+
+export const TextArea: React.FC<TextAreaType> = (props) => {
+    const {input,children,meta,...restProps} = props
+    return (
+          <FormControl {...props}>
+              <textarea {...input} {...restProps}/>
+          </FormControl>
+    )
+}
+
+export const Input: React.FC<TextAreaType> = (props) => {
+    const {input,children,meta,...restProps} = props
+    return (
+        <FormControl {...props}>
+            <input {...input} {...restProps}/>
+        </FormControl>
     )
 }

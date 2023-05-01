@@ -3,7 +3,6 @@ import {FormDataType, LoginReduxForm,} from "./LoginForm/LoginForm";
 
 
 export const Login = () => {
-    console.log('Login')
     const  onSubmit = (formData:FormDataType) => {
         console.log(formData)
     }
