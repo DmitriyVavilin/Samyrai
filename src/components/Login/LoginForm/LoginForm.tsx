@@ -6,7 +6,7 @@ import {Input} from "../../common/FormsControls/FormsControls";
 export type FormDataType = {
     login: string
     password: string
-    rememberMe: string
+    rememberMe: boolean
 
 }
 
