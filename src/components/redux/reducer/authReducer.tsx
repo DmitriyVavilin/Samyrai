@@ -1,6 +1,7 @@
 import React from "react";
-import {AppDispatchType} from "../redux-store";
-import {authAPI, profileAPI} from "../../../api/api";
+import {AppThunk} from "../redux-store";
+import {authAPI} from "../../../api/api";
+import {Dispatch} from "redux";
 
 
 export type authUsersType = {
@@ -17,7 +18,7 @@ const initialState: authUsersType = {
     isAuth: false
 }
 
-export const authReducer = (state: authUsersType = initialState, action: ActionType): authUsersType => {
+export const authReducer = (state: authUsersType = initialState, action: AuthActionType): authUsersType => {
     switch (action.type) {
         case 'SET-USER-DATA': {
             return {
@@ -32,7 +33,7 @@ export const authReducer = (state: authUsersType = initialState, action: ActionT
 }
 
 
-type ActionType = SetUserData
+export type AuthActionType = SetUserData
 type SetUserData = ReturnType<typeof setAuthUserData>
 
 export const setAuthUserData = (userId: number, email: string, login: string) => {
@@ -44,7 +45,7 @@ export const setAuthUserData = (userId: number, email: string, login: string) =>
 }
 
 
-export const getAuthUserData = () => (dispatch: AppDispatchType) => {
+export const getAuthUserData = () => (dispatch: Dispatch<AuthActionType>) => {
     authAPI.me().then(response => {
         if (response.data.resultCode === 0) {
             let {id, login, email} = response.data.data
@@ -53,11 +54,19 @@ export const getAuthUserData = () => (dispatch: AppDispatchType) => {
     })
 }
 
-export const Login = (email:string,password:string) => (dispatch: AppDispatchType) => {
-    authAPI.me().then(response => {
+export const Login = (email: string, password: string, rememberMe: boolean): AppThunk => (dispatch) => {
+    authAPI.login(email, password, rememberMe).then(response => {
         if (response.data.resultCode === 0) {
-            let {id, login, email} = response.data.data
-            dispatch(setAuthUserData(id, login, email))
+            dispatch(getAuthUserData())
+        }
+
+    })
+}
+
+export const Logout = (email: string, password: string, rememberMe: boolean):AppThunk => (dispatch) => {
+    authAPI.login(email, password, rememberMe).then(response => {
+        if (response.data.resultCode === 0) {
+            dispatch(getAuthUserData())
         }
     })
 }
