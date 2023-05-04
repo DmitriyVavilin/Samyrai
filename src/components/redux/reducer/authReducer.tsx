@@ -67,15 +67,11 @@ export const getAuthUserData = () => (dispatch: Dispatch<AuthActionType>) => {
 }
 
 export const login = (email: string, password: string, rememberMe: boolean): AppThunk => (dispatch) => {
-    let action = stopSubmit('login', {_error: 'Error email or password'})
-    dispatch(action)
-    return
     authAPI.login(email, password, rememberMe).then(response => {
         if (response.data.resultCode === 0) {
             dispatch(getAuthUserData())
         } else {
-            let action = stopSubmit('login', {_error: response.data.messages[0]})
-            dispatch(action)
+            dispatch(stopSubmit('login', {_error: response.data.messages[0]}))
         }
 
     })
