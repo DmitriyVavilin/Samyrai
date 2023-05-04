@@ -23,8 +23,7 @@ export const authReducer = (state: authUsersType = initialState, action: AuthAct
         case 'SET-USER-DATA': {
             return {
                 ...state,
-                ...action.payload,
-                isAuth: true
+                ...action.payload
             }
         }
         case 'SET-USER-DATA-NULL': {
@@ -78,7 +77,7 @@ export const login = (email: string, password: string, rememberMe: boolean): App
 export const logout = (): AppThunk => (dispatch) => {
     authAPI.logout().then(response => {
         if (response.data.resultCode === 0) {
-            dispatch(setAuthUserDataNull)
+            dispatch(setAuthUserDataNull())
         }
     })
 }
