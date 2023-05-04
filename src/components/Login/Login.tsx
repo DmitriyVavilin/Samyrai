@@ -1,10 +1,16 @@
 import React from 'react';
 import {FormDataType, LoginReduxForm,} from "./LoginForm/LoginForm";
+import {connect} from "react-redux";
+import {login} from "../redux/reducer/authReducer";
+import {RootStateType} from "../redux/redux-store";
 
+type DispatchPropsType = {
+    login: (email: string, password: string, rememberMe: boolean) => void
+}
 
-export const Login = () => {
-    const  onSubmit = (formData:FormDataType) => {
-        console.log(formData)
+const Login = ({login}: DispatchPropsType) => {
+    const onSubmit = (data: FormDataType) => {
+        login(data.login,data.password,data.rememberMe)
     }
 
     return (
@@ -15,3 +21,7 @@ export const Login = () => {
     );
 };
 
+
+
+
+export default connect<{}, DispatchPropsType, {}, RootStateType>(() => ({}), {login})(Login)

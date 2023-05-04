@@ -25,3 +25,6 @@ export type AppDispatchType = typeof store.dispatch
 export type AppActionsType = AuthActionType
 
 export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootStateType, unknown, AppActionsType>
+
+//@ts-ignore
+window.store = store

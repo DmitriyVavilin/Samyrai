@@ -9,7 +9,7 @@ import {NavBar} from "./components/NavBar/NavBar";
 import {UsersContainer} from "./components/Users/UsersContainer";
 import WithUrlDataContainerComponent from './components/Profile/ProfileContainer';
 import HeaderContainer from "./components/Header/HeaderContainer";
-import {Login} from "./components/Login/Login";
+import Login from "./components/Login/Login";
 
 
 const App = () => {
@@ -23,8 +23,8 @@ const App = () => {
                 <Route path={'/news'} component={News}/>
                 <Route path={'/music'} component={Music}/>
                 <Route path={'/settings'} component={Settings}/>
-                <Route path={'/users'} render={() => <UsersContainer />}/>
-                <Route path={'/login'} render={() => <Login />}/>
+                <Route path={'/users'} render={() => <UsersContainer/>}/>
+                <Route path={'/login'} render={() => <Login/>}/>
             </div>
         </div>
     );
