@@ -11,6 +11,8 @@ import {compose} from "redux";
 type mapStateToProps = {
     profile: ProfileType
     status: string
+    authorizedUserId: null | number
+    isAuth: boolean
 }
 type mapDispatchToProps = {
     setUsersProfile: (profile: ProfileType) => void
@@ -30,9 +32,9 @@ export type OwnType = ProfileContainerPropsType & RouteComponentProps<PathParams
 class ProfileContainer extends React.Component<OwnType> {
 
     componentDidMount() {
-        let userId: string = this.props.match.params.userId
+        let userId = this.props.match.params.userId
         if (!userId) {
-            userId = '2'
+            userId = this.props.authorizedUserId === null ? '2' : this.props.authorizedUserId.toString()
         }
         this.props.getUserProfile(userId)
         this.props.getUserStatus(userId)
@@ -41,7 +43,8 @@ class ProfileContainer extends React.Component<OwnType> {
     render() {
         return (
             <div>
-                <Profile{...this.props} profile={this.props.profile} status={this.props.status} updateStatus={this.props.updateStatus}/>
+                <Profile{...this.props} profile={this.props.profile} status={this.props.status}
+                        updateStatus={this.props.updateStatus}/>
             </div>
         )
     }
@@ -50,13 +53,15 @@ class ProfileContainer extends React.Component<OwnType> {
 
 const mapStateToProps = (state: RootStateType): mapStateToProps => ({
     profile: state.profilePage.profile,
-    status: state.profilePage.status
+    status: state.profilePage.status,
+    authorizedUserId: state.authUsers.userId,
+    isAuth: state.authUsers.isAuth
 })
 
 export default compose<React.ComponentType>(connect(mapStateToProps, {
     setUsersProfile,
     getUserProfile,
-    getUserStatus: getStatus,updateStatus
+    getUserStatus: getStatus, updateStatus
 }), withRouter, withAuthRedirect)(ProfileContainer)
 
 
