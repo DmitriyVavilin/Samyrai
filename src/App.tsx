@@ -14,8 +14,9 @@ import {connect} from "react-redux";
 import {compose} from "redux";
 import {initializeApp} from "components/redux/reducer/appReducer";
 import {RootStateType} from "components/redux/redux-store";
+import {Preloader} from "Preloader/Preloader";
 
-type AppContainerType = MapDispatchToProps
+type AppContainerType = MapDispatchToProps & MapStateToProps
 
 type MapDispatchToProps = {
     getAuthUserData: () => void
@@ -34,6 +35,10 @@ class App extends React.Component<AppContainerType, RouteComponentProps> {
     }
 
     render() {
+        debugger
+        if (!this.props.initialized) {
+            return <Preloader/>
+        }
         return (
             <div className={'app-wrapper'}>
                 <HeaderContainer/>
