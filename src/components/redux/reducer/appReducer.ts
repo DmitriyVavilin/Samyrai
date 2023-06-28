@@ -1,35 +1,22 @@
-import React from "react";
-import {AppThunk} from "../redux-store";
-import {authAPI} from "api/api";
-import {Dispatch} from "redux";
-import {stopSubmit} from "redux-form";
+import {RootStateType} from "components/redux/redux-store";
+import {getAuthUserData} from "components/redux/reducer/authReducer";
+import {ThunkDispatch} from "redux-thunk";
+import {AnyAction} from "redux";
 
-
-export type authUsersType = {
-    isAuth: boolean
-    userId: null | number,
-    email: null | string,
-    login: null | string,
+export type appType = {
+    initialized: boolean
 }
 
-const initialState: authUsersType = {
-    userId: null,
-    email: null,
-    login: null,
-    isAuth: false
+const initialState = {
+    initialized: false
 }
 
-export const authReducer = (state: authUsersType = initialState, action: AuthActionType): authUsersType => {
+export const appReducer = (state: appType = initialState, action: ActionType): appType => {
     switch (action.type) {
-        case 'SET-USER-DATA': {
+        case 'SET-INITIALIZED-SUCCESS': {
             return {
                 ...state,
-                ...action.payload
-            }
-        }
-        case 'SET-USER-DATA-NULL': {
-            return {
-                ...initialState
+                initialized: true
             }
         }
         default:
@@ -37,51 +24,20 @@ export const authReducer = (state: authUsersType = initialState, action: AuthAct
     }
 }
 
+type ActionType = SetInitializedSuccess
+type SetInitializedSuccess = ReturnType<typeof setInitializedSuccess>
 
-export type AuthActionType = SetUserData | SetUserDataNULL
-type SetUserData = ReturnType<typeof setAuthUserData>
-type SetUserDataNULL = ReturnType<typeof setAuthUserDataNull>
-
-export const setAuthUserData = (userId: number, email: string, login: string, isAuth: boolean) => {
+export const setInitializedSuccess = () => {
     return {
-        type: 'SET-USER-DATA',
-        payload: {userId, email, login, isAuth}
-
+        type: 'SET-INITIALIZED-SUCCESS',
     } as const
 }
 
-export const setAuthUserDataNull = () => {
-    return {
-        type: 'SET-USER-DATA-NULL',
-    } as const
-}
-
-
-export const getAuthUserData = () => (dispatch: Dispatch<AuthActionType>) => {
-    authAPI.me().then(response => {
-        if (response.data.resultCode === 0) {
-            let {id, login, email} = response.data.data
-            dispatch(setAuthUserData(id, login, email, true))
-        }
+export const initializeApp = () => (dispatch:TypedDispatch) => {
+    let promise = dispatch(getAuthUserData())
+    promise.then(() => {
+        dispatch(setInitializedSuccess())
     })
 }
 
-export const login = (email: string, password: string, rememberMe: boolean): AppThunk => (dispatch) => {
-    authAPI.login(email, password, rememberMe).then(response => {
-        if (response.data.resultCode === 0) {
-            dispatch(getAuthUserData())
-        } else {
-            let messages = response.data.messages.length > 0 ? response.data.messages[0] : 'Some Error'
-            dispatch(stopSubmit('login', {_error: messages}))
-        }
-
-    })
-}
-
-export const logout = (): AppThunk => (dispatch) => {
-    authAPI.logout().then(response => {
-        if (response.data.resultCode === 0) {
-            dispatch(setAuthUserDataNull())
-        }
-    })
-}
+type TypedDispatch = ThunkDispatch<RootStateType, any, AnyAction>;

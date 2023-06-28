@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import {Route, RouteComponentProps} from "react-router-dom";
+import {Route, RouteComponentProps, withRouter} from "react-router-dom";
 import {News} from "components/News/News";
 import {Music} from "components/Music/Music";
 import {Settings} from "components/Settings/Settings";
@@ -11,20 +11,26 @@ import WithUrlDataContainerComponent from './components/Profile/ProfileContainer
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
 import {connect} from "react-redux";
-import {getAuthUserData} from "components/redux/reducer/authReducer";
 import {compose} from "redux";
-import {withRouter} from "react-router-dom";
+import {initializeApp} from "components/redux/reducer/appReducer";
+import {RootStateType} from "components/redux/redux-store";
 
-type AppContainerType =  MapDispatchToProps
+type AppContainerType = MapDispatchToProps
 
 type MapDispatchToProps = {
     getAuthUserData: () => void
+    initializeApp: () => void
 }
 
-class App extends React.Component<AppContainerType,RouteComponentProps> {
+type MapStateToProps = {
+    initialized: boolean
+}
+
+
+class App extends React.Component<AppContainerType, RouteComponentProps> {
 
     componentDidMount() {
-        this.props.getAuthUserData();
+        this.props.initializeApp()
     }
 
     render() {
@@ -46,5 +52,11 @@ class App extends React.Component<AppContainerType,RouteComponentProps> {
     }
 }
 
-export default compose<React.ComponentType>(connect(null, {getAuthUserData}),withRouter)(App)
+const mapStateToProps = (state: RootStateType): MapStateToProps => {
+    return {
+        initialized: state.appReducer.initialized
+    }
+}
+
+export default compose<React.ComponentType>(connect(mapStateToProps, {initializeApp}), withRouter)(App)
 

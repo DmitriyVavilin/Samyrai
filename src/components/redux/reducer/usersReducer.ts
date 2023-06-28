@@ -1,4 +1,3 @@
-import React from "react";
 import {usersAPI} from "../../../api/api";
 import {AppDispatchType} from "../redux-store";
 

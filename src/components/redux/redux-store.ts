@@ -6,6 +6,7 @@ import {usersReducer} from "components/redux/reducer/usersReducer";
 import {AuthActionType, authReducer} from "components/redux/reducer/authReducer";
 import thunkMiddleware, {ThunkAction} from 'redux-thunk'
 import {reducer as formReducer} from 'redux-form'
+import {appReducer} from "components/redux/reducer/appReducer";
 
 
 let rootReducer = combineReducers({
@@ -14,7 +15,8 @@ let rootReducer = combineReducers({
     dialogsPage: dialogsReducer,
     sideBar: sideBarReducer,
     usersPage: usersReducer,
-    form: formReducer
+    form: formReducer,
+    appReducer:appReducer
 })
 
 

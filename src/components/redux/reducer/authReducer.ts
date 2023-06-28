@@ -1,4 +1,3 @@
-import React from "react";
 import {AppThunk} from "../redux-store";
 import {authAPI} from "api/api";
 import {Dispatch} from "redux";
@@ -58,7 +57,7 @@ export const setAuthUserDataNull = () => {
 
 
 export const getAuthUserData = () => (dispatch: Dispatch<AuthActionType>) => {
-    authAPI.me().then(response => {
+    return authAPI.me().then(response => {
         if (response.data.resultCode === 0) {
             let {id, login, email} = response.data.data
             dispatch(setAuthUserData(id, login, email, true))

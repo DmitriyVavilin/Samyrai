@@ -1,4 +1,3 @@
-import React from "react";
 import {AppDispatchType} from "../redux-store";
 import {profileAPI} from "../../../api/api";
 

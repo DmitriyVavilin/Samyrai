@@ -1,5 +1,3 @@
-import React from "react";
-
 export type MessageType = {
     id: number
     message: string
