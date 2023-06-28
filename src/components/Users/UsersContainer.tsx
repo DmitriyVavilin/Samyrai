@@ -12,7 +12,7 @@ import {
     unfollow,
     UserStateType,
     UserType
-} from "../redux/reducer/usersReducer";
+} from "components/redux/reducer/usersReducer";
 import {Users} from "./Users";
 import {Preloader} from "../../Preloader/Preloader";
 import {compose} from "redux";

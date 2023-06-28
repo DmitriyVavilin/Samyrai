@@ -1,7 +1,7 @@
 import React from "react";
 import s from './Friends.module.css'
 import {NavLink, Redirect} from "react-router-dom";
-import {DialogsType} from "../redux/reducer/dialogsReducer";
+import {DialogsType} from "components/redux/reducer/dialogsReducer";
 
 
 type FriendsTypeProps = {

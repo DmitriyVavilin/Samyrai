@@ -1,10 +1,10 @@
 import React from "react";
 import {connect} from "react-redux";
-import {getUserProfile, getStatus, ProfileType, setUsersProfile, updateStatus} from "../redux/reducer/profileReducer";
+import {getUserProfile, getStatus, ProfileType, setUsersProfile, updateStatus} from "components/redux/reducer/profileReducer";
 import {RootStateType} from "../redux/redux-store";
 import {Profile} from "./Profile";
 import {RouteComponentProps, withRouter} from "react-router-dom";
-import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {withAuthRedirect} from "hoc/withAuthRedirect";
 import {compose} from "redux";
 
 

@@ -2,7 +2,7 @@ import React from 'react';
 import style from "./Users.module.css";
 import s from "./Users.module.css";
 import userPhoto from "../../assets/images/user.jpg";
-import {UserStateType} from "../redux/reducer/usersReducer";
+import {UserStateType} from "components/redux/reducer/usersReducer";
 import {NavLink, Redirect} from "react-router-dom";
 
 type UserPresentationType = {

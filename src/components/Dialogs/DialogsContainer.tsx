@@ -1,9 +1,9 @@
 import React from "react";
-import {sendMessageCreator, StateDialogsType} from "../redux/reducer/dialogsReducer";
+import {sendMessageCreator, StateDialogsType} from "components/redux/reducer/dialogsReducer";
 import {connect} from "react-redux";
 import {RootStateType} from "../redux/redux-store";
 import {compose, Dispatch} from "redux";
-import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {withAuthRedirect} from "hoc/withAuthRedirect";
 import {Dialogs} from "./Dialogs";
 import {withRouter} from "react-router-dom";
 

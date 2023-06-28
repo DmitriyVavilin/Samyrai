@@ -1,6 +1,6 @@
 import React from "react";
 import {AppThunk} from "../redux-store";
-import {authAPI} from "../../../api/api";
+import {authAPI} from "api/api";
 import {Dispatch} from "redux";
 import {stopSubmit} from "redux-form";
 
