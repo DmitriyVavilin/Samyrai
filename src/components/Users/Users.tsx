@@ -2,7 +2,7 @@ import React from 'react';
 import style from "./Users.module.css";
 import s from "./Users.module.css";
 import userPhoto from "../../assets/images/user.jpg";
-import {UserStateType} from "components/redux/reducer/usersReducer";
+import {UserStateType, UserType} from "components/redux/reducer/usersReducer";
 import {NavLink, Redirect} from "react-router-dom";
 
 type UserPresentationType = {
@@ -10,11 +10,10 @@ type UserPresentationType = {
     pageSize: number
     currentPage: number
     followingInProgress: number []
-    usersPage: UserStateType
+    usersPage: UserType[]
     onPageChanged: (pageNumber: number) => void
     follow: (id: number) => void
     unfollow: (id: number) => void
-    isAuth:boolean
 }
 
 export const Users = (props: UserPresentationType) => {
@@ -24,7 +23,6 @@ export const Users = (props: UserPresentationType) => {
     for (let i = 1; i <= pageCount; i++) {
         pages.push(i)
     }
-    if(props.isAuth === false) return <Redirect to={'/login'}/>
     return (
         <div>
             <div>
@@ -35,7 +33,7 @@ export const Users = (props: UserPresentationType) => {
                 }
             </div>
             {
-                props.usersPage.users.length && props.usersPage.users.map(el => {
+                props.usersPage.length && props.usersPage.map(el => {
                     return (
                         <div key={el.id}>
                         <span>

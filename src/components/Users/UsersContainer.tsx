@@ -3,31 +3,36 @@ import {connect} from "react-redux";
 import {RootStateType} from "../redux/redux-store";
 import {
     follow,
-    getUser,
+    requestUsers,
     setCurrentPage,
     setTotalCount,
     setUsers,
     toggleFollowingInProgress,
     toggleIsFetching,
     unfollow,
-    UserStateType,
     UserType
 } from "components/redux/reducer/usersReducer";
 import {Users} from "./Users";
-import {Preloader} from "../../Preloader/Preloader";
+import {Preloader} from "Preloader/Preloader";
 import {compose} from "redux";
 import {withRouter} from "react-router-dom";
-import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {withAuthRedirect} from "hoc/withAuthRedirect";
+import {
+    getCurrentPage, getFollowingInProgress,
+    getIsFetching,
+    getPageSize,
+    getTotalCount,
+    getUsers
+} from "components/redux/reducer/selectors/users-selectors";
 
 export type UsersContainerType = mapStateToProps & mapDispatchToProps
 export type mapStateToProps = {
-    usersPage: UserStateType
+    usersPage: UserType[]
     pageSize: number
     totalCount: number
     currentPage: number
     isFetching: boolean
     followingInProgress: number []
-    isAuth: boolean
 }
 type mapDispatchToProps = {
     setUsers: (users: Array<UserType>) => void
@@ -35,7 +40,7 @@ type mapDispatchToProps = {
     setTotalCount: (totalCount: number) => void
     toggleIsFetching: (isFetching: boolean) => void
     toggleFollowingInProgress: (isFetching: boolean, userId: number) => void
-    getUser: (currentPage: number, pageSize: number) => void
+    requestUsers: (currentPage: number, pageSize: number) => void
     follow: (id: number) => void
     unfollow: (id: number) => void
 
@@ -44,11 +49,11 @@ type mapDispatchToProps = {
 export class UsersAPIComponent extends React.Component<UsersContainerType> {
 
     componentDidMount() {
-        this.props.getUser(this.props.currentPage, this.props.pageSize)
+        this.props.requestUsers(this.props.currentPage, this.props.pageSize)
     }
 
     onPageChanged = (pageNumber: number) => {
-        this.props.getUser(pageNumber, this.props.pageSize)
+        this.props.requestUsers(pageNumber, this.props.pageSize)
     }
 
     render() {
@@ -60,7 +65,6 @@ export class UsersAPIComponent extends React.Component<UsersContainerType> {
                    followingInProgress={this.props.followingInProgress}
                    follow={this.props.follow}
                    unfollow={this.props.unfollow}
-                   isAuth={this.props.isAuth}
             />
         </>
     }
@@ -69,21 +73,22 @@ export class UsersAPIComponent extends React.Component<UsersContainerType> {
 
 const mapStateToProps = (state: RootStateType): mapStateToProps => {
     return {
-        usersPage: state.usersPage,
-        pageSize: state.usersPage.pageSize,
-        totalCount: state.usersPage.totalCount,
-        currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching,
-        followingInProgress: state.usersPage.followingInProgress,
-        isAuth: state.authUsers.isAuth
+        usersPage: getUsers(state),
+        pageSize: getPageSize(state),
+        totalCount: getTotalCount(state),
+        currentPage: getCurrentPage(state),
+        isFetching: getIsFetching(state),
+        followingInProgress: getFollowingInProgress(state),
     }
 }
 
-export const UsersContainer =  compose<React.ComponentType>(connect(mapStateToProps, { setUsers,
+export const UsersContainer = compose<React.ComponentType>(connect(mapStateToProps, {
+    setUsers,
     setCurrentPage,
     setTotalCount,
     toggleIsFetching,
     toggleFollowingInProgress,
-    getUser,
+    requestUsers,
     follow,
-    unfollow}),withRouter,withAuthRedirect)(UsersAPIComponent)
+    unfollow
+}), withRouter, withAuthRedirect)(UsersAPIComponent)

@@ -1,4 +1,4 @@
-import {usersAPI} from "../../../api/api";
+import {usersAPI} from "api/api";
 import {AppDispatchType} from "../redux-store";
 
 
@@ -28,7 +28,7 @@ export type UserStateType = {
 }
 
 let initialState: UserStateType = {
-    users: [],
+    users: [] as UserType[],
     pageSize: 10,
     totalCount: 500,
     currentPage: 1,
@@ -134,13 +134,14 @@ export const unfollow = (userId: number) => (dispatch: AppDispatchType) => {
         })
     }
 
-export const getUser = (currentPage: number, pageSize: number) => {
+export const requestUsers = (page: number, pageSize: number) => {
     return (dispatch: AppDispatchType) => {
         dispatch(toggleIsFetching(true))
-        dispatch(setCurrentPage(currentPage))
-        usersAPI.getUsers(currentPage, pageSize).then(data => {
+        dispatch(setCurrentPage(page))
+        usersAPI.getUsers(page, pageSize).then(data => {
             dispatch(toggleIsFetching(false))
             dispatch(setUsers(data.items))
+            dispatch(setTotalCount(data.data.totalCount))
         })
     }
 }
