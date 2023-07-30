@@ -18,11 +18,12 @@ import {compose} from "redux";
 import {withRouter} from "react-router-dom";
 import {withAuthRedirect} from "hoc/withAuthRedirect";
 import {
-    getCurrentPage, getFollowingInProgress,
+    getCurrentPage,
+    getFollowingInProgress,
     getIsFetching,
     getPageSize,
     getTotalCount,
-    getUsers
+    getUsers,
 } from "components/redux/reducer/selectors/users-selectors";
 
 export type UsersContainerType = mapStateToProps & mapDispatchToProps

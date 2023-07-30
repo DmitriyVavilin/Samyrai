@@ -1,7 +1,6 @@
 import {usersAPI} from "api/api";
 import {AppDispatchType} from "../redux-store";
 
-
 export type LocationType = {
     city: string
     counter: string
@@ -35,7 +34,6 @@ let initialState: UserStateType = {
     isFetching: false,
     followingInProgress: [2, 3]
 }
-
 
 export const usersReducer = (state: UserStateType = initialState, action: ActionType): UserStateType => {
     switch (action.type) {
