@@ -29,7 +29,7 @@ export type UserStateType = {
 let initialState: UserStateType = {
     users: [] as UserType[],
     pageSize: 10,
-    totalCount: 500,
+    totalCount: 50,
     currentPage: 1,
     isFetching: false,
     followingInProgress: [2, 3]
@@ -112,35 +112,33 @@ type Fetching = ReturnType<typeof toggleIsFetching>
 type Following = ReturnType<typeof toggleFollowingInProgress>
 
 
-export const follow = (userId: number) => (dispatch: AppDispatchType) => {
-        dispatch(toggleFollowingInProgress(true, userId))
-    usersAPI.follow(userId).then(data => {
-            if (data.resultCode === 0) {
-                dispatch(followSuccess(userId))
-            }
-            dispatch(toggleFollowingInProgress(false, userId))
-        })
+export const follow = (userId: number) => async (dispatch: AppDispatchType) => {
+    dispatch(toggleFollowingInProgress(true, userId))
+    const res = await usersAPI.follow(userId)
+    if (res.resultCode === 0) {
+        dispatch(followSuccess(userId))
     }
+    dispatch(toggleFollowingInProgress(false, userId))
+}
 
-export const unfollow = (userId: number) => (dispatch: AppDispatchType) => {
-        dispatch(toggleFollowingInProgress(true, userId))
-    usersAPI.unFollow(userId).then(data => {
-            if (data.resultCode === 0) {
-                dispatch(unFollowSuccess(userId))
-            }
-            dispatch(toggleFollowingInProgress(false, userId))
-        })
+export const unfollow = (userId: number) => async (dispatch: AppDispatchType) => {
+    dispatch(toggleFollowingInProgress(true, userId))
+    const res = await usersAPI.unFollow(userId)
+    if (res.resultCode === 0) {
+        dispatch(unFollowSuccess(userId))
     }
+    dispatch(toggleFollowingInProgress(false, userId))
+}
 
 export const requestUsers = (page: number, pageSize: number) => {
-    return (dispatch: AppDispatchType) => {
+    return async (dispatch: AppDispatchType) => {
         dispatch(toggleIsFetching(true))
         dispatch(setCurrentPage(page))
-        usersAPI.getUsers(page, pageSize).then(data => {
-            dispatch(toggleIsFetching(false))
-            dispatch(setUsers(data.items))
-            dispatch(setTotalCount(data.data.totalCount))
-        })
+        const res = await usersAPI.getUsers(page, pageSize)
+        dispatch(toggleIsFetching(false))
+        dispatch(setUsers(res.items))
+        debugger
+        dispatch(setTotalCount(res.totalCount))
     }
 }
 

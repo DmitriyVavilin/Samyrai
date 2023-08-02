@@ -24,14 +24,7 @@ export const ProfileInfo = (props: ProfileInfo) => {
 
                 <img src={props.profile.photos.large}/>
                 <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
-                <div>
-
-                </div>
-
                 <ul>
-                    <li>
-                        <span>{props.profile.fullName}</span>
-                    </li>
                     <li>
                         <span>{props.profile.contacts.facebook}</span>
                     </li>

@@ -102,7 +102,7 @@ type SetUsersProfile = ReturnType<typeof setUsersProfile>
 type SetUserStatus = ReturnType<typeof setStatus>
 type DeletePostAC = ReturnType<typeof deletePostAC>
 
-export const deletePostAC = (id:number) => {
+export const deletePostAC = (id: number) => {
     return {
         type: 'DELETE-POST',
         id: id
@@ -132,21 +132,18 @@ export const setStatus = (status: string) => {
     } as const
 }
 
-export const getUserProfile = (userId: string) => (dispatch: AppDispatchType) => {
-    profileAPI.getProfile(userId).then(response => {
-        dispatch(setUsersProfile(response.data))
-    })
+export const getUserProfile = (userId: string) => async (dispatch: AppDispatchType) => {
+    const res = await profileAPI.getProfile(userId)
+    dispatch(setUsersProfile(res.data))
 }
 
-export const getStatus = (userId: string) => (dispatch: AppDispatchType) => {
-    profileAPI.getStatus(userId).then(response => {
-        dispatch(setStatus(response.data))
-    })
+export const getStatus = (userId: string) => async (dispatch: AppDispatchType) => {
+    const res = await profileAPI.getStatus(userId)
+    dispatch(setStatus(res.data))
 }
 
-export const updateStatus = (status: string) => (dispatch: AppDispatchType) => {
-    profileAPI.updateStatus(status).then(response => {
-        if (response.data.resultCode === 0)
-            dispatch(setStatus(status))
-    })
+export const updateStatus = (status: string) => async (dispatch: AppDispatchType) => {
+    const res = await profileAPI.updateStatus(status)
+    if (res.data.resultCode === 0)
+        dispatch(setStatus(status))
 }

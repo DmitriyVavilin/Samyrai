@@ -45,7 +45,6 @@ export const setAuthUserData = (userId: number, email: string, login: string, is
     return {
         type: 'SET-USER-DATA',
         payload: {userId, email, login, isAuth}
-
     } as const
 }
 
@@ -56,31 +55,27 @@ export const setAuthUserDataNull = () => {
 }
 
 
-export const getAuthUserData = () => (dispatch: Dispatch<AuthActionType>) => {
-    return authAPI.me().then(response => {
-        if (response.data.resultCode === 0) {
-            let {id, login, email} = response.data.data
-            dispatch(setAuthUserData(id, login, email, true))
-        }
-    })
+export const getAuthUserData = () => async (dispatch: Dispatch<AuthActionType>) => {
+    const res = await authAPI.me()
+    if (res.data.resultCode === 0) {
+        let {id, login, email} = res.data.data
+        dispatch(setAuthUserData(id, login, email, true))
+    }
 }
 
-export const login = (email: string, password: string, rememberMe: boolean): AppThunk => (dispatch) => {
-    authAPI.login(email, password, rememberMe).then(response => {
-        if (response.data.resultCode === 0) {
-            dispatch(getAuthUserData())
-        } else {
-            let messages = response.data.messages.length > 0 ? response.data.messages[0] : 'Some Error'
-            dispatch(stopSubmit('login', {_error: messages}))
-        }
-
-    })
+export const login = (email: string, password: string, rememberMe: boolean): AppThunk => async (dispatch) => {
+    const res = await authAPI.login(email, password, rememberMe)
+    if (res.data.resultCode === 0) {
+        dispatch(getAuthUserData())
+    } else {
+        let messages = res.data.messages.length > 0 ? res.data.messages[0] : 'Some Error'
+        dispatch(stopSubmit('login', {_error: messages}))
+    }
 }
 
-export const logout = (): AppThunk => (dispatch) => {
-    authAPI.logout().then(response => {
-        if (response.data.resultCode === 0) {
-            dispatch(setAuthUserDataNull())
-        }
-    })
+export const logout = (): AppThunk => async (dispatch) => {
+    const res = await authAPI.logout()
+    if (res.data.resultCode === 0) {
+        dispatch(setAuthUserDataNull())
+    }
 }
