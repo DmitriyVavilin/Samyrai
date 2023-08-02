@@ -1,5 +1,5 @@
 import {AppDispatchType} from "../redux-store";
-import {profileAPI} from "../../../api/api";
+import {profileAPI} from "api/api";
 
 export type PostType = {
     id: number
@@ -25,14 +25,14 @@ type ProfileContactsType = {
 }
 
 export type ProfilePhotosType = {
-    "small": "https://social-network.samuraijs.com/activecontent/images/users/2/user-small.jpg?v=0",
-    "large": "https://social-network.samuraijs.com/activecontent/images/users/2/user.jpg?v=0"
+    "small": string
+    "large": string
 }
 
 export type ProfileType = {
     "aboutMe": string
     contacts: ProfileContactsType
-    "lookingForAJob": true,
+    "lookingForAJob": boolean,
     "lookingForAJobDescription": string
     "fullName": string
     "userId": number
@@ -86,18 +86,30 @@ export const profileReducer = (state: StatePostType = initialState, action: Acti
                 status: action.status
             }
         }
+        case 'DELETE-POST': {
+            return {
+                ...state, posts: state.posts.filter(el => el.id !== action.id)
+            }
+        }
         default:
             return state
     }
 }
 
-type ActionType = AddPostCreator | SetUsersProfile | SetUserStatus
-type AddPostCreator = ReturnType<typeof addPostCreator>
+type ActionType = AddPostCreator | SetUsersProfile | SetUserStatus | DeletePostAC
+type AddPostCreator = ReturnType<typeof addPostAC>
 type SetUsersProfile = ReturnType<typeof setUsersProfile>
 type SetUserStatus = ReturnType<typeof setStatus>
+type DeletePostAC = ReturnType<typeof deletePostAC>
 
+export const deletePostAC = (id:number) => {
+    return {
+        type: 'DELETE-POST',
+        id: id
+    } as const
+}
 
-export const addPostCreator = (newPostText: string) => {
+export const addPostAC = (newPostText: string) => {
     return (
         {
             type: 'ADD-POST',
