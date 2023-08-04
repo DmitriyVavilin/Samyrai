@@ -1,5 +1,6 @@
 import {usersAPI} from "api/api";
 import {AppDispatchType} from "../redux-store";
+import {Dispatch} from "redux";
 
 export type LocationType = {
     city: string
@@ -112,7 +113,7 @@ type Fetching = ReturnType<typeof toggleIsFetching>
 type Following = ReturnType<typeof toggleFollowingInProgress>
 
 
-export const follow = (userId: number) => async (dispatch: AppDispatchType) => {
+const followUnfollowFlow = async (dispatch: Dispatch, userId: number) => {
     dispatch(toggleFollowingInProgress(true, userId))
     const res = await usersAPI.follow(userId)
     if (res.resultCode === 0) {
@@ -121,11 +122,26 @@ export const follow = (userId: number) => async (dispatch: AppDispatchType) => {
     dispatch(toggleFollowingInProgress(false, userId))
 }
 
-export const unfollow = (userId: number) => async (dispatch: AppDispatchType) => {
+export const follow = (userId: number) => async (dispatch: AppDispatchType) => {
+    let apiMethod = usersAPI.follow.bind(userId)
+    let actionCreator = followSuccess
+
     dispatch(toggleFollowingInProgress(true, userId))
-    const res = await usersAPI.unFollow(userId)
+    const res = await apiMethod(userId)
     if (res.resultCode === 0) {
-        dispatch(unFollowSuccess(userId))
+        dispatch(actionCreator(userId))
+    }
+    dispatch(toggleFollowingInProgress(false, userId))
+}
+
+export const unfollow = (userId: number) => async (dispatch: AppDispatchType) => {
+    let apiMethod = usersAPI.unFollow.bind(userId)
+    let actionCreator = unFollowSuccess
+
+    dispatch(toggleFollowingInProgress(true, userId))
+    const res = await apiMethod(userId)
+    if (res.resultCode === 0) {
+        dispatch(actionCreator(userId))
     }
     dispatch(toggleFollowingInProgress(false, userId))
 }
