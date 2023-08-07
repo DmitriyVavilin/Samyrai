@@ -3,14 +3,13 @@ import s from './Heade.module.css'
 import {NavLink} from "react-router-dom";
 import {HeaderContainerType} from "./HeaderContainer";
 
-
-export const Header = (props: HeaderContainerType) => {
+export const Header: React.FC<HeaderContainerType> = ({isAuth, login, logout}) => {
     return (
         <header className={s.header}>
             <img src={'https://www.mirf.ru/wp-content/uploads/2021/04/Ataka-titanov-Eren_titan.jpg'}/>
             <div className={s.loginBlock}>
-                {props.isAuth
-                    ? <div>{props.login} - <button onClick={props.logout}>Log out</button></div>
+                {isAuth
+                    ? <div>{login} - <button onClick={logout}>Log out</button></div>
                     : <NavLink to={'/login'}>Login</NavLink>}
             </div>
         </header>

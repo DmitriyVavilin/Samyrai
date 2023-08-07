@@ -1,6 +1,6 @@
 import React from 'react';
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import {maxLengthCreator, required} from "../../../../utils/validators/validators.js";
+import {maxLengthCreator, required} from "utils/validators/validators.js";
 import {TextArea} from "../../../common/FormsControls/FormsControls";
 
 
@@ -10,9 +10,9 @@ export type AddNewPostFormType = {
 
 const maxLength10 = maxLengthCreator(10)
 
-export const AddNewPostForm: React.FC<InjectedFormProps<AddNewPostFormType>> = (props) => {
+export const AddNewPostForm: React.FC<InjectedFormProps<AddNewPostFormType>> = ({handleSubmit}) => {
     return (
-        <form onSubmit={props.handleSubmit}>
+        <form onSubmit={handleSubmit}>
             <div>
                 <Field placeholder={'Post Message'} component={TextArea} name={'newPost'} validate={[required,maxLength10]}/>
             </div>
@@ -24,29 +24,3 @@ export const AddNewPostForm: React.FC<InjectedFormProps<AddNewPostFormType>> = (
 };
 
 export const AddNewPostFormRedux = reduxForm<AddNewPostFormType>({form: 'AddNewPostForm'})(AddNewPostForm)
-
-// export const AddNewPostForm = () => {
-//     return (
-//         <div>
-//             <Formik
-//                 initialValues={{ name: '' }}
-//                 onSubmit={(values, actions) => {
-//                         alert(JSON.stringify(values));
-//                 }}
-//             >
-//                 {props => (
-//                     <form onSubmit={props.handleSubmit}>
-//                         <textarea
-//                             onChange={props.handleChange}
-//                             onBlur={props.handleBlur}
-//                             value={props.values.name}
-//                             name="name"
-//                         />
-//                         <button type="submit">Submit</button>
-//                     </form>
-//                 )}
-//             </Formik>
-//         </div>
-//     );
-// };
-//

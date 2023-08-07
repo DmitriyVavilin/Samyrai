@@ -4,12 +4,10 @@ import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {MyPostContainer} from "./MyPost/MyPostContainer";
 import {ProfileContainerPropsType} from "./ProfileContainer";
 
-
-
-export const Profile = (props: ProfileContainerPropsType) => {
+export const Profile: React.FC<ProfileContainerPropsType> = ({profile, status, updateStatus}) => {
     return (
         <div className={s.content}>
-            <ProfileInfo profile={props.profile} status={props.status} updateStatus={props.updateStatus}/>
+            <ProfileInfo profile={profile} status={status} updateStatus={updateStatus}/>
             <MyPostContainer/>
         </div>
     );

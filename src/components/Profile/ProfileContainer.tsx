@@ -26,7 +26,6 @@ type PathParamsType = {
 }
 
 export type ProfileContainerPropsType = mapStateToProps & mapDispatchToProps
-
 export type OwnType = ProfileContainerPropsType & RouteComponentProps<PathParamsType>
 
 class ProfileContainer extends React.Component<OwnType> {

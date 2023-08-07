@@ -7,14 +7,15 @@ export type DialogItemsPropsType = {
     id: number
 }
 
-export const DialogItems = (props: DialogItemsPropsType) => {
-    let path = '/dialogs1' + props.id
+export const DialogItems: React.FC<DialogItemsPropsType> = ({id, name}) => {
+    let path = '/dialogs1' + id
     return (
         <div className={s.dialogs + ' ' + s.active}>
             <div>
-                <img className={s.dialogsImg} src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRffk80ltMT1J-0nN3YDGzPq6pbfGWQeC50ug&usqp=CAU'}/>
+                <img className={s.dialogsImg}
+                     src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRffk80ltMT1J-0nN3YDGzPq6pbfGWQeC50ug&usqp=CAU'}/>
             </div>
-            <NavLink to={path}>{props.name}</NavLink>
+            <NavLink to={path}>{name}</NavLink>
         </div>
     )
 }

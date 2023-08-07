@@ -5,34 +5,35 @@ type ProfileStatusType = {
     updateStatus: (status: string) => void
 }
 
-const ProfileStatusWithHooks: React.FC<ProfileStatusType> = (props) => {
+const ProfileStatusWithHooks: React.FC<ProfileStatusType> = ({status, updateStatus}) => {
     const [editMode, setEditMode] = useState<boolean>(false)
-    const [status, setStatus] = useState(props.status)
+    const [profileStatus, setProfileStatus] = useState(status)
 
     useEffect(() => {
-        setStatus(props.status)
-    }, [props.status])
+        setProfileStatus(status)
+    }, [status])
 
     const activateEditMode = () => {
         setEditMode(true)
     }
 
     const deActivateEditMode = () => {
+
         setEditMode(false)
-        props.updateStatus(status)
+        updateStatus(profileStatus)
     }
 
     const onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setStatus(e.currentTarget.value)
+        setProfileStatus(e.currentTarget.value)
     }
 
     return <div>
         {!editMode ?
             <div>
-                <span onDoubleClick={activateEditMode}>{props.status || 'No status'}</span>
+                <span onDoubleClick={activateEditMode}>{status || 'No status'}</span>
             </div> :
             <div>
-                <input onChange={onStatusChange} autoFocus value={status} onBlur={deActivateEditMode}/>
+                <input onChange={onStatusChange} autoFocus value={profileStatus} onBlur={deActivateEditMode}/>
             </div>
         })
     </div>

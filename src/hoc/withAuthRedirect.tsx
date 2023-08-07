@@ -1,7 +1,7 @@
 import React, {ComponentType} from 'react';
 import {Redirect} from "react-router-dom";
 import {connect} from "react-redux";
-import {RootStateType} from "../components/redux/redux-store";
+import {RootStateType} from "components/redux/redux-store";
 
 
 type MapStateToProps = {
@@ -18,7 +18,7 @@ const mapStateToProps = (state: RootStateType): MapStateToProps => {
 
 export function withAuthRedirect<T extends HocProps>(Component: ComponentType<T>) {
 
-    const RedirectComponent: React.FC<MapStateToProps & MapDispatchProps> = (props ) => {
+    const RedirectComponent: React.FC<MapStateToProps & MapDispatchProps> = (props) => {
 
         let {isAuth, ...resProps} = props
 
@@ -26,8 +26,6 @@ export function withAuthRedirect<T extends HocProps>(Component: ComponentType<T>
 
         return <Component {...resProps as T}/>
     }
-
-    let ConnectRedirectComponent = connect<MapStateToProps, MapDispatchProps, T, RootStateType>(mapStateToProps,{})(RedirectComponent)
-    return ConnectRedirectComponent
+    return connect<MapStateToProps, MapDispatchProps, T, RootStateType>(mapStateToProps, {})(RedirectComponent)
 };
 

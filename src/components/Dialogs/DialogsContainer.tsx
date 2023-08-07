@@ -12,7 +12,6 @@ export type DialogsPropsType = MapStateToPropsType & MapDispatchPropsType
 
 type MapStateToPropsType = {
     dialogsPage: StateDialogsType
-
 }
 
 type MapDispatchPropsType = {

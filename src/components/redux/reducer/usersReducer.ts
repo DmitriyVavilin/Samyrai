@@ -113,37 +113,23 @@ type Fetching = ReturnType<typeof toggleIsFetching>
 type Following = ReturnType<typeof toggleFollowingInProgress>
 
 
-const followUnfollowFlow = async (dispatch: Dispatch, userId: number) => {
+const followUnfollowFlow = async (dispatch: Dispatch, userId: number, apiMethod: (userID: number) => any, actionCreator: any) => {
     dispatch(toggleFollowingInProgress(true, userId))
-    const res = await usersAPI.follow(userId)
+    const res = await apiMethod(userId)
     if (res.resultCode === 0) {
-        dispatch(followSuccess(userId))
+        dispatch(actionCreator(userId))
     }
     dispatch(toggleFollowingInProgress(false, userId))
 }
 
 export const follow = (userId: number) => async (dispatch: AppDispatchType) => {
     let apiMethod = usersAPI.follow.bind(userId)
-    let actionCreator = followSuccess
-
-    dispatch(toggleFollowingInProgress(true, userId))
-    const res = await apiMethod(userId)
-    if (res.resultCode === 0) {
-        dispatch(actionCreator(userId))
-    }
-    dispatch(toggleFollowingInProgress(false, userId))
+    followUnfollowFlow(dispatch, userId, apiMethod, followSuccess)
 }
 
 export const unfollow = (userId: number) => async (dispatch: AppDispatchType) => {
     let apiMethod = usersAPI.unFollow.bind(userId)
-    let actionCreator = unFollowSuccess
-
-    dispatch(toggleFollowingInProgress(true, userId))
-    const res = await apiMethod(userId)
-    if (res.resultCode === 0) {
-        dispatch(actionCreator(userId))
-    }
-    dispatch(toggleFollowingInProgress(false, userId))
+    followUnfollowFlow(dispatch, userId, apiMethod, unFollowSuccess)
 }
 
 export const requestUsers = (page: number, pageSize: number) => {
@@ -174,7 +160,7 @@ export const unFollowSuccess = (userId: number) => {
         }
     } as const
 }
-export const setUsers = (users: Array<UserType>) => {
+export const setUsers = (users: UserType[]) => {
     return {
         type: 'SET-USERS',
         payload: {

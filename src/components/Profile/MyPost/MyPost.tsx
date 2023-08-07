@@ -4,13 +4,12 @@ import {Post} from "./Post/Post";
 import {MyPostPropsType} from "./MyPostContainer";
 import {AddNewPostFormRedux, AddNewPostFormType} from "./AddNewPostForm/AddNewPostForm";
 
-export const MyPost = React.memo((props: MyPostPropsType) => {
+export const MyPost: React.FC<MyPostPropsType> = React.memo(({posts, addPost}) => {
 
-    const postElements = props.posts.map((el, index) => <Post key={index} messages={el.messages}
-                                                              likesCount={el.likesCount}/>)
+    const postElements = posts.map((el, index) => <Post key={index} messages={el.messages} likesCount={el.likesCount}/>)
 
     const addNewProfile = (values: AddNewPostFormType) => {
-        props.addPost(values.newPost)
+        addPost(values.newPost)
     }
     return (
         <div className={s.postBlock}>

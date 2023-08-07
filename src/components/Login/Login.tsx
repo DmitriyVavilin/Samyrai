@@ -5,8 +5,6 @@ import {login} from "components/redux/reducer/authReducer";
 import {RootStateType} from "../redux/redux-store";
 import {Redirect} from "react-router-dom";
 
-
-
 type MapStateToProps = {
     isAuth: boolean
 }
