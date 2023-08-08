@@ -4,7 +4,6 @@ import {required} from "utils/validators/validators.js";
 import s from './LoginForm.module.css'
 import {createField, Input} from "components/common/FormsControls/FormsControls";
 
-
 export type FormDataType = {
     login: string
     password: string

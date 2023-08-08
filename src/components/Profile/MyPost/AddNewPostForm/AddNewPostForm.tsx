@@ -1,7 +1,7 @@
 import React from 'react';
-import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import {InjectedFormProps, reduxForm} from "redux-form";
 import {maxLengthCreator, required} from "utils/validators/validators.js";
-import {TextArea} from "../../../common/FormsControls/FormsControls";
+import {createField, TextArea} from "../../../common/FormsControls/FormsControls";
 
 
 export type AddNewPostFormType = {
@@ -13,9 +13,7 @@ const maxLength10 = maxLengthCreator(10)
 export const AddNewPostForm: React.FC<InjectedFormProps<AddNewPostFormType>> = ({handleSubmit}) => {
     return (
         <form onSubmit={handleSubmit}>
-            <div>
-                <Field placeholder={'Post Message'} component={TextArea} name={'newPost'} validate={[required,maxLength10]}/>
-            </div>
+                {createField('newPost', [required,maxLength10], TextArea, 'Post Message', 'input')}
             <div>
                 <button>add post</button>
             </div>

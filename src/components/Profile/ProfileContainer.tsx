@@ -1,6 +1,12 @@
 import React from "react";
 import {connect} from "react-redux";
-import {getUserProfile, getStatus, ProfileType, setUsersProfile, updateStatus} from "components/redux/reducer/profileReducer";
+import {
+    getUserProfile,
+    getStatus,
+    ProfileType,
+    setUsersProfile,
+    updateStatus
+} from "components/redux/reducer/profileReducer";
 import {RootStateType} from "../redux/redux-store";
 import {Profile} from "./Profile";
 import {RouteComponentProps, withRouter} from "react-router-dom";
@@ -29,17 +35,18 @@ export type ProfileContainerPropsType = mapStateToProps & mapDispatchToProps
 export type OwnType = ProfileContainerPropsType & RouteComponentProps<PathParamsType>
 
 class ProfileContainer extends React.Component<OwnType> {
-
     componentDidMount() {
+        const {authorizedUserId, history, getUserProfile, getUserStatus} = this.props
+
         let userId = this.props.match.params.userId
         if (!userId) {
-            userId = this.props.authorizedUserId === null ? '2' : this.props.authorizedUserId.toString()
-            if(!userId) {
-                this.props.history.push('/login')
+            userId = authorizedUserId === null ? '2' : authorizedUserId.toString()
+            if (!userId) {
+                history.push('/login')
             }
         }
-        this.props.getUserProfile(userId)
-        this.props.getUserStatus(userId)
+        getUserProfile(userId)
+        getUserStatus(userId)
     }
 
     render() {

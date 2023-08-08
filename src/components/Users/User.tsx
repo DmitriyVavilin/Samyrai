@@ -17,31 +17,28 @@ export const User: React.FC<UserPropsTypeType> = ({
                                                       follow,
                                                       followingInProgress
                                                   }) => {
-
-    const el = user
-
     return (
         <div>
                         <span>
                         <div>
-                            <NavLink to={'/profile/' + el.id}>
+                            <NavLink to={'/profile/' + user.id}>
                                 <img className={s.userPhoto}
-                                     src={el.photos.small != null ? el.photos.small : userPhoto} alt={'userPhoto'}/>
+                                     src={user.photos.small != null ? user.photos.small : userPhoto} alt={'userPhoto'}/>
                             </NavLink>
 
                         </div>
                         <div>
                     {
-                        el.followed
-                            ? <button disabled={followingInProgress.some(id => id === el.id)}
+                        user.followed
+                            ? <button disabled={followingInProgress.some(id => id === user.id)}
                                       onClick={() => {
-                                          unfollow(el.id)
+                                          unfollow(user.id)
                                       }
 
                                       }>UnFollow</button>
-                            : <button disabled={followingInProgress.some(id => id === el.id)}
+                            : <button disabled={followingInProgress.some(id => id === user.id)}
                                       onClick={() => {
-                                          follow(el.id)
+                                          follow(user.id)
                                       }
                                       }>Follow</button>
                     }
@@ -49,15 +46,15 @@ export const User: React.FC<UserPropsTypeType> = ({
                         </span>
             <span>
                         <span>
-                        <div>{el.name}</div>
-                        <div>{el.status}</div>
+                        <div>{user.name}</div>
+                        <div>{user.status}</div>
                         </span>
                         <span>
                         <div>
-                    {'el.location.city'}
+                    {'user.location.city'}
                         </div>
                         <div>
-                    {'el.location.counter'}
+                    {'user.location.counter'}
                         </div>
                         </span>
                         </span>
