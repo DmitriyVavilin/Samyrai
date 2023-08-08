@@ -15,8 +15,8 @@ export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = ({handleSubm
     return (
         <form onSubmit={handleSubmit}>
             {createField('login', [required], Input, 'Login', 'input')}
-            {createField('password', [required], Input, 'Password', 'input')}
-            {createField('rememberMe', [required], Input, 'Login', 'checkbox')}
+            {createField('password', [required], Input, 'Password', 'password')}
+            {createField('rememberMe', [required], Input, 'Checkbox', 'checkbox')}
             <span>remember for me</span>
             {error && <div className={s.formSummaryError}>
                 {error}

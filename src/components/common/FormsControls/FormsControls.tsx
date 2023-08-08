@@ -11,14 +11,14 @@ type TextAreaType = {
 }
 
 
-export const FormControl: React.FC<TextAreaType> = ({input, meta, children, ...props}) => {
-    const hasError = meta.touched && meta.error
+export const FormControl: React.FC<TextAreaType> = ({input, meta: {touched, error}, children, ...props}) => {
+    const hasError = touched && error
     return (
         <div className={s.formControl + ' ' + (hasError ? s.error : '')}>
             <div>
                 {children}
             </div>
-            {hasError && <span>{meta.error}</span>}
+            {hasError && <span>{error}</span>}
         </div>
     )
 }
@@ -46,7 +46,7 @@ type createFieldFunc = (
     validate: Validator | Validator[] | undefined,
     component: "input" | "select" | "textarea" | React.FC<any>,
     placeholder: string,
-    type: "input" | "select" | "textarea" | "checkbox"
+    type: "input" | "select" | "textarea" | "checkbox" | 'password'
 ) => any
 
 export const createField: createFieldFunc = (name, validate, component,

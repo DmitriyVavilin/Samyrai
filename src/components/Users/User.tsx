@@ -3,39 +3,25 @@ import s from "./Users.module.css";
 import userPhoto from "../../assets/images/user.jpg";
 import {UserType} from "components/redux/reducer/usersReducer";
 import {NavLink} from "react-router-dom";
-import {Paginator} from "components/common/Paginator/Paginator";
 
-type UserPresentationType = {
-    totalCount: number
-    pageSize: number
-    currentPage: number
+type UserPropsTypeType = {
     followingInProgress: number []
-    usersPage: UserType[]
-    onPageChanged: (pageNumber: number) => void
     follow: (id: number) => void
     unfollow: (id: number) => void
+    user: UserType
 }
 
-export const Users: React.FC<UserPresentationType> = ({
-                                                          usersPage,
-                                                          currentPage,
-                                                          pageSize,
-                                                          onPageChanged,
-                                                          totalCount,
-                                                          unfollow,
-                                                          follow,
-                                                          followingInProgress
-                                                      }) => {
+export const User: React.FC<UserPropsTypeType> = ({
+                                                      user,
+                                                      unfollow,
+                                                      follow,
+                                                      followingInProgress
+                                                  }) => {
 
+    const el = user
 
     return (
         <div>
-            <Paginator currentPage={currentPage} pageSize={pageSize} onPageChanged={onPageChanged}
-                       totalCount={totalCount}/>
-            {
-                usersPage.length && usersPage.map(el => {
-                    return (
-                        <div key={el.id}>
                         <span>
                         <div>
                             <NavLink to={'/profile/' + el.id}>
@@ -61,7 +47,7 @@ export const Users: React.FC<UserPresentationType> = ({
                     }
                         </div>
                         </span>
-                            <span>
+            <span>
                         <span>
                         <div>{el.name}</div>
                         <div>{el.status}</div>
@@ -75,11 +61,7 @@ export const Users: React.FC<UserPresentationType> = ({
                         </div>
                         </span>
                         </span>
-                        </div>
-                    )
-                })
-            }
         </div>
-    );
+    )
 };
 

@@ -3,11 +3,7 @@
     height: 100px;
 }
 
-.selected {
-    font-weight: bold;
-    margin-right: 10px;
-    cursor: pointer;
-}
+
 
 .cursor {
     cursor: pointer;
