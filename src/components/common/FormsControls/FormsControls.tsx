@@ -1,5 +1,8 @@
 import React from 'react';
 import s from './FormsControls.module.css'
+import {Field} from "redux-form";
+import {required} from "utils/validators/validators.js";
+import {Validator} from "redux-form/lib/Field";
 
 type TextAreaType = {
     input: {}
@@ -8,10 +11,10 @@ type TextAreaType = {
 }
 
 
-export const FormControl:React.FC<TextAreaType> = ({input, meta,children, ...props}) => {
+export const FormControl: React.FC<TextAreaType> = ({input, meta, children, ...props}) => {
     const hasError = meta.touched && meta.error
-    return(
-        <div className={s.formControl + ' ' + (hasError ? s.error: '')}>
+    return (
+        <div className={s.formControl + ' ' + (hasError ? s.error : '')}>
             <div>
                 {children}
             </div>
@@ -21,19 +24,35 @@ export const FormControl:React.FC<TextAreaType> = ({input, meta,children, ...pro
 }
 
 export const TextArea: React.FC<TextAreaType> = (props) => {
-    const {input,children,meta,...restProps} = props
+    const {input, children, meta, ...restProps} = props
     return (
-          <FormControl {...props}>
-              <textarea {...input} {...restProps}/>
-          </FormControl>
+        <FormControl {...props}>
+            <textarea {...input} {...restProps}/>
+        </FormControl>
     )
 }
 
 export const Input: React.FC<TextAreaType> = (props) => {
-    const {input,children,meta,...restProps} = props
+    const {input, children, meta, ...restProps} = props
     return (
         <FormControl {...props}>
             <input {...input} {...restProps}/>
         </FormControl>
     )
 }
+
+type createFieldFunc = (
+    name: string,
+    validate: Validator | Validator[] | undefined,
+    component: "input" | "select" | "textarea" | React.FC<any>,
+    placeholder: string,
+    type: "input" | "select" | "textarea" | "checkbox"
+) => any
+
+export const createField: createFieldFunc = (name, validate, component,
+                                             placeholder, type
+) =>
+    <div>
+        <Field type={type} validate={[required]} placeholder={placeholder} name={name} component={component}/>
+    </div>
+
