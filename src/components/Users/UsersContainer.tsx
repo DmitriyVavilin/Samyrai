@@ -51,8 +51,7 @@ export class UsersAPIComponent extends React.Component<UsersContainerType> {
 
     componentDidMount() {
         const {currentPage, pageSize, requestUsers} = this.props
-
-        requestUsers(currentPage, pageSize)
+        requestUsers(currentPage, pageSize,)
     }
 
     onPageChanged = (pageNumber: number) => {

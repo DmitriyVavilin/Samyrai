@@ -23,7 +23,6 @@ export const Paginator: React.FC<PaginatorPropsType> = ({totalCount, pageSize, o
                                                onClick={(e) => onPageChanged(el)}> {el}</span>)
             }
         </div>
-
     );
 };
 
