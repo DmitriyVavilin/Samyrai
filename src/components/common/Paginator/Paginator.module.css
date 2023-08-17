@@ -1,5 +1,15 @@
+.paginator {
+    margin: 10px;
+}
+
+
 .selected {
     font-weight: bold;
     margin-right: 10px;
     cursor: pointer;
+}
+
+.paginatorNumber{
+    padding: 2px;
+    border: 1px solid green;
 }

@@ -28,11 +28,14 @@ export const Paginator: React.FC<PaginatorPropsType> = ({
     const rightPortionPageNumber = portionNumber * portionSize
 
     return (
-        <div>
+        <div className={style.paginator}>
+            {portionNumber > 1 &&
+                <button onClick={() => setPortionNumber(portionNumber - 1)}>PREF</button>
+            }
             {
                 pages.filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber)
-                    .map((el, index) => <span key={index}
-                                              className={currentPage === el ? s.selected : '' + style.cursor}
+                    .map((el, index) => <span  key={index}
+                                              className={(currentPage === el ? s.selected : '' + style.cursor)}
                                               onClick={(e) => onPageChanged(el)}> {el}</span>)
             }
             {portionCount > portionNumber &&
