@@ -29,7 +29,7 @@ export const Users: React.FC<UserPresentationType> = ({
     return (
         <div>
             <Paginator currentPage={currentPage} pageSize={pageSize} onPageChanged={onPageChanged}
-                       totalCount={totalCount}/>
+                       totalItemsCount={totalCount}  portionSize={10} />
             {
                 usersPage.length && usersPage.map(el => {
                         return (

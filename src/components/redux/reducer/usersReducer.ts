@@ -89,7 +89,7 @@ export const usersReducer = (state: UserStateType = initialState, action: Action
                 ...state,
                 followingInProgress: action.payload.isFetching
                     ? [...state.followingInProgress, action.payload.userId]
-                    : state.followingInProgress.filter(el => el != action.payload.userId)
+                    : state.followingInProgress.filter(el => el !== action.payload.userId)
             }
         }
 
@@ -132,7 +132,7 @@ export const unfollow = (userId: number) => async (dispatch: AppDispatchType) =>
     followUnfollowFlow(dispatch, userId, apiMethod, unFollowSuccess)
 }
 
-export const requestUsers = (page: number, pageSize: number) => {
+export const getUsersTC = (page: number, pageSize: number) => {
     return async (dispatch: AppDispatchType) => {
         dispatch(toggleIsFetching(true))
         dispatch(setCurrentPage(page))

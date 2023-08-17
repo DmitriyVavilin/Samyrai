@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import {RootStateType} from "../redux/redux-store";
 import {
     follow,
-    requestUsers,
+    getUsersTC,
     setCurrentPage,
     setTotalCount,
     setUsers,
@@ -56,7 +56,7 @@ export class UsersAPIComponent extends React.Component<UsersContainerType> {
 
     onPageChanged = (pageNumber: number) => {
         const {pageSize} = this.props
-        requestUsers(pageNumber, pageSize)
+        getUsersTC(pageNumber, pageSize)
     }
 
     render() {
@@ -91,7 +91,7 @@ export const UsersContainer = compose<React.ComponentType>(connect(mapStateToPro
     setTotalCount,
     toggleIsFetching,
     toggleFollowingInProgress,
-    requestUsers,
+    requestUsers: getUsersTC,
     follow,
     unfollow
 }), withRouter, withAuthRedirect)(UsersAPIComponent)
