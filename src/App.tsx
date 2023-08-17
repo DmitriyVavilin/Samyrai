@@ -1,13 +1,12 @@
-import React from 'react';
+import React, {Suspense} from 'react';
 import './App.css';
 import {BrowserRouter, Route, RouteComponentProps, withRouter} from "react-router-dom";
 import {News} from "components/News/News";
 import {Music} from "components/Music/Music";
 import {Settings} from "components/Settings/Settings";
-import {DialogsContainer} from "components/Dialogs/DialogsContainer";
 import {NavBar} from "components/NavBar/NavBar";
 import {UsersContainer} from "components/Users/UsersContainer";
-import WithUrlDataContainerComponent from './components/Profile/ProfileContainer';
+// import WithUrlDataContainerComponent from './components/Profile/ProfileContainer';
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
 import {connect, Provider} from "react-redux";
@@ -15,9 +14,12 @@ import {compose} from "redux";
 import {initializeApp} from "components/redux/reducer/appReducer";
 import {RootStateType, store} from "components/redux/redux-store";
 import {Preloader} from "Preloader/Preloader";
+// import DialogsContainer from "components/Dialogs/DialogsContainer";
+
+const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'))
+const WithUrlDataContainerComponent = React.lazy(() => import('./components/Profile/ProfileContainer'))
 
 type AppContainerType = MapDispatchToProps & MapStateToProps
-
 type MapDispatchToProps = {
     getAuthUserData: () => void
     initializeApp: () => void
@@ -38,13 +40,22 @@ class App extends React.Component<AppContainerType, RouteComponentProps> {
         if (!this.props.initialized) {
             return <Preloader/>
         }
+
         return (
             <div className={'app-wrapper'}>
                 <HeaderContainer/>
                 <NavBar/>
                 <div className={'app-wrapper-content'}>
-                    <Route path={'/dialogs'} render={() => <DialogsContainer/>}/>
-                    <Route path={'/profile/:userId?'} render={() => <WithUrlDataContainerComponent/>}/>
+                    <Route path={'/dialogs'} render={() => {
+                        return <React.Suspense  fallback={<div><Preloader/></div>}>
+                            <DialogsContainer/>
+                        </React.Suspense>
+                    }}/>
+                    <Route path={'/profile/:userId?'} render={() => {
+                        return <React.Suspense fallback={<div><Preloader/></div>}>
+                            <WithUrlDataContainerComponent/>
+                        </React.Suspense>
+                    }}/>
                     <Route path={'/news'} component={News}/>
                     <Route path={'/music'} component={Music}/>
                     <Route path={'/settings'} component={Settings}/>
@@ -71,3 +82,4 @@ export const SamuraiJSApp = () => {
         </Provider>
     </BrowserRouter>
 }
+
