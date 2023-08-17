@@ -1,15 +1,16 @@
 .paginator {
-    margin: 10px;
+    margin:  10px;
+    display: flex;
+    justify-content: space-between;
 }
 
+.pageNumber{
+    padding: 5px;
+    border: 2px solid #266969;
+    font-size: 17px;
+}
 
-.selected {
+.pageNumber.selectedPage {
     font-weight: bold;
-    margin-right: 10px;
-    cursor: pointer;
-}
-
-.paginatorNumber{
-    padding: 2px;
-    border: 1px solid green;
+    border-color: black;
 }
