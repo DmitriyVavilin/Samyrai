@@ -1,6 +1,6 @@
 .app-wrapper {
     display: grid;
-    width: 1200px;
+    width: 100%;
     margin: 0 auto;
     overflow: hidden;
     grid-template-areas:
@@ -9,9 +9,6 @@
     grid-template-rows: 60px 1fr;
     grid-template-columns: 2fr 10fr;
 }
-
-/*grid-gap: 10px;*/
-
 
 .app-wrapper-content {
     grid-area: c;

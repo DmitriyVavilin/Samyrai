@@ -6,7 +6,6 @@ import {Music} from "components/Music/Music";
 import {Settings} from "components/Settings/Settings";
 import {NavBar} from "components/NavBar/NavBar";
 import {UsersContainer} from "components/Users/UsersContainer";
-// import WithUrlDataContainerComponent from './components/Profile/ProfileContainer';
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
 import {connect, Provider} from "react-redux";
@@ -15,7 +14,6 @@ import {initializeApp} from "components/redux/reducer/appReducer";
 import {RootStateType, store} from "components/redux/redux-store";
 import {Preloader} from "Preloader/Preloader";
 import {withSuspense} from "hoc/withSuspense";
-// import DialogsContainer from "components/Dialogs/DialogsContainer";
 
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'))
 const WithUrlDataContainerComponent = React.lazy(() => import('./components/Profile/ProfileContainer'))

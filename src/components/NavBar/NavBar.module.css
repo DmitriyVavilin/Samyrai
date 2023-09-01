@@ -2,7 +2,7 @@
     display: flex;
     justify-content: center;
     background-color: #266969;
-    padding: 10px;
+    padding: 20px;
 }
 
 .icons {
@@ -10,13 +10,13 @@
 }
 .btn {
     display: block;
-    text-align: center;
     width: 120px;
     font-size: 20px;
     color: #ffffff;
     margin-bottom: 10px;
     border: 1px solid #000000;
-    padding: 10px 10px
+    padding: 10px 10px;
+    border-radius: 10px;
 }
 
 .nav a {
@@ -29,5 +29,6 @@ ul li {
 }
 
 .item a.active {
-    color: #7f7fff;
+    background-color: #7f7fff;
+    color: black;
 }

@@ -3,6 +3,7 @@ import s from './ProfileInfo.module.css'
 import {Preloader} from "Preloader/Preloader";
 import {ProfileType} from "components/redux/reducer/profileReducer";
 import ProfileStatusWithHooks from "components/Profile/ProfileInfo/ProfileStatus/ProfileStatusWithHooks";
+import User from './../../../assets/images/bussiness-man.png'
 
 type ProfileInfo = {
     profile: ProfileType
@@ -16,10 +17,7 @@ export const ProfileInfo: React.FC<ProfileInfo> = ({profile, updateStatus, statu
     }
     return (
         <div>
-            <div className={s.img}>
-                <img
-                    src={'https://p4.wallpaperbetter.com/wallpaper/797/280/934/anime-attack-on-titan-attack-on-titan-colossal-titan-wallpaper-preview.jpg'}/>
-            </div>
+                <img className={s.user} src={User}/>
             <div className={s.descriptionBlock}>
 
                 <img src={profile.photos.large}/>
