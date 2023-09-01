@@ -1,3 +1,8 @@
+
+.profile {
+    display: flex;
+}
+
 .descriptionBlock {
     padding: 10px;
 }
@@ -5,5 +10,5 @@
 .user {
     display: block;
     padding: 20px;
-    height: 100px;
+    height: 200px;
 }

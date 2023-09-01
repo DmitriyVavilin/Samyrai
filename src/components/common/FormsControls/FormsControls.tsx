@@ -27,7 +27,7 @@ export const TextArea: React.FC<TextAreaType> = (props) => {
     const {input, children, meta, ...restProps} = props
     return (
         <FormControl {...props}>
-            <textarea {...input} {...restProps}/>
+            <textarea className={s.textArea} {...input} {...restProps}/>
         </FormControl>
     )
 }

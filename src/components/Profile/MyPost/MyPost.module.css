@@ -6,11 +6,14 @@
     margin: 0;
 }
 
-
+.posts {
+    width: 300px;
+}
 .addPost {
     padding: 5px;
 }
 
 .h3 {
-    color: rgba(227, 24, 24, 0.8);
+    font-size: 50px;
+    color: #000000;
 }

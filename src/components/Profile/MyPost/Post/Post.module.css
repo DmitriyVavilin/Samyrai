@@ -1,6 +1,7 @@
 .item {
     font-size: 18px;
-    color: #ffffff;
+    color:#000000;
+    margin-bottom: 30px;
 }
 
 .item img {
@@ -8,6 +9,4 @@
     height: 50px;
     border-radius: 30%;
 }
-.item span {
-    color: red;
-}
+

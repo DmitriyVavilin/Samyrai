@@ -16,7 +16,7 @@ export const ProfileInfo: React.FC<ProfileInfo> = ({profile, updateStatus, statu
         return <Preloader/>
     }
     return (
-        <div>
+        <div className={s.profile}>
                 <img className={s.user} src={User}/>
             <div className={s.descriptionBlock}>
 
