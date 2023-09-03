@@ -10,8 +10,14 @@ export const Post: React.FC<PostPropsType> = ({likesCount, messages}) => {
     return (
         <div>
             <div className={s.item}>
-                <img src={manUser}/>{messages}
-                <div><span>Like {likesCount}</span></div>
+                <img src={manUser}/>
+                <div className={s.textContainer}>
+                    {messages}
+                </div>
+
+            </div>
+            <div className={s.likeContainer}>
+                <span>Like {likesCount}</span>
             </div>
         </div>
     )

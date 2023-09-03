@@ -9,7 +9,6 @@ export const MyPost: React.FC<MyPostPropsType> = React.memo(({posts, addPost}) =
     const postElements = posts.map((el, index) => <Post key={index} messages={el.messages} likesCount={el.likesCount}/>)
 
     const addNewProfile = (values: AddNewPostFormType) => {
-        debugger
         addPost(values.newPost)
     }
     return (
