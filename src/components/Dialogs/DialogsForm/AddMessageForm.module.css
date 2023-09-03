@@ -7,10 +7,4 @@
     border: 1px solid #000000;
     border-radius: 10px;
     background-color:  #7f7fff;
-    transition: transform 0.2s;
-}
-
-.btn:active {
-    transform: translateY(-5px);
-    background-color: #ffffff;
 }

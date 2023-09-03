@@ -1,6 +1,7 @@
 import {NavLink} from "react-router-dom";
 import React from "react";
 import s from './../Dialogs.module.css'
+import userDialogs from './../../../assets/images/userDialogs.png'
 
 export type DialogItemsPropsType = {
     name: string
@@ -11,11 +12,13 @@ export const DialogItems: React.FC<DialogItemsPropsType> = ({id, name}) => {
     let path = '/dialogs1' + id
     return (
         <div className={s.dialogs + ' ' + s.active}>
-            <div>
+            <div className={s.dialogsContent}>
                 <img className={s.dialogsImg}
-                     src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRffk80ltMT1J-0nN3YDGzPq6pbfGWQeC50ug&usqp=CAU'}/>
+                     src={userDialogs} alt={name}/>
             </div>
-            <NavLink to={path}>{name}</NavLink>
+            <div className={s.nameContainer}>
+                <NavLink  to={path}>{name}</NavLink>
+            </div>
         </div>
     )
 }

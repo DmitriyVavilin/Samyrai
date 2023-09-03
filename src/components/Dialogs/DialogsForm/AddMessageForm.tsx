@@ -2,6 +2,7 @@ import React from 'react';
 import {Field, InjectedFormProps, reduxForm} from 'redux-form';
 import {TextArea} from "../../common/FormsControls/FormsControls";
 import {maxLengthCreator, required} from "utils/validators/validators.js";
+import s from './AddMessageForm.module.css'
 
 export type AddMessageFormType = {
     newMessageBody: string
@@ -17,7 +18,7 @@ const AddMessageForm: React.FC<InjectedFormProps<AddMessageFormType>> = ({handle
                        validate={[required, maxLength100]}/>
             </div>
             <div>
-                <button>Send</button>
+                <button className={s.btn}>SEND MESSAGE</button>
             </div>
         </form>
     );

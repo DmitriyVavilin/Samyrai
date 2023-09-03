@@ -4,8 +4,8 @@
     background-color: #cccccc;
 }
 
-.dialogs_item {
-    display: block;
+.dialogsContent {
+    display: flex;
     align-items: center;
 }
 
@@ -19,13 +19,9 @@
     padding: 10px;
 }
 
-.item {
-    padding: 10px;
-    align-items: center;
-}
-
-.item a{
-
+.nameContainer {
+    margin: auto;
+    text-align: center;
 }
 
 a {

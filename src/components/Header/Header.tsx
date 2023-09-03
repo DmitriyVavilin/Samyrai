@@ -10,7 +10,7 @@ export const Header: React.FC<HeaderContainerType> = ({isAuth, login, logout}) =
             <img src={headerIcon}/>
             <div className={s.loginBlock}>
                 {isAuth
-                    ? <div>{login} - <button onClick={logout}>Log out</button></div>
+                    ? <div>{login} - <button className={s.btn} onClick={logout}>Log out</button></div>
                     : <NavLink to={'/login'}>Login</NavLink>}
             </div>
         </header>
