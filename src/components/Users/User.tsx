@@ -18,7 +18,7 @@ export const User: React.FC<UserPropsTypeType> = ({
                                                       followingInProgress
                                                   }) => {
     return (
-        <div>
+        <div className={s.user}>
                         <span>
                         <div>
                             <NavLink to={'/profile/' + user.id}>
@@ -30,13 +30,13 @@ export const User: React.FC<UserPropsTypeType> = ({
                         <div>
                     {
                         user.followed
-                            ? <button disabled={followingInProgress.some(id => id === user.id)}
+                            ? <button className={s.btn} disabled={followingInProgress.some(id => id === user.id)}
                                       onClick={() => {
                                           unfollow(user.id)
                                       }
 
                                       }>UnFollow</button>
-                            : <button disabled={followingInProgress.some(id => id === user.id)}
+                            : <button className={s.btn} disabled={followingInProgress.some(id => id === user.id)}
                                       onClick={() => {
                                           follow(user.id)
                                       }
@@ -46,7 +46,7 @@ export const User: React.FC<UserPropsTypeType> = ({
                         </span>
             <span>
                         <span>
-                        <div>{user.name}</div>
+                        <div className={s.name}>{user.name}</div>
                         <div>{user.status}</div>
                         </span>
                         <span>

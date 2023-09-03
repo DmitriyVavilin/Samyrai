@@ -14,3 +14,22 @@
     font-weight: bold;
     border-color: black;
 }
+
+.btnLeft{
+    display: block;
+    padding: 5px 20px;
+    font-size: 18px;
+    color: #000000;
+    border: 1px solid #000000;
+    border-radius: 10px;
+    background-color:  #7f7fff;
+}
+
+.btnRight{
+    padding: 5px 20px;
+    font-size: 18px;
+    color: #000000;
+    border: 1px solid #000000;
+    border-radius: 10px;
+    background-color:  #7f7fff;
+}
