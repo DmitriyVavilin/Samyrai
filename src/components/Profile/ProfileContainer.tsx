@@ -35,9 +35,9 @@ export type ProfileContainerPropsType = mapStateToProps & mapDispatchToProps
 export type OwnType = ProfileContainerPropsType & RouteComponentProps<PathParamsType>
 
 class ProfileContainer extends React.Component<OwnType> {
-    componentDidMount() {
-        const {authorizedUserId, history, getUserProfile, getUserStatus} = this.props
 
+    refreshProfile() {
+        const {authorizedUserId, history, getUserProfile, getUserStatus} = this.props
         let userId = this.props.match.params.userId
         if (!userId) {
             userId = authorizedUserId === null ? '2' : authorizedUserId.toString()
@@ -49,11 +49,23 @@ class ProfileContainer extends React.Component<OwnType> {
         getUserStatus(userId)
     }
 
+    componentDidMount() {
+        debugger
+        this.refreshProfile()
+    }
+
+    componentDidUpdate(prevProps: Readonly<OwnType>, prevState: Readonly<{}>, snapshot?: any) {
+        debugger
+        if (this.props.match.params.userId !== prevProps.match.params.userId) {
+            this.refreshProfile()
+        }
+    }
+
     render() {
         return (
             <div>
-                <Profile{...this.props} profile={this.props.profile} status={this.props.status}
-                        updateStatus={this.props.updateStatus}/>
+                <Profile isOwner={!this.props.match.params.userId} {...this.props} profile={this.props.profile} status={this.props.status}
+                         updateStatus={this.props.updateStatus}/>
             </div>
         )
     }
@@ -64,7 +76,7 @@ const mapStateToProps = (state: RootStateType): mapStateToProps => ({
     profile: state.profilePage.profile,
     status: state.profilePage.status,
     authorizedUserId: state.authUsers.userId,
-    isAuth: state.authUsers.isAuth
+    isAuth: state.authUsers.isAuth,
 })
 
 export default compose<React.ComponentType>(connect(mapStateToProps, {
