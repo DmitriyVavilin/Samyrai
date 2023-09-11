@@ -25,8 +25,8 @@ type ProfileContactsType = {
 }
 
 export type ProfilePhotosType = {
-    "small": string
-    "large": string
+    "small": undefined | string
+    "large": undefined | string
 }
 
 export type ProfileType = {
@@ -91,16 +91,20 @@ export const profileReducer = (state: StatePostType = initialState, action: Acti
                 ...state, posts: state.posts.filter(el => el.id !== action.id)
             }
         }
+        case 'SAVE-PHOTO-SUCCESS':{
+            return {...state, profile : {...state.profile, photos : action.photos}}
+        }
         default:
             return state
     }
 }
 
-type ActionType = AddPostCreator | SetUsersProfile | SetUserStatus | DeletePostAC
+type ActionType = AddPostCreator | SetUsersProfile | SetUserStatus | DeletePostAC | SavePhotoSuccess
 type AddPostCreator = ReturnType<typeof addPostAC>
 type SetUsersProfile = ReturnType<typeof setUsersProfile>
 type SetUserStatus = ReturnType<typeof setStatus>
 type DeletePostAC = ReturnType<typeof deletePostAC>
+type SavePhotoSuccess = ReturnType<typeof savePhotoSuccess>
 
 export const deletePostAC = (id: number) => {
     return {
@@ -132,6 +136,16 @@ export const setStatus = (status: string) => {
     } as const
 }
 
+export const savePhotoSuccess = (photos: {
+    small: undefined | string
+    large: undefined | string
+}) => ({
+    type : 'SAVE-PHOTO-SUCCESS',
+    photos
+} as const)
+
+
+
 export const getUserProfile = (userId: string) => async (dispatch: AppDispatchType) => {
     const res = await profileAPI.getProfile(userId)
     dispatch(setUsersProfile(res.data))
@@ -147,3 +161,11 @@ export const updateStatus = (status: string) => async (dispatch: AppDispatchType
     if (res.data.resultCode === 0)
         dispatch(setStatus(status))
 }
+
+export const savePhoto = (file: File) => async (dispatch: AppDispatchType) => {
+    const res = await profileAPI.savePhoto(file)
+    if (res.data.resultCode === 0) {
+        dispatch(savePhotoSuccess(res.data.photos))
+    }
+}
+
