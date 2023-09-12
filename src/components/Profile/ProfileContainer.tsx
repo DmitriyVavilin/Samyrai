@@ -52,12 +52,10 @@ class ProfileContainer extends React.Component<OwnType> {
     }
 
     componentDidMount() {
-        debugger
         this.refreshProfile()
     }
 
     componentDidUpdate(prevProps: Readonly<OwnType>, prevState: Readonly<{}>, snapshot?: any) {
-        debugger
         if (this.props.match.params.userId !== prevProps.match.params.userId) {
             this.refreshProfile()
         }
@@ -86,7 +84,7 @@ const mapStateToProps = (state: RootStateType): mapStateToProps => ({
 export default compose<React.ComponentType>(connect(mapStateToProps, {
     setUsersProfile,
     getUserProfile,
-    getUserStatus: getStatus, updateStatus
-}), withRouter, withAuthRedirect,savePhoto)(ProfileContainer)
+    getUserStatus: getStatus, updateStatus, savePhoto
+}), withRouter, withAuthRedirect)(ProfileContainer)
 
 
