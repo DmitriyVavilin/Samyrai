@@ -1,14 +1,20 @@
 
-.profile {
-    display: flex;
-}
-
 .descriptionBlock {
     padding: 10px;
 }
 
+.refreshPhoto {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.loadingPhoto {
+    height: 50px;
+    margin-right: 10px;
+}
+
 .user {
     display: block;
-    padding: 20px;
     height: 180px;
 }

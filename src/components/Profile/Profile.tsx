@@ -8,6 +8,7 @@ import {Preloader} from "Preloader/Preloader";
 type ProfilePagePropType = {
     isOwner:boolean
     savePhoto:(file: File) => void
+    status:string
 }
 export const Profile: React.FC<ProfileContainerPropsType & ProfilePagePropType> = ({profile,savePhoto, status, updateStatus,isOwner}) => {
     if (!profile) {

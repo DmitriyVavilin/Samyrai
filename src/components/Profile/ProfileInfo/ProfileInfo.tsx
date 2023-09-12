@@ -4,6 +4,7 @@ import {Preloader} from "Preloader/Preloader";
 import {ProfileType} from "components/redux/reducer/profileReducer";
 import ProfileStatusWithHooks from "components/Profile/ProfileInfo/ProfileStatus/ProfileStatusWithHooks";
 import userPhoto from './../../../assets/images/bussiness-man.png'
+import loadingPhoto from './../../../assets/images/loadingPhoto.png'
 
 type ProfileInfo = {
     profile: ProfileType
@@ -28,7 +29,23 @@ export const ProfileInfo: React.FC<ProfileInfo> = ({profile, updateStatus, statu
         <div className={s.profile}>
             <div className={s.descriptionBlock}>
                 <img className={s.user} src={profilePhoto}/>
-                {isOwner && <input type={'file'} onChange={onMainPhotoSelected}/>}
+                {isOwner && (<>
+                        <label className={s.customFileInput} htmlFor={"add_avatar"}>
+                            <div className={s.refreshPhoto}>
+                                <img className={s.loadingPhoto} src={loadingPhoto}/>
+                                Загрузить фото
+                            </div>
+                        </label>
+
+                        <input
+                            id={"add_avatar"}
+                            hidden
+                            type="file"
+                            name="file"
+                            onChange={onMainPhotoSelected}
+                        />
+                    </>
+                )}
                 <ProfileStatusWithHooks status={status} updateStatus={updateStatus}/>
                 <ul>
                     <li>
