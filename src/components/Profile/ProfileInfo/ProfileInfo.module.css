@@ -14,7 +14,12 @@
     margin-right: 10px;
 }
 
+.contact{
+    padding-left: 10px;
+}
+
 .user {
     display: block;
     height: 180px;
+    margin-bottom: 10px;
 }

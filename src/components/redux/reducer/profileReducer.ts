@@ -13,7 +13,7 @@ export type StatePostType = {
     status: string
 }
 
-type ProfileContactsType = {
+export type ProfileContactsType = {
     "facebook": string
     "website": null
     "vk": string

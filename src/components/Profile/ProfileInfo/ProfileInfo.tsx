@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from "react";
+import React, {ChangeEvent, useState} from "react";
 import s from './ProfileInfo.module.css'
 import {Preloader} from "Preloader/Preloader";
 import {ProfileType} from "components/redux/reducer/profileReducer";
@@ -15,6 +15,9 @@ type ProfileInfo = {
 }
 
 export const ProfileInfo: React.FC<ProfileInfo> = ({profile, updateStatus, status, isOwner, savePhoto}) => {
+
+    const [editMode, setEditMode] = useState<boolean>(false)
+
     if (!profile) {
         return <Preloader/>
     }
@@ -36,7 +39,6 @@ export const ProfileInfo: React.FC<ProfileInfo> = ({profile, updateStatus, statu
                                 Загрузить фото
                             </div>
                         </label>
-
                         <input
                             id={"add_avatar"}
                             hidden
@@ -46,25 +48,56 @@ export const ProfileInfo: React.FC<ProfileInfo> = ({profile, updateStatus, statu
                         />
                     </>
                 )}
+                {editMode ? <ProfileDataForm profile={profile}/> : <ProfileData profile={profile}/>}
+                <ProfileData profile={profile}/>
                 <ProfileStatusWithHooks status={status} updateStatus={updateStatus}/>
-                <ul>
-                    <li>
-                        <span>{profile.contacts.facebook}</span>
-                    </li>
-                    <li>
-                        <span>{profile.contacts.github}</span>
-                    </li>
-                    <li>
-                        <span>{profile.contacts.vk}</span>
-                    </li>
-                    <li>
-                        <span>{profile.contacts.instagram}</span>
-                    </li>
-                    <li>
-                        <span>{profile.contacts.twitter}</span>
-                    </li>
-                </ul>
             </div>
         </div>
     )
 }
+
+
+type ContactTypeProps = {
+    contactTitle: string
+    contactValue: any
+}
+
+type ProfileDataProps = {
+    profile: ProfileType
+}
+
+const ProfileData: React.FC<ProfileDataProps> = ({profile}) => {
+    return (
+        <div>
+            <div>
+                <b>Full Name:</b> {profile.fullName}
+            </div>
+            <div>
+                <b>Looking for a job:</b> {profile.lookingForAJob ? 'yes' : 'no'}
+            </div>
+            {profile.lookingForAJob && <div>
+                <b>My professional skills:</b> {profile.lookingForAJobDescription}
+            </div>}
+            <div>
+                <b>About me:</b> {profile.aboutMe}
+            </div>
+            <div>
+                <b>Contacts:</b> {Object.keys(profile.contacts).map((key) => {
+                // @ts-ignore
+                return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]}/>
+            })}
+            </div>
+        </div>
+    )
+}
+const ProfileDataForm: React.FC<ProfileDataProps> = ({profile}) => {
+    return (
+        <div></div>
+    )
+}
+export const Contact: React.FC<ContactTypeProps> = ({contactTitle, contactValue}) => {
+    return (
+        <div className={s.contact}><b>{contactTitle}</b>: {contactValue}</div>
+    )
+}
+
