@@ -5,11 +5,7 @@ import {ProfileType} from "components/redux/reducer/profileReducer";
 import ProfileStatusWithHooks from "components/Profile/ProfileInfo/ProfileStatus/ProfileStatusWithHooks";
 import userPhoto from './../../../assets/images/bussiness-man.png'
 import loadingPhoto from './../../../assets/images/loadingPhoto.png'
-import ProfileDataFormRedux, {
-    ProfileDataForm,
-    ProfileDataFormType
-} from "components/Profile/ProfileInfo/ProfileDataForm";
-import {FormDataType} from "components/Login/LoginForm/LoginForm";
+import ProfileDataFormRedux, {ProfileDataFormType} from "components/Profile/ProfileInfo/ProfileDataForm";
 
 type ProfileInfo = {
     profile: ProfileType
@@ -17,13 +13,23 @@ type ProfileInfo = {
     updateStatus: (status: string) => void
     isOwner: boolean
     savePhoto: (file: File) => void
+    saveProfile: (profile: ProfileDataFormType) => void
 }
 
-export const ProfileInfo: React.FC<ProfileInfo> = ({profile, updateStatus, status, isOwner, savePhoto}) => {
+export const ProfileInfo: React.FC<ProfileInfo> = ({
+                                                       profile,
+                                                       updateStatus,
+                                                       status,
+                                                       isOwner,
+                                                       savePhoto,
+                                                       saveProfile
+                                                   }) => {
 
     const [editMode, setEditMode] = useState<boolean>(false)
+
     const onSubmit = (data: ProfileDataFormType) => {
-        console.log(data)
+        saveProfile(data)
+        setEditMode(false)
     }
 
     if (!profile) {
@@ -57,7 +63,12 @@ export const ProfileInfo: React.FC<ProfileInfo> = ({profile, updateStatus, statu
                     </>
                 )}
                 {editMode
-                    ? <ProfileDataFormRedux onSubmit={onSubmit}/>
+                    ? <ProfileDataFormRedux initialValues={{
+                        fullName: profile.fullName,
+                        aboutMe: profile.aboutMe,
+                        lookingForAJob: profile.lookingForAJob,
+                        lookingForAJobDescription: profile.lookingForAJobDescription
+                    }} onSubmit={onSubmit}/>
                     : <ProfileData goToEditMode={() => setEditMode(true)} profile={profile} isOwner={isOwner}/>}
                 <ProfileStatusWithHooks status={status} updateStatus={updateStatus}/>
             </div>

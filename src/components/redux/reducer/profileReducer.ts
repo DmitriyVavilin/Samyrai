@@ -1,5 +1,7 @@
-import {AppDispatchType} from "../redux-store";
+import {AppDispatchType, AppThunk} from "../redux-store";
 import {profileAPI} from "api/api";
+import {ProfileDataFormType} from "components/Profile/ProfileInfo/ProfileDataForm";
+import {stopSubmit} from "redux-form";
 
 export type PostType = {
     id: number
@@ -95,17 +97,23 @@ export const profileReducer = (state: StatePostType = initialState, action: Acti
             debugger
             return {...state, profile: {...state.profile, photos: action.photos}}
         }
+        case 'SAVE-PROFILE': {
+            return  {
+                ...state,
+            }
+        }
         default:
             return state
     }
 }
 
-type ActionType = AddPostCreator | SetUsersProfile | SetUserStatus | DeletePostAC | SavePhotoSuccess
+type ActionType = AddPostCreator | SetUsersProfile | SetUserStatus | DeletePostAC | SavePhotoSuccess | SaveProfileAC
 type AddPostCreator = ReturnType<typeof addPostAC>
 type SetUsersProfile = ReturnType<typeof setUsersProfile>
 type SetUserStatus = ReturnType<typeof setStatus>
 type DeletePostAC = ReturnType<typeof deletePostAC>
 type SavePhotoSuccess = ReturnType<typeof savePhotoSuccess>
+type SaveProfileAC = ReturnType<typeof saveProfileAC>
 
 export const deletePostAC = (id: number) => {
     return {
@@ -145,6 +153,12 @@ export const savePhotoSuccess = (photos: {
     photos
 } as const)
 
+export const saveProfileAC = (profile: ProfileDataFormType) => {
+    return {
+        type: 'SAVE-PROFILE',
+        profile
+    } as const
+}
 
 export const getUserProfile = (userId: string) => async (dispatch: AppDispatchType) => {
     const res = await profileAPI.getProfile(userId)
@@ -170,3 +184,24 @@ export const savePhoto = (file: File) => async (dispatch: AppDispatchType) => {
     }
 }
 
+// export const _saveProfile = (profile: ProfileType):AppThunk =>  (dispatch: AppDispatchType) => {
+//     const res = await profileAPI.saveProfile(profile)
+//     if (res.data.resultCode === 0) {
+//         dispatch(getUserProfile())
+//     }
+// }
+
+    export const saveProfile = (profile: ProfileDataFormType): AppThunk => {
+        return async (dispatch, getState) => {
+            const userId = getState().authUsers.userId
+            let res = await profileAPI.saveProfile(profile)
+            if (res.data.resultCode === 0) {
+                if (userId) {
+                    dispatch(getUserProfile(userId.toString()))
+                }
+            } else {
+                dispatch(stopSubmit("edit-profile", {_error : res.data.messages[0]}))
+                return Promise.reject(res.data.messages[0])
+            }
+        }
+    }

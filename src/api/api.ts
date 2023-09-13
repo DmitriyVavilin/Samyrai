@@ -1,4 +1,5 @@
 import axios from "axios";
+import {ProfileDataFormType} from "components/Profile/ProfileInfo/ProfileDataForm";
 
 
 const instance = axios.create({
@@ -44,6 +45,9 @@ export const profileAPI = {
                 'Content-Type': 'multipart/form-data'
             }
         })
+    },
+    saveProfile(profile: ProfileDataFormType) {
+        return instance.put(`profile`, profile)
     }
 }
 
