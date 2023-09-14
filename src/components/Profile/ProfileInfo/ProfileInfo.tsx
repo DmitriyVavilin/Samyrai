@@ -13,7 +13,7 @@ type ProfileInfo = {
     updateStatus: (status: string) => void
     isOwner: boolean
     savePhoto: (file: File) => void
-    saveProfile: (profile: ProfileDataFormType) => void
+    saveProfile: (profile: ProfileDataFormType) => Promise<void>
 }
 
 export const ProfileInfo: React.FC<ProfileInfo> = ({
@@ -28,8 +28,9 @@ export const ProfileInfo: React.FC<ProfileInfo> = ({
     const [editMode, setEditMode] = useState<boolean>(false)
 
     const onSubmit = (data: ProfileDataFormType) => {
-        saveProfile(data)
-        setEditMode(false)
+        saveProfile(data).then(() =>{
+            setEditMode(false)
+        })
     }
 
     if (!profile) {

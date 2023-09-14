@@ -10,7 +10,7 @@ type ProfilePagePropType = {
     isOwner:boolean
     savePhoto:(file: File) => void
     status:string
-    saveProfile: (profile: ProfileDataFormType) => void
+    saveProfile: (profile: ProfileDataFormType) => Promise<void>
 }
 export const Profile: React.FC<ProfileContainerPropsType & ProfilePagePropType> = ({profile,savePhoto, status, updateStatus,isOwner,saveProfile}) => {
     if (!profile) {
