@@ -7,21 +7,26 @@ import {Redirect} from "react-router-dom";
 
 type MapStateToProps = {
     isAuth: boolean
+    captchaUrl: string | null
 }
 
 type LoginType = {
     login: (email: string, password: string, rememberMe: boolean, captcha?: string) => void
     isAuth: boolean
+    captchaUrl: string | null
 }
 
 const mapStateToProps = (state: RootStateType): MapStateToProps => {
-    return {isAuth: state.authUsers.isAuth}
+    return {
+        isAuth: state.authUsers.isAuth,
+        captchaUrl: state.authUsers.captchaUrl
+    }
 }
 
 
-const Login: React.FC<LoginType> = ({login, isAuth}) => {
+const Login: React.FC<LoginType> = ({login, isAuth,captchaUrl,}) => {
     const onSubmit = (data: FormDataType) => {
-        login(data.login, data.password, data.rememberMe)
+        login(data.login, data.password, data.rememberMe, data.captchaUrl)
     }
 
     if (isAuth) {
