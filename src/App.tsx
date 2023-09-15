@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import {HashRouter, Route, RouteComponentProps, withRouter} from "react-router-dom";
+import {BrowserRouter, Redirect, Route, RouteComponentProps, Switch, withRouter} from "react-router-dom";
 import {News} from "components/News/News";
 import {Music} from "components/Music/Music";
 import {Settings} from "components/Settings/Settings";
@@ -45,13 +45,16 @@ class App extends React.Component<AppContainerType, RouteComponentProps> {
                 <HeaderContainer/>
                 <NavBar/>
                 <div className={'app-wrapper-content'}>
-                    <Route path={'/dialogs'} render={withSuspense(DialogsContainer)}/>
-                    <Route path={'/profile/:userId?'} render={withSuspense(WithUrlDataContainerComponent)}/>
-                    <Route path={'/news'} component={News}/>
-                    <Route path={'/music'} component={Music}/>
-                    <Route path={'/settings'} component={Settings}/>
-                    <Route path={'/users'} render={() => <UsersContainer/>}/>
-                    <Route path={'/login'} render={() => <Login/>}/>
+                    <Switch>
+                        <Route exact path='/' render={() => <Redirect to={"/profile"}/>}/>
+                        <Route path={'/dialogs'} render={withSuspense(DialogsContainer)}/>
+                        <Route path={'/profile/:userId?'} render={withSuspense(WithUrlDataContainerComponent)}/>
+                        <Route path={'/news'} component={News}/>
+                        <Route path={'/music'} component={Music}/>
+                        <Route path={'/settings'} component={Settings}/>
+                        <Route path={'/users'} render={() => <UsersContainer/>}/>
+                        <Route path={'/login'} render={() => <Login/>}/>
+                    </Switch>
                 </div>
             </div>
         );
@@ -67,10 +70,10 @@ const mapStateToProps = (state: RootStateType): MapStateToProps => {
 const AppContainer = compose<React.ComponentType>(connect(mapStateToProps, {initializeApp}), withRouter)(App)
 
 export const SamuraiJSApp = () => {
-    return <HashRouter>
+    return <BrowserRouter>
         <Provider store={store}>
             <AppContainer/>
         </Provider>
-    </HashRouter>
+    </BrowserRouter>
 }
 
