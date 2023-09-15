@@ -1,11 +1,11 @@
 {
   "files": {
     "main.css": "/Samyrai/static/css/main.3fa1c374.css",
-    "main.js": "/Samyrai/static/js/main.7825c3fb.js",
+    "main.js": "/Samyrai/static/js/main.c103f2dc.js",
     "static/css/245.a35bb0f3.chunk.css": "/Samyrai/static/css/245.a35bb0f3.chunk.css",
     "static/js/245.1c000d4f.chunk.js": "/Samyrai/static/js/245.1c000d4f.chunk.js",
     "static/css/96.90b0324b.chunk.css": "/Samyrai/static/css/96.90b0324b.chunk.css",
-    "static/js/96.9a155e93.chunk.js": "/Samyrai/static/js/96.9a155e93.chunk.js",
+    "static/js/96.0d228a75.chunk.js": "/Samyrai/static/js/96.0d228a75.chunk.js",
     "static/media/Loading.gif": "/Samyrai/static/media/Loading.4788d2913cb426427524.gif",
     "static/media/man.png": "/Samyrai/static/media/man.ab45eb1d42b1faaf3d12.png",
     "static/media/bussiness-man.png": "/Samyrai/static/media/bussiness-man.46d7f612aa4b54075372.png",
@@ -17,14 +17,14 @@
     "static/media/music-note.png": "/Samyrai/static/media/music-note.19bdfe8fd2e37ff4cf27.png",
     "index.html": "/Samyrai/index.html",
     "main.3fa1c374.css.map": "/Samyrai/static/css/main.3fa1c374.css.map",
-    "main.7825c3fb.js.map": "/Samyrai/static/js/main.7825c3fb.js.map",
+    "main.c103f2dc.js.map": "/Samyrai/static/js/main.c103f2dc.js.map",
     "245.a35bb0f3.chunk.css.map": "/Samyrai/static/css/245.a35bb0f3.chunk.css.map",
     "245.1c000d4f.chunk.js.map": "/Samyrai/static/js/245.1c000d4f.chunk.js.map",
     "96.90b0324b.chunk.css.map": "/Samyrai/static/css/96.90b0324b.chunk.css.map",
-    "96.9a155e93.chunk.js.map": "/Samyrai/static/js/96.9a155e93.chunk.js.map"
+    "96.0d228a75.chunk.js.map": "/Samyrai/static/js/96.0d228a75.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.3fa1c374.css",
-    "static/js/main.7825c3fb.js"
+    "static/js/main.c103f2dc.js"
   ]
 }
